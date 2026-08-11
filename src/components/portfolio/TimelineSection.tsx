@@ -9,10 +9,7 @@ export function TimelineSection() {
 
         <ol className="mt-12 border-l border-border">
           {timeline.map((item, i) => (
-            <li
-              key={`${item.period}-${i}`}
-              className={`relative pb-10 pl-8 ${item.transition ? "opacity-60" : ""}`}
-            >
+            <li key={`${item.period}-${i}`} className="relative pb-10 pl-8">
               <span
                 className={`absolute -left-[5px] top-1.5 size-2.5 rounded-full ${
                   item.transition ? "border border-border bg-background" : "bg-accent"
@@ -21,7 +18,11 @@ export function TimelineSection() {
               <p className="font-serif text-[0.7rem] uppercase tracking-[0.18em] text-muted-foreground">
                 {item.period}
               </p>
-              <h3 className="mt-2 text-base font-medium sm:text-lg">
+              <h3
+                className={`mt-2 text-base font-medium sm:text-lg ${
+                  item.transition ? "text-muted-foreground" : ""
+                }`}
+              >
                 {item.role}
                 <span className="text-muted-foreground"> · {item.org}</span>
               </h3>

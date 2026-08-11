@@ -28,8 +28,14 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <div className="min-h-screen bg-background">
+      <a
+        href="#conteudo"
+        className="sr-only rounded-md focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-background focus:px-4 focus:py-2 focus:text-sm focus:text-foreground focus:outline focus:outline-2 focus:outline-ring"
+      >
+        Pular para o conteúdo
+      </a>
       <SiteHeader />
-      <main>
+      <main id="conteudo">
         <Hero />
         <LeadershipSection />
         <CasesSection />

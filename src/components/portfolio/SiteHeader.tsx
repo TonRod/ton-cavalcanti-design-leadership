@@ -1,7 +1,8 @@
-import { Menu } from "lucide-react";
-import { useState } from "react";
+import { Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
 import { contact } from "@/data/portfolio";
 import { ThemeToggle } from "@/components/portfolio/ThemeToggle";
+import { cn } from "@/lib/utils";
 
 const links = [
   { href: "#lideranca", label: "Liderança" },
@@ -11,8 +12,31 @@ const links = [
   { href: "#contato", label: "Contato" },
 ];
 
+const cvLabel = "Baixar CV em PDF, 940 KB (abre em nova aba)";
+
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const [activeId, setActiveId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const sections = links
+      .map((l) => document.getElementById(l.href.slice(1)))
+      .filter((el): el is HTMLElement => !!el);
+    if (!sections.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible[0]) setActiveId(visible[0].target.id);
+      },
+      { rootMargin: "-80px 0px -55% 0px", threshold: 0 }
+    );
+
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur-md">
@@ -22,20 +46,33 @@ export function SiteHeader() {
         </a>
 
         <nav className="hidden items-center gap-8 md:flex">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-            >
-              {l.label}
-            </a>
-          ))}
+          {links.map((l) => {
+            const isActive = activeId === l.href.slice(1);
+            return (
+              <a
+                key={l.href}
+                href={l.href}
+                aria-current={isActive ? "true" : undefined}
+                className={cn(
+                  "text-sm transition-colors hover:text-foreground",
+                  isActive
+                    ? "text-foreground underline decoration-accent underline-offset-8"
+                    : "text-muted-foreground"
+                )}
+              >
+                {l.label}
+              </a>
+            );
+          })}
           <a
             href={contact.cv}
-            className="rounded-md border border-border px-4 py-2 text-sm transition-colors hover:bg-secondary"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={cvLabel}
+            className="rounded-md border border-border px-4 py-2 text-sm leading-tight transition-colors hover:bg-secondary"
           >
-            Baixar CV
+            Baixar CV{" "}
+            <span className="text-xs text-muted-foreground">PDF · 940 KB</span>
           </a>
           <ThemeToggle />
         </nav>
@@ -44,28 +81,47 @@ export function SiteHeader() {
           <ThemeToggle />
           <button
             className="p-1.5"
-            aria-label="Abrir menu"
+            aria-label={open ? "Fechar menu" : "Abrir menu"}
+            aria-expanded={open}
+            aria-controls="menu-mobile"
             onClick={() => setOpen((v) => !v)}
           >
-            <Menu className="size-5" />
+            {open ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
         </div>
       </div>
 
       {open && (
-        <nav className="flex flex-col gap-1 border-t border-border px-6 py-4 md:hidden">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              onClick={() => setOpen(false)}
-              className="py-2 text-sm text-muted-foreground"
-            >
-              {l.label}
-            </a>
-          ))}
-          <a href={contact.cv} className="py-2 text-sm">
-            Baixar CV
+        <nav
+          id="menu-mobile"
+          className="flex flex-col gap-1 border-t border-border px-6 py-4 md:hidden"
+        >
+          {links.map((l) => {
+            const isActive = activeId === l.href.slice(1);
+            return (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                aria-current={isActive ? "true" : undefined}
+                className={cn(
+                  "py-2 text-sm",
+                  isActive ? "text-foreground" : "text-muted-foreground"
+                )}
+              >
+                {l.label}
+              </a>
+            );
+          })}
+          <a
+            href={contact.cv}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={cvLabel}
+            className="py-2 text-sm"
+          >
+            Baixar CV{" "}
+            <span className="text-xs text-muted-foreground">PDF · 940 KB</span>
           </a>
         </nav>
       )}

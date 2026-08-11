@@ -38,7 +38,10 @@ export function CasesSection() {
   const goToContact = () => {
     setActive(null);
     setTimeout(() => {
-      document.getElementById("contato")?.scrollIntoView({ behavior: "smooth" });
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      document
+        .getElementById("contato")
+        ?.scrollIntoView({ behavior: reduced ? "auto" : "smooth" });
     }, 250);
   };
 
