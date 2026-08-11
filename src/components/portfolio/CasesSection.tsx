@@ -34,18 +34,18 @@ export function CasesSection() {
               className={`${c.duotone} group relative flex min-h-72 flex-col justify-between rounded-lg border border-border/60 p-6 text-left transition-transform duration-300 hover:-translate-y-1`}
             >
               <div className="flex items-start justify-between">
-                <span className="font-mono text-xs tracking-[0.2em] text-foreground/60">
+                <span className="font-mono text-xs tracking-[0.2em] text-current/60">
                   CASE {c.index}
                 </span>
-                <ArrowUpRight className="size-4 text-foreground/50 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                <ArrowUpRight className="size-4 text-current/50 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </div>
               <div>
-                <p className="text-xs uppercase tracking-widest text-foreground/60">
+                <p className="text-xs uppercase tracking-widest text-current/60">
                   {c.org} · {c.year}
                 </p>
                 <h3 className="display mt-2 text-2xl">{c.title}</h3>
-                <div className="mt-5 border-t border-foreground/15 pt-4">
-                  <p className="text-[0.7rem] uppercase tracking-widest text-foreground/60">
+                <div className="mt-5 border-t border-current/15 pt-4">
+                  <p className="text-[0.7rem] uppercase tracking-widest text-current/60">
                     {c.highlight.label}
                   </p>
                   <p className="metric-num mt-1">{c.highlight.value}</p>
