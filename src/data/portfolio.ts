@@ -126,7 +126,7 @@ export const cases: CaseStudy[] = [
     org: "Try/WPP · Livelo",
     year: "2018–2019",
     role: "Designer Líder · 4 designers",
-    highlight: { label: "NPS de atendimento (baseline)", value: "3,3" },
+    highlight: { label: "NPS de atendimento", value: "3,3 → 6,7" },
     duotone: "duotone-graphite",
     contexto:
       "O atendimento da Livelo apresentava baixo NPS (3,3) e alto turnover de funcionários (60% ao ano). O sistema de suporte era lento, os fluxos de atendimento desorganizados e a experiência multicanal fragmentada.",
@@ -145,7 +145,7 @@ export const cases: CaseStudy[] = [
     aprendizado:
       "A análise mostrou que o tempo de solução é mais relevante que o tempo de atendimento em si — pequenas falhas no chatbot e na priorização de chamados tinham impacto desproporcional na experiência do cliente.",
     metricas: [
-      { label: "NPS de atendimento (baseline)", value: "3,3" },
+      { label: "NPS de atendimento", value: "3,3 → 6,7" },
       { label: "Turnover de atendentes", value: "60%/ano" },
       { label: "Time de design", value: "4 designers" },
     ],
