@@ -45,7 +45,7 @@ export function SiteHeader() {
           Ton Cavalcanti
         </a>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-6 xl:gap-8 lg:flex">
           {links.map((l) => {
             const isActive = activeId === l.href.slice(1);
             return (
