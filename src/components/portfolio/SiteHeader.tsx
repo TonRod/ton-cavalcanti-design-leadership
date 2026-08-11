@@ -36,15 +36,19 @@ export function SiteHeader() {
           >
             Baixar CV
           </a>
+          <ThemeToggle />
         </nav>
 
-        <button
-          className="md:hidden"
-          aria-label="Abrir menu"
-          onClick={() => setOpen((v) => !v)}
-        >
-          <Menu className="size-5" />
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <button
+            className="p-1.5"
+            aria-label="Abrir menu"
+            onClick={() => setOpen((v) => !v)}
+          >
+            <Menu className="size-5" />
+          </button>
+        </div>
       </div>
 
       {open && (
