@@ -3,9 +3,9 @@ import portrait from "@/assets/portrait.jpg";
 import { contact } from "@/data/portfolio";
 
 const metrics = [
-  { label: "NPS · Natura &Co", value: "40 → 60" },
-  { label: "Entrega de proposta · Bradesco", value: "24h → 15min" },
-  { label: "Tempo de lançamento · Motrix", value: "−30%" },
+  { label: "CSAT · Natura &Co", value: "40% → 80%" },
+  { label: "Tempo de resposta ao cliente · Bradesco", value: "24h → 15min" },
+  { label: "Tempo de produção · Motrix", value: "−30%" },
 ];
 
 export function Hero() {
