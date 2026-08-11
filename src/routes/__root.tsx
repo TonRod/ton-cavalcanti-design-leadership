@@ -17,7 +17,7 @@ import portraitDay from "@/assets/portrait-day.jpg.asset.json";
 const siteTitle =
   "Éliton Cavalcanti (Ton) — Design Leadership · Product Strategy · Head of Design";
 const siteDescription =
-  "Ton Cavalcanti · 16 anos em produto, mais de 6 liderando times de design em Try, Bradesco, Motrix, Natura e Porto Seguro. Cases com resultado medido em NPS, tempo de entrega e adoção.";
+  "Ton Cavalcanti · 16 anos em produto, mais de 6 liderando times de design em Try, Bradesco, Globo, Motrix, Natura e Porto Seguro. Cases com resultado medido em CSAT, NPS, tempo de resposta e abandono de jornada.";
 const portraitUrl = `${siteUrl}${portraitDay.url}`;
 
 const personJsonLd = {

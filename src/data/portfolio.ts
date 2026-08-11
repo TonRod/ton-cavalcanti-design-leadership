@@ -65,7 +65,7 @@ export const cases: CaseStudy[] = [
     title: "Globo SIM · Plataforma de Autoatendimento",
     org: "Globo S.A.",
     year: "2021",
-    role: "Decisão de conduzir o discovery completo (Double Diamond, 370 entrevistas) antes de qualquer redesenho de interface.",
+    role: "Senior Product Designer · Discovery e estratégia de experiência",
     highlight: { label: "Abandono da jornada", value: "−50%" },
     duotone: "duotone-2",
     contexto:
@@ -75,7 +75,7 @@ export const cases: CaseStudy[] = [
     escopo:
       "Responsável pela fase de discovery, direcionando arquitetura e UI para atender negócio, processos internos e experiência do usuário.",
     estrategia:
-      "Double Diamond como estrutura do discovery; 37 entrevistas com usuários, mapa de empatia e atualização de personas; workshop com negócio e engenharia; wireframes, testes de usabilidade e guia de estilo.",
+      "Double Diamond como estrutura do discovery; 370 entrevistas com usuários, mapa de empatia e atualização de personas; workshop com negócio e engenharia; wireframes, testes de usabilidade e guia de estilo.",
     alinhamento:
       "O workshop com negócio e engenharia garantiu que a nova arquitetura respeitasse os processos internos existentes.",
     solucao:
@@ -141,12 +141,11 @@ export const cases: CaseStudy[] = [
     solucao:
       "Redesign da interface de atendimento, reduzindo informações em tela e simplificando tarefas; chatbot com storytelling e diálogos mais humanos; jornadas omnichannel integradas, evitando que clientes precisassem repetir problemas em diferentes canais; programa de treinamento e materiais de apoio para os atendentes.",
     resultados:
-      "Redução do tempo médio de atendimento e maior agilidade na priorização de chamados, experiência mais consistente entre canais e maior engajamento dos atendentes com ferramentas mais rápidas e materiais de suporte atualizados.",
+      "NPS de atendimento de +3,3 para +6,7, com redução do tempo médio de atendimento e maior agilidade na priorização de chamados. A experiência ficou mais consistente entre canais e os atendentes passaram a contar com ferramentas mais rápidas e materiais de suporte atualizados.",
     aprendizado:
       "A análise mostrou que o tempo de solução é mais relevante que o tempo de atendimento em si — pequenas falhas no roteiro do chatbot e na priorização de chamados tinham impacto desproporcional na experiência do cliente.",
     metricas: [
       { label: "NPS de atendimento", value: "+3,3 → +6,7" },
-      { label: "Turnover de atendentes", value: "60%/ano" },
       { label: "Time de design", value: "4 designers" },
     ],
   },
@@ -249,13 +248,15 @@ export type LeadershipProof = {
 export const leadershipProofs: LeadershipProof[] = [
   {
     label: "Time",
-    value: "Multidisciplinar",
-    context: "Engenharia, pesquisa, design e negócios.",
+    value: "Até 25 designers",
+    context:
+      "Times multidisciplinares com engenharia, pesquisa, design e negócios. Pico no Bradesco, entre 2019 e 2020.",
   },
   {
     label: "Processo",
-    value: "Redução no tempo de entrega",
-    context: "Pesquisa, desenvolvimento e entrega mais rápidos com uso de IA no processo.",
+    value: "−30% no tempo de entrega",
+    context:
+      "Práticas de design estruturadas na Motrix: design reviews semanais, ritual de handoff com engenharia e operação de pesquisa. Hoje, uso de IA para acelerar pesquisa e prototipação.",
   },
   {
     label: "Pessoas",
