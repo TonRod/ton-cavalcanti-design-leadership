@@ -1,6 +1,6 @@
 import { Mail, Linkedin, Globe } from "lucide-react";
-import portraitDay from "@/assets/portrait-day.png.asset.json";
-import portraitNight from "@/assets/portrait-night.png.asset.json";
+import portraitDay from "@/assets/portrait-day.jpg.asset.json";
+import portraitNight from "@/assets/portrait-night.jpg.asset.json";
 import { contact } from "@/data/portfolio";
 
 const metrics = [
