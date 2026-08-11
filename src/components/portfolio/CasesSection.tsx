@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { ArrowUpRight, ArrowLeft, ArrowRight } from "lucide-react";
+import { Maximize2, ArrowLeft, ArrowRight } from "lucide-react";
 import { cases, type CaseStudy } from "@/data/portfolio";
 import { cn } from "@/lib/utils";
 
@@ -62,6 +62,7 @@ export function CasesSection() {
             <button
               key={c.id}
               onClick={() => setActive(c)}
+              aria-label={`Ver case ${c.title}`}
               className="group relative flex flex-col overflow-hidden rounded-lg border border-border bg-surface text-left transition-transform duration-300 hover:-translate-y-1"
             >
               <div
@@ -79,7 +80,6 @@ export function CasesSection() {
                     c.id === "livelo-design-servicos" ? "object-contain" : "object-cover"
                   )}
                 />
-                <ArrowUpRight className="absolute right-4 top-4 size-4 text-foreground/70 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </div>
               <div className="flex flex-1 flex-col justify-between p-6">
                 <div>
@@ -93,6 +93,10 @@ export function CasesSection() {
                     {c.highlight.label}
                   </p>
                   <p className="metric-num mt-1">{c.highlight.value}</p>
+                  <p className="mt-4 inline-flex items-center gap-1.5 text-xs text-muted-foreground transition-colors group-hover:text-foreground">
+                    <Maximize2 className="size-3.5" aria-hidden="true" />
+                    Ver case
+                  </p>
                 </div>
               </div>
             </button>
