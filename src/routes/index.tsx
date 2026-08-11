@@ -4,6 +4,7 @@ import { Hero } from "@/components/portfolio/Hero";
 import { LeadershipSection } from "@/components/portfolio/LeadershipSection";
 import { CasesSection } from "@/components/portfolio/CasesSection";
 import { TimelineSection } from "@/components/portfolio/TimelineSection";
+import { EducationSection } from "@/components/portfolio/EducationSection";
 import { ContactSection } from "@/components/portfolio/ContactSection";
 
 const title = "Éliton Cavalcanti (Ton) — Design Leadership · Product Strategy · Head of Design";
