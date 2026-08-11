@@ -1,4 +1,9 @@
+import naturaCover from "@/assets/case-natura.png.asset.json";
+import globoCover from "@/assets/case-globo.png.asset.json";
+import bradescoCover from "@/assets/case-bradesco.png.asset.json";
+
 export type CaseStudy = {
+  cover: string;
   id: string;
   index: string;
   title: string;
@@ -21,6 +26,7 @@ export type CaseStudy = {
 export const cases: CaseStudy[] = [
   {
     id: "natura",
+    cover: naturaCover.url,
     index: "01",
     title: "Experiência Omnichannel",
     org: "Natura &Co",
@@ -53,6 +59,7 @@ export const cases: CaseStudy[] = [
   },
   {
     id: "globo",
+    cover: globoCover.url,
     index: "02",
     title: "Globo SIM · Plataforma de Autoatendimento",
     org: "Globo S.A.",
@@ -82,6 +89,7 @@ export const cases: CaseStudy[] = [
   },
   {
     id: "bradesco",
+    cover: bradescoCover.url,
     index: "03",
     title: "Dashboard de Relacionamento",
     org: "Bradesco BBI",
