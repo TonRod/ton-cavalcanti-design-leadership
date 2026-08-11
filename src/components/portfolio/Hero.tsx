@@ -25,20 +25,20 @@ export function Hero() {
           </p>
         </div>
 
-        <div className="relative min-h-[320px]">
+        <div className="relative min-h-[380px] sm:min-h-[460px] lg:min-h-0">
           <img
             src={portraitDay.url}
             alt="Retrato profissional de Éliton (Ton) Cavalcanti"
             width={912}
             height={1104}
-            className="block h-full w-full rounded-lg border border-border object-cover object-[center_20%] dark:hidden"
+            className="absolute inset-0 block h-full w-full rounded-lg border border-border object-cover object-[center_22%] dark:hidden"
           />
           <img
             src={portraitNight.url}
             alt="Retrato profissional de Éliton (Ton) Cavalcanti"
             width={912}
             height={1104}
-            className="hidden h-full w-full rounded-lg border border-border object-cover object-[center_20%] dark:block"
+            className="absolute inset-0 hidden h-full w-full rounded-lg border border-border object-cover object-[center_22%] dark:block"
           />
         </div>
       </div>
