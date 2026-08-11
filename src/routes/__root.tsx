@@ -11,6 +11,47 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { contact, siteUrl } from "@/data/portfolio";
+import portraitDay from "@/assets/portrait-day.jpg.asset.json";
+
+const siteTitle =
+  "Éliton Cavalcanti (Ton) — Design Leadership · Product Strategy · Head of Design";
+const siteDescription =
+  "Ton Cavalcanti · 16 anos em produto, mais de 6 liderando times de design em Try, Bradesco, Motrix, Natura e Porto Seguro. Cases com resultado medido em NPS, tempo de entrega e adoção.";
+const portraitUrl = `${siteUrl}${portraitDay.url}`;
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Éliton R. Cavalcanti",
+  alternateName: "Ton Cavalcanti",
+  jobTitle: "Senior Product Designer",
+  worksFor: { "@type": "Organization", name: "Porto Seguro" },
+  url: siteUrl,
+  image: portraitUrl,
+  email: contact.email,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "São Paulo",
+    addressCountry: "BR",
+  },
+  sameAs: [contact.linkedin, contact.behance],
+  alumniOf: [
+    { "@type": "Organization", name: "ESPM" },
+    { "@type": "Organization", name: "Auckland University of Technology" },
+    { "@type": "Organization", name: "Instituto Superior de Tecnologia" },
+    { "@type": "Organization", name: "Fundação Eurípides Soares da Rocha" },
+  ],
+  knowsAbout: [
+    "Design Leadership",
+    "Product Strategy",
+    "Service Design",
+    "Design Ops",
+    "Pesquisa de Usuário",
+    "Design Thinking",
+  ],
+  description: siteDescription,
+};
 
 function NotFoundComponent() {
   return (
