@@ -2,7 +2,7 @@ import { timeline } from "@/data/portfolio";
 
 export function TimelineSection() {
   return (
-    <section id="trajetoria" className="border-t border-border py-20 sm:py-28">
+    <section id="trajetoria" className="bg-surface-2 py-20 sm:py-28">
       <div className="mx-auto w-full max-w-6xl px-6">
         <p className="kicker">Trajetória</p>
         <h2 className="display mt-4 text-3xl sm:text-5xl">16 anos, em ordem.</h2>

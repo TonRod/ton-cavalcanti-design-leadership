@@ -355,6 +355,7 @@ export const certifications: Certification[] = [
 export type SkillGroup = {
   label: string;
   items: string[];
+  display?: "chips" | "list";
 };
 
 export const skillGroups: SkillGroup[] = [
@@ -363,12 +364,9 @@ export const skillGroups: SkillGroup[] = [
     items: [
       "Inteligência Artificial",
       "Data-Driven Design",
-      "Value Proposition Design",
       "Estratégia de Produto",
-      "Lean Inception",
+      "Value Proposition Design",
       "Design Sprint",
-      "Wireframing",
-      "Prototipagem",
       "Pesquisa de Usuário",
       "JTBD",
     ],
@@ -378,17 +376,13 @@ export const skillGroups: SkillGroup[] = [
     items: [
       "Figma",
       "Miro",
-      "Sketch",
-      "InVision",
       "Maze",
       "Webflow",
       "Notion",
-      "Typeform",
       "Google Analytics",
       "Hotjar",
       "ChatGPT",
       "Claude",
-      "Slack",
     ],
   },
   {
@@ -404,11 +398,12 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     label: "Idiomas",
+    display: "list",
     items: [
-      "Português (Nativo)",
-      "Inglês (Intermediário B2)",
-      "Francês (Iniciante A1)",
-      "Espanhol (Iniciante A1)",
+      "Português — Nativo",
+      "Inglês — Intermediário B2",
+      "Francês — Iniciante A1",
+      "Espanhol — Iniciante A1",
     ],
   },
 ];
