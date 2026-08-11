@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ArrowLeft, ArrowRight } from "lucide-react";
 import { cases, type CaseStudy } from "@/data/portfolio";
 import { cn } from "@/lib/utils";
 
@@ -15,6 +15,33 @@ function Block({ label, children }: { label: string; children: React.ReactNode }
 
 export function CasesSection() {
   const [active, setActive] = useState<CaseStudy | null>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const activeIndex = active ? cases.findIndex((c) => c.id === active.id) : -1;
+  const prev = activeIndex > 0 ? cases[activeIndex - 1] : null;
+  const next =
+    activeIndex >= 0 && activeIndex < cases.length - 1 ? cases[activeIndex + 1] : null;
+
+  useEffect(() => {
+    if (scrollRef.current) scrollRef.current.scrollTop = 0;
+  }, [active?.id]);
+
+  useEffect(() => {
+    if (!active) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft" && prev) setActive(prev);
+      if (e.key === "ArrowRight" && next) setActive(next);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [active, prev, next]);
+
+  const goToContact = () => {
+    setActive(null);
+    setTimeout(() => {
+      document.getElementById("contato")?.scrollIntoView({ behavior: "smooth" });
+    }, 250);
+  };
+
 
   return (
     <section id="cases" className="border-t border-border py-20 sm:py-28">
@@ -76,7 +103,7 @@ export function CasesSection() {
       </div>
 
       <Dialog open={!!active} onOpenChange={(o) => !o && setActive(null)}>
-        <DialogContent className="max-h-[88vh] max-w-2xl overflow-y-auto bg-popover">
+        <DialogContent ref={scrollRef} className="max-h-[88vh] max-w-2xl overflow-y-auto bg-popover">
           {active && (
             <>
               <DialogHeader>
@@ -108,8 +135,54 @@ export function CasesSection() {
                 <Block label="Resultados">{active.resultados}</Block>
                 {active.aprendizado && <Block label="Aprendizado">{active.aprendizado}</Block>}
               </div>
+
+              <div className="mt-8 border-t border-border pt-5">
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {prev ? (
+                    <button
+                      onClick={() => setActive(prev)}
+                      aria-label={`Ver case anterior: ${prev.title}`}
+                      className="flex items-start gap-3 rounded-md border border-border p-3 text-left transition-colors hover:bg-secondary"
+                    >
+                      <ArrowLeft className="mt-0.5 size-4 shrink-0" />
+                      <span>
+                        <span className="kicker block">Anterior</span>
+                        <span className="mt-1 block text-sm">{prev.title}</span>
+                      </span>
+                    </button>
+                  ) : (
+                    <span className="hidden sm:block" />
+                  )}
+                  {next && (
+                    <button
+                      onClick={() => setActive(next)}
+                      aria-label={`Ver próximo case: ${next.title}`}
+                      className="flex items-start justify-end gap-3 rounded-md border border-border p-3 text-right transition-colors hover:bg-secondary"
+                    >
+                      <span>
+                        <span className="kicker block">Próximo</span>
+                        <span className="mt-1 block text-sm">{next.title}</span>
+                      </span>
+                      <ArrowRight className="mt-0.5 size-4 shrink-0" />
+                    </button>
+                  )}
+                </div>
+
+                <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-5">
+                  <p className="text-xs text-muted-foreground">
+                    Quer entender como aplico isso no seu contexto?
+                  </p>
+                  <button
+                    onClick={goToContact}
+                    className="rounded-md bg-accent px-5 py-2.5 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
+                  >
+                    Vamos conversar
+                  </button>
+                </div>
+              </div>
             </>
           )}
+
         </DialogContent>
       </Dialog>
     </section>
