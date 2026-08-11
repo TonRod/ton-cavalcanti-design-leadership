@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { ArrowUpRight, ArrowLeft, ArrowRight } from "lucide-react";
+import { Maximize2, ArrowLeft, ArrowRight } from "lucide-react";
 import { cases, type CaseStudy } from "@/data/portfolio";
 import { cn } from "@/lib/utils";
 
