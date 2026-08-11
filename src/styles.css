@@ -157,25 +157,28 @@
 }
 
 @utility duotone-1 {
+  color: var(--on-duotone);
   background-image: linear-gradient(
     145deg,
     color-mix(in oklch, var(--wine) 85%, black),
-    color-mix(in oklch, var(--background) 70%, var(--wine))
+    color-mix(in oklch, var(--duotone-base) 70%, var(--wine))
   );
 }
 
 @utility duotone-2 {
+  color: var(--on-duotone);
   background-image: linear-gradient(
     145deg,
     color-mix(in oklch, var(--graphite) 85%, black),
-    color-mix(in oklch, var(--background) 70%, var(--graphite))
+    color-mix(in oklch, var(--duotone-base) 70%, var(--graphite))
   );
 }
 
 @utility duotone-3 {
+  color: var(--on-duotone);
   background-image: linear-gradient(
     145deg,
     color-mix(in oklch, var(--moss) 80%, black),
-    color-mix(in oklch, var(--background) 70%, var(--moss))
+    color-mix(in oklch, var(--duotone-base) 70%, var(--moss))
   );
 }
