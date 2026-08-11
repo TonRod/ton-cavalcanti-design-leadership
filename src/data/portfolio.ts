@@ -1,4 +1,4 @@
-import naturaCover from "@/assets/case-natura.png.asset.json";
+jaimport naturaCover from "@/assets/case-natura.png.asset.json";
 import globoCover from "@/assets/case-globo.png.asset.json";
 import bradescoCover from "@/assets/case-bradesco.png.asset.json";
 import liveloCover from "@/assets/case-livelo.png.asset.json";
@@ -133,9 +133,9 @@ export const cases: CaseStudy[] = [
     problema:
       "Melhorar a qualidade do atendimento, aumentando o NPS e reduzindo a fricção entre canais, ao mesmo tempo em que se criavam condições melhores de trabalho para os atendentes.",
     escopo:
-      "Liderei o design de serviços do atendimento Livelo como Designer Líder, com um time de 4 designers, conduzindo o processo do mapeamento à prototipação.",
+      "Liderei o design de serviços do atendimento Livelo como Designer Líder, com um time de 4 designers, conduzindo o processo do mapeamento do serviço à prototipação.",
     estrategia:
-      "Entrevistas com funcionários e clientes para mapear dores. Shadowing em atendimentos reais. Service Blueprint para entender conexões entre processos, sistemas e pessoas. Reclassificação de atendimentos, dos mais comuns aos mais raros. Prototipação: redesign da interface, protótipos de features e chatbot.",
+      "Entrevistas com funcionários e clientes para mapear dores. Shadowing em atendimentos reais. Service Blueprint para entender conexões entre processos, sistemas e pessoas. Reclassificação de atendimentos, dos mais comuns aos mais raros. Prototipação: redesign da interface, redesign de processos, protótipos de features e chatbot.",
     alinhamento:
       "O Service Blueprint conectou as decisões de design às restrições reais de sistemas, processos e times de atendimento, alinhando a solução entre design, operação e tecnologia.",
     solucao:
@@ -143,7 +143,7 @@ export const cases: CaseStudy[] = [
     resultados:
       "Redução do tempo médio de atendimento e maior agilidade na priorização de chamados, experiência mais consistente entre canais e maior engajamento dos atendentes com ferramentas mais rápidas e materiais de suporte atualizados.",
     aprendizado:
-      "A análise mostrou que o tempo de solução é mais relevante que o tempo de atendimento em si — pequenas falhas no chatbot e na priorização de chamados tinham impacto desproporcional na experiência do cliente.",
+      "A análise mostrou que o tempo de solução é mais relevante que o tempo de atendimento em si — pequenas falhas no roteiro do chatbot e na priorização de chamados tinham impacto desproporcional na experiência do cliente.",
     metricas: [
       { label: "NPS de atendimento", value: "3,3 → 6,7" },
       { label: "Turnover de atendentes", value: "60%/ano" },
