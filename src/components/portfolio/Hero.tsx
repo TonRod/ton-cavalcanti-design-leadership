@@ -28,7 +28,7 @@ export function Hero() {
             {metrics.map((m) => (
               <div key={m.label} className="flex flex-col bg-surface p-5">
                 <p className="metric-num text-accent">{m.value}</p>
-                <p className="mt-3 text-[0.7rem] uppercase tracking-[0.15em] text-muted-foreground">
+                <p className="mt-auto pt-3 text-[0.7rem] uppercase tracking-[0.15em] text-muted-foreground">
                   {m.label}
                 </p>
               </div>
