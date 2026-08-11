@@ -39,7 +39,7 @@ export function Hero() {
               href="#cases"
               className="rounded-md bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
             >
-              Ver 3 cases
+              Ver cases
             </a>
             <a
               href="#contato"
