@@ -1,7 +1,7 @@
 import naturaCover from "@/assets/case-natura.png.asset.json";
 import globoCover from "@/assets/case-globo.png.asset.json";
 import bradescoCover from "@/assets/case-bradesco.png.asset.json";
-import liveloCover from "@/assets/case-livelo.jpg";
+import liveloCover from "@/assets/case-livelo.png.asset.json";
 
 export type CaseStudy = {
   cover: string;
@@ -120,7 +120,7 @@ export const cases: CaseStudy[] = [
   },
   {
     id: "livelo-design-servicos",
-    cover: liveloCover,
+    cover: liveloCover.url,
     index: "04",
     title: "Design de Serviços no Atendimento",
     org: "Try/WPP · Livelo",
