@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { ArrowUpRight } from "lucide-react";
 import { cases, type CaseStudy } from "@/data/portfolio";
+import { cn } from "@/lib/utils";
 
 function Block({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -33,12 +34,20 @@ export function CasesSection() {
               onClick={() => setActive(c)}
               className="group relative flex flex-col overflow-hidden rounded-lg border border-border bg-surface text-left transition-transform duration-300 hover:-translate-y-1"
             >
-              <div className="relative aspect-[4/3] w-full overflow-hidden">
+              <div
+                className={cn(
+                  "relative aspect-[4/3] w-full overflow-hidden",
+                  c.id === "livelo-design-servicos" && "bg-surface p-8 sm:p-12"
+                )}
+              >
                 <img
                   src={c.cover}
                   alt={`Capa do case ${c.title} — ${c.org}`}
                   loading="lazy"
-                  className="size-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                  className={cn(
+                    "size-full object-center transition-transform duration-500 group-hover:scale-105",
+                    c.id === "livelo-design-servicos" ? "object-contain" : "object-cover"
+                  )}
                 />
                 <ArrowUpRight className="absolute right-4 top-4 size-4 text-foreground/70 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </div>
