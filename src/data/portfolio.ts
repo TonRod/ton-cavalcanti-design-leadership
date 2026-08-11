@@ -1,4 +1,4 @@
-jaimport naturaCover from "@/assets/case-natura.png.asset.json";
+import naturaCover from "@/assets/case-natura.png.asset.json";
 import globoCover from "@/assets/case-globo.png.asset.json";
 import bradescoCover from "@/assets/case-bradesco.png.asset.json";
 import liveloCover from "@/assets/case-livelo.png.asset.json";
@@ -235,3 +235,27 @@ export const contact = {
   behance: "https://behance.net/quattro",
   cv: "https://drive.google.com/uc?export=download&id=1rbA3k0bmXsh3mllrTn5R95aKfmmqIzRL",
 };
+
+export type LeadershipProof = {
+  label: string;
+  value: string;
+  context: string;
+};
+
+export const leadershipProofs: LeadershipProof[] = [
+  {
+    label: "Time",
+    value: "Multidisciplinar",
+    context: "Engenharia, pesquisa, design e negócios.",
+  },
+  {
+    label: "Processo",
+    value: "Redução no tempo de entrega",
+    context: "Pesquisa, desenvolvimento e entrega mais rápidos com uso de IA no processo.",
+  },
+  {
+    label: "Pessoas",
+    value: "100+ designers",
+    context: "Liderados e mentorados ao longo da carreira.",
+  },
+];
