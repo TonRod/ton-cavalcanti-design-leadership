@@ -34,6 +34,7 @@ function Index() {
         <LeadershipSection />
         <CasesSection />
         <TimelineSection />
+        <EducationSection />
         <ContactSection />
       </main>
       <footer className="border-t border-border py-8">
