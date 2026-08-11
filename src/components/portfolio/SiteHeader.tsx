@@ -94,7 +94,7 @@ export function SiteHeader() {
       {open && (
         <nav
           id="menu-mobile"
-          className="flex flex-col gap-1 border-t border-border px-6 py-4 md:hidden"
+          className="flex flex-col gap-1 border-t border-border px-6 py-4 lg:hidden"
         >
           {links.map((l) => {
             const isActive = activeId === l.href.slice(1);
