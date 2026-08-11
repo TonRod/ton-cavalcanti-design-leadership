@@ -2,7 +2,7 @@ import { leadershipProofs } from "@/data/portfolio";
 
 export function LeadershipSection() {
   return (
-    <section id="lideranca" className="border-t border-border py-20 sm:py-28">
+    <section id="lideranca" className="bg-surface-2 py-20 sm:py-28">
       <div className="mx-auto w-full max-w-6xl px-6">
         <p className="kicker">Liderança</p>
         <h2 className="display mt-4 text-3xl sm:text-5xl">Liderança, em números.</h2>

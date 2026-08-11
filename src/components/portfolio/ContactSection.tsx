@@ -3,7 +3,7 @@ import { contact } from "@/data/portfolio";
 
 export function ContactSection() {
   return (
-    <section id="contato" className="border-t border-border py-20 sm:py-28">
+    <section id="contato" className="bg-surface-2 py-20 sm:py-28">
       <div className="mx-auto w-full max-w-6xl px-6">
         <p className="kicker">Contato</p>
         <h2 className="display mt-4 max-w-2xl text-3xl sm:text-5xl">

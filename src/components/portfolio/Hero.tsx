@@ -26,9 +26,9 @@ export function Hero() {
 
           <div className="mt-10 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-3">
             {metrics.map((m) => (
-              <div key={m.label} className="bg-surface p-5">
-                <p className="metric-num">{m.value}</p>
-                <p className="mt-3 text-[0.7rem] uppercase tracking-[0.15em] text-muted-foreground">
+              <div key={m.label} className="flex flex-col bg-surface p-5">
+                <p className="metric-num text-accent">{m.value}</p>
+                <p className="mt-auto pt-3 text-[0.7rem] uppercase tracking-[0.15em] text-muted-foreground">
                   {m.label}
                 </p>
               </div>
@@ -38,7 +38,7 @@ export function Hero() {
           <div className="mt-10 flex flex-wrap gap-3">
             <a
               href="#cases"
-              className="rounded-md bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+              className="rounded-md bg-accent px-5 py-3 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
             >
               Ver cases
             </a>
