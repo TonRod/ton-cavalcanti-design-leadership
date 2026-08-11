@@ -1,24 +1,45 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { SiteHeader } from "@/components/portfolio/SiteHeader";
+import { Hero } from "@/components/portfolio/Hero";
+import { LeadershipSection } from "@/components/portfolio/LeadershipSection";
+import { CasesSection } from "@/components/portfolio/CasesSection";
+import { TimelineSection } from "@/components/portfolio/TimelineSection";
+import { ContactSection } from "@/components/portfolio/ContactSection";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const title = "Éliton Cavalcanti (Ton) — Design Leadership · Product Strategy · Head of Design";
+const description =
+  "Portfólio de liderança de design de Ton Cavalcanti: 16 anos em produto, times de até 25 designers, cases com NPS 40→60, −50% de abandono e −30% no tempo de lançamento.";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "profile" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen bg-background">
+      <SiteHeader />
+      <main>
+        <Hero />
+        <LeadershipSection />
+        <CasesSection />
+        <TimelineSection />
+        <ContactSection />
+      </main>
+      <footer className="border-t border-border py-8">
+        <div className="mx-auto w-full max-w-6xl px-6 text-xs text-muted-foreground">
+          © {new Date().getFullYear()} Éliton R. Cavalcanti. Todos os direitos reservados.
+        </div>
+      </footer>
     </div>
   );
 }
