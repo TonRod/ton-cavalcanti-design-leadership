@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { ArrowUpRight } from "lucide-react";
 import { cases, type CaseStudy } from "@/data/portfolio";
+import { cn } from "@/lib/utils";
 
 function Block({ label, children }: { label: string; children: React.ReactNode }) {
   return (
