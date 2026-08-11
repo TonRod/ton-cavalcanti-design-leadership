@@ -75,7 +75,7 @@ export const cases: CaseStudy[] = [
     escopo:
       "Responsável pela fase de discovery, direcionando arquitetura e UI para atender negócio, processos internos e experiência do usuário.",
     estrategia:
-      "Double Diamond como estrutura do discovery; 370 entrevistas com usuários, mapa de empatia e atualização de personas; workshop com negócio e engenharia; wireframes, testes de usabilidade e guia de estilo.",
+      "Double Diamond como estrutura do discovery; 37 entrevistas com usuários, mapa de empatia e atualização de personas; workshop com negócio e engenharia; wireframes, testes de usabilidade e guia de estilo.",
     alinhamento:
       "O workshop com negócio e engenharia garantiu que a nova arquitetura respeitasse os processos internos existentes.",
     solucao:
@@ -84,7 +84,7 @@ export const cases: CaseStudy[] = [
       "Redução de 50% no abandono da jornada de compra e aumento do tempo de permanência até a conclusão.",
     metricas: [
       { label: "Abandono da jornada", value: "−50%" },
-      { label: "Entrevistas com usuários", value: "370" },
+      { label: "Entrevistas com usuários", value: "37" },
       { label: "Prazo de entrega", value: "2 meses" },
     ],
   },
