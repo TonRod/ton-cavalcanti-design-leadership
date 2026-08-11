@@ -65,11 +65,19 @@ export function Hero() {
 
         <div className="relative">
           <img
-            src={portrait}
+            src={portraitDay.url}
             alt="Retrato profissional de Éliton (Ton) Cavalcanti"
             width={912}
             height={1104}
-            className="w-full rounded-lg border border-border object-cover grayscale-[35%]"
+            className="block w-full rounded-lg border border-border object-cover dark:hidden"
+          />
+          <img
+            src={portraitNight.url}
+            alt="Retrato profissional de Éliton (Ton) Cavalcanti"
+            aria-hidden="true"
+            width={912}
+            height={1104}
+            className="hidden w-full rounded-lg border border-border object-cover dark:block"
           />
         </div>
       </div>
