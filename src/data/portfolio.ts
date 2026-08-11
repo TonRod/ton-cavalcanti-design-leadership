@@ -234,6 +234,8 @@ export const contact = {
   linkedin: "https://linkedin.com/in/toncavalcanti",
   behance: "https://behance.net/quattro",
   cv: "https://drive.google.com/uc?export=download&id=1rbA3k0bmXsh3mllrTn5R95aKfmmqIzRL",
+};
+
 export type LeadershipProof = {
   label: string;
   value: string;
