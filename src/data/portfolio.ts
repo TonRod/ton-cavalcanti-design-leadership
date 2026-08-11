@@ -259,3 +259,156 @@ export const leadershipProofs: LeadershipProof[] = [
     context: "Liderados e mentorados ao longo da carreira.",
   },
 ];
+
+export type Education = {
+  degree: string;
+  institution: string;
+  location: string;
+  period: string;
+};
+
+export const education: Education[] = [
+  {
+    degree: "MBA em Design Thinking",
+    institution: "ESPM",
+    location: "São Paulo, Brasil",
+    period: "jun 2019 – jul 2020",
+  },
+  {
+    degree: "Pós-graduação em Service Design",
+    institution: "Auckland University of Technology",
+    location: "Nova Zelândia",
+    period: "abr 2018 – nov 2019",
+  },
+  {
+    degree: "Graduação em Design Gráfico",
+    institution: "Instituto Superior de Tecnologia",
+    location: "Marília, Brasil",
+    period: "jan 2004 – dez 2006",
+  },
+  {
+    degree: "Graduação em Administração",
+    institution: "Fundação Eurípides Soares da Rocha",
+    location: "Marília, Brasil",
+    period: "jan 1999 – 2005",
+  },
+];
+
+export type Certification = {
+  title: string;
+  institution: string;
+  location: string;
+  period: string;
+};
+
+export const certifications: Certification[] = [
+  {
+    title: "Soluções de Alto Impacto com MIT designX",
+    institution: "Massachusetts Institute of Technology (MIT)",
+    location: "São Paulo",
+    period: "mar 2023 – jul 2023",
+  },
+  {
+    title: "Get Your Product Used: Adoption and Appropriation",
+    institution: "The Institute Design Foundation",
+    location: "São Paulo",
+    period: "fev 2021 – mar 2021",
+  },
+  {
+    title: "Accessibility: How to Design for All",
+    institution: "The Institute Design Foundation",
+    location: "São Paulo",
+    period: "jul 2020 – ago 2020",
+  },
+  {
+    title: "UX Management: Strategy and Tactics",
+    institution: "The Institute Design Foundation",
+    location: "São Paulo",
+    period: "jan 2020 – fev 2020",
+  },
+  {
+    title: "Design de Processos",
+    institution: "Fluxe School",
+    location: "São Paulo",
+    period: "jan 2020",
+  },
+  {
+    title: "Emotional Design — How to Make Products People Will Love",
+    institution: "The Institute Design Foundation",
+    location: "São Paulo",
+    period: "nov 2019 – dez 2019",
+  },
+  {
+    title: "Operacionalização em Design",
+    institution: "Instituto Superior de Tecnologia",
+    location: "Marília",
+    period: "jul 2004 – jan 2005",
+  },
+  {
+    title: "Planejamento e Técnicas de Design",
+    institution: "Instituto Superior de Tecnologia",
+    location: "Marília",
+    period: "jan 2003 – jul 2003",
+  },
+];
+
+export type SkillGroup = {
+  label: string;
+  items: string[];
+};
+
+export const skillGroups: SkillGroup[] = [
+  {
+    label: "Técnicas",
+    items: [
+      "Inteligência Artificial",
+      "Data-Driven Design",
+      "Value Proposition Design",
+      "Estratégia de Produto",
+      "Lean Inception",
+      "Design Sprint",
+      "Wireframing",
+      "Prototipagem",
+      "Pesquisa de Usuário",
+      "JTBD",
+    ],
+  },
+  {
+    label: "Ferramentas",
+    items: [
+      "Figma",
+      "Miro",
+      "Sketch",
+      "InVision",
+      "Maze",
+      "Webflow",
+      "Notion",
+      "Typeform",
+      "Google Analytics",
+      "Hotjar",
+      "ChatGPT",
+      "Claude",
+      "Slack",
+    ],
+  },
+  {
+    label: "Comportamentais",
+    items: [
+      "Liderança",
+      "Colaboração",
+      "Resolução de conflitos",
+      "Comunicação não violenta",
+      "Disciplina",
+      "Empatia",
+    ],
+  },
+  {
+    label: "Idiomas",
+    items: [
+      "Português (Nativo)",
+      "Inglês (Intermediário B2)",
+      "Francês (Iniciante A1)",
+      "Espanhol (Iniciante A1)",
+    ],
+  },
+];
