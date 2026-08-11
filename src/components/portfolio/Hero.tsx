@@ -19,9 +19,9 @@ export function Hero() {
             negócio.
           </h1>
           <p className="mt-8 max-w-2xl font-serif text-sm leading-relaxed text-muted-foreground sm:text-base">
-            Ton Cavalcanti · 16 anos em produto, mais de 6 deles liderando times em
-            Try, Bradesco, Motrix e Natura. Estruturo a função de design onde ela
-            ainda não existe. São Paulo, Brasil.
+            Ton Cavalcanti · 16 anos em produto, mais de 6 deles liderando times de design.
+            Passagens por Try, Bradesco, Globo, Motrix, Natura e hoje Porto Seguro. Estruturo a
+            função de design onde ela ainda não existe. São Paulo, Brasil.
           </p>
 
           <div className="mt-10 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-3">
