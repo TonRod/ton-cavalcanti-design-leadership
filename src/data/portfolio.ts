@@ -33,7 +33,7 @@ export const cases: CaseStudy[] = [
     org: "Natura &Co",
     year: "2024",
     role: "Líder de design da frente Omnichannel · 2 designers",
-    highlight: { label: "NPS de atendimento", value: "40 → 60" },
+    highlight: { label: "CSAT de atendimento", value: "40 → 80" },
     duotone: "duotone-1",
     contexto:
       "A Natura enfrentava queda na satisfação do cliente e aumento de retrabalho operacional nos fluxos de Retira em Loja e Entrega Super Expressa — experiências que atravessam o digital e a operação física das lojas.",
@@ -48,11 +48,11 @@ export const cases: CaseStudy[] = [
     solucao:
       "Dashboards em tempo real, notificações proativas, redesenho do Retira em Loja com QR Code e interface simplificada para uso em loja.",
     resultados:
-      "NPS de 40 para 60, −25% no tempo de processamento de pedidos, −13% nos chamados ao suporte, 97% de aprovação entre gerentes de loja.",
+      "CSAT de 40 para 80, −25% no tempo de processamento de pedidos, −13% nos chamados ao suporte, 97% de aprovação entre gerentes de loja.",
     aprendizado:
       "A integração de tecnologia em processos físicos exige mais do que ferramentas digitais: depende de um profundo entendimento das jornadas dos usuários.",
     metricas: [
-      { label: "NPS de atendimento", value: "40 → 60" },
+      { label: "CSAT de atendimento", value: "40 → 80" },
       { label: "Processamento de pedidos", value: "−25%" },
       { label: "Chamados ao suporte", value: "−13%" },
       { label: "Aprovação dos gerentes", value: "97%" },
