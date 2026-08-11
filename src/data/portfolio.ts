@@ -1,4 +1,9 @@
+import naturaCover from "@/assets/case-natura.png.asset.json";
+import globoCover from "@/assets/case-globo.png.asset.json";
+import bradescoCover from "@/assets/case-bradesco.png.asset.json";
+
 export type CaseStudy = {
+  cover: string;
   id: string;
   index: string;
   title: string;
