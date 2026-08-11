@@ -33,7 +33,7 @@ export const cases: CaseStudy[] = [
     org: "Natura &Co",
     year: "2024",
     role: "Líder de design da frente Omnichannel · 2 designers",
-    highlight: { label: "CSAT de atendimento", value: "40 → 80" },
+    highlight: { label: "CSAT de atendimento", value: "40% → 80%" },
     duotone: "duotone-1",
     contexto:
       "A Natura enfrentava queda na satisfação do cliente e aumento de retrabalho operacional nos fluxos de Retira em Loja e Entrega Super Expressa — experiências que atravessam o digital e a operação física das lojas.",
@@ -48,11 +48,11 @@ export const cases: CaseStudy[] = [
     solucao:
       "Dashboards em tempo real, notificações proativas, redesenho do Retira em Loja com QR Code e interface simplificada para uso em loja.",
     resultados:
-      "CSAT de 40 para 80, −25% no tempo de processamento de pedidos, −13% nos chamados ao suporte, 97% de aprovação entre gerentes de loja.",
+      "CSAT de 40% para 80%, −25% no tempo de processamento de pedidos, −13% nos chamados ao suporte, 97% de aprovação entre gerentes de loja.",
     aprendizado:
       "A integração de tecnologia em processos físicos exige mais do que ferramentas digitais: depende de um profundo entendimento das jornadas dos usuários.",
     metricas: [
-      { label: "CSAT de atendimento", value: "40 → 80" },
+      { label: "CSAT de atendimento", value: "40% → 80%" },
       { label: "Processamento de pedidos", value: "−25%" },
       { label: "Chamados ao suporte", value: "−13%" },
       { label: "Aprovação dos gerentes", value: "97%" },
@@ -85,7 +85,7 @@ export const cases: CaseStudy[] = [
     metricas: [
       { label: "Abandono da jornada", value: "−50%" },
       { label: "Entrevistas com usuários", value: "370" },
-      { label: "Tempo até solução", value: "2 meses" },
+      { label: "Prazo de entrega", value: "2 meses" },
     ],
   },
   {
@@ -126,10 +126,10 @@ export const cases: CaseStudy[] = [
     org: "Try/WPP · Livelo",
     year: "2018–2019",
     role: "Designer Líder · 4 designers",
-    highlight: { label: "NPS de atendimento", value: "3,3 → 6,7" },
+    highlight: { label: "NPS de atendimento", value: "+3,3 → +6,7" },
     duotone: "duotone-graphite",
     contexto:
-      "O atendimento da Livelo apresentava baixo NPS (3,3) e alto turnover de funcionários (60% ao ano). O sistema de suporte era lento, os fluxos de atendimento desorganizados e a experiência multicanal fragmentada.",
+      "O atendimento da Livelo apresentava baixo NPS (+3,3) e alto turnover de funcionários (60% ao ano). O sistema de suporte era lento, os fluxos de atendimento desorganizados e a experiência multicanal fragmentada.",
     problema:
       "Melhorar a qualidade do atendimento, aumentando o NPS e reduzindo a fricção entre canais, ao mesmo tempo em que se criavam condições melhores de trabalho para os atendentes.",
     escopo:
@@ -145,7 +145,7 @@ export const cases: CaseStudy[] = [
     aprendizado:
       "A análise mostrou que o tempo de solução é mais relevante que o tempo de atendimento em si — pequenas falhas no roteiro do chatbot e na priorização de chamados tinham impacto desproporcional na experiência do cliente.",
     metricas: [
-      { label: "NPS de atendimento", value: "3,3 → 6,7" },
+      { label: "NPS de atendimento", value: "+3,3 → +6,7" },
       { label: "Turnover de atendentes", value: "60%/ano" },
       { label: "Time de design", value: "4 designers" },
     ],
