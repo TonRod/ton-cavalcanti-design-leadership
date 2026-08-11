@@ -1,6 +1,7 @@
 import { Menu } from "lucide-react";
 import { useState } from "react";
 import { contact } from "@/data/portfolio";
+import { ThemeToggle } from "@/components/portfolio/ThemeToggle";
 
 const links = [
   { href: "#lideranca", label: "Liderança" },
