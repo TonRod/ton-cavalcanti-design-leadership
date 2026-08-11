@@ -20,7 +20,7 @@ export function CasesSection() {
       <div className="mx-auto w-full max-w-6xl px-6">
         <p className="kicker">Cases selecionados</p>
         <h2 className="display mt-4 max-w-2xl text-3xl sm:text-5xl">
-          Três iniciativas, diferentes contextos de negócio.
+          Quatro iniciativas, diferentes contextos de negócio.
         </h2>
         <p className="mt-4 max-w-xl font-serif text-sm leading-relaxed text-muted-foreground">
           Selecione um case para ver contexto, estratégia, alinhamento e resultados completos.
