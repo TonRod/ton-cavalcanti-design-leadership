@@ -33,7 +33,7 @@ export const cases: CaseStudy[] = [
     org: "Natura &Co",
     year: "2024",
     role: "Líder de design da frente Omnichannel · 2 designers",
-    highlight: { label: "NPS", value: "40 → 60" },
+    highlight: { label: "NPS de atendimento", value: "40 → 60" },
     duotone: "duotone-1",
     contexto:
       "A Natura enfrentava queda na satisfação do cliente e aumento de retrabalho operacional nos fluxos de Retira em Loja e Entrega Super Expressa — experiências que atravessam o digital e a operação física das lojas.",
@@ -52,7 +52,7 @@ export const cases: CaseStudy[] = [
     aprendizado:
       "A integração de tecnologia em processos físicos exige mais do que ferramentas digitais: depende de um profundo entendimento das jornadas dos usuários.",
     metricas: [
-      { label: "NPS", value: "40 → 60" },
+      { label: "NPS de atendimento", value: "40 → 60" },
       { label: "Processamento de pedidos", value: "−25%" },
       { label: "Chamados ao suporte", value: "−13%" },
       { label: "Aprovação dos gerentes", value: "97%" },
@@ -65,7 +65,7 @@ export const cases: CaseStudy[] = [
     title: "Globo SIM · Plataforma de Autoatendimento",
     org: "Globo S.A.",
     year: "2021",
-    role: "Decisão de conduzir o discovery completo (Double Diamond, 37 entrevistas) antes de qualquer redesenho de interface.",
+    role: "Decisão de conduzir o discovery completo (Double Diamond, 370 entrevistas) antes de qualquer redesenho de interface.",
     highlight: { label: "Abandono da jornada", value: "−50%" },
     duotone: "duotone-2",
     contexto:
@@ -84,8 +84,8 @@ export const cases: CaseStudy[] = [
       "Redução de 50% no abandono da jornada de compra e aumento do tempo de permanência até a conclusão.",
     metricas: [
       { label: "Abandono da jornada", value: "−50%" },
-      { label: "Entrevistas com usuários", value: "37" },
-      { label: "Tempo até conclusão", value: "Aumento" },
+      { label: "Entrevistas com usuários", value: "370" },
+      { label: "Tempo até solução", value: "2 meses" },
     ],
   },
   {
