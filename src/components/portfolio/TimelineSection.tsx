@@ -18,7 +18,7 @@ export function TimelineSection() {
                   item.transition ? "border border-border bg-background" : "bg-accent"
                 }`}
               />
-              <p className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted-foreground">
+              <p className="font-serif text-[0.7rem] uppercase tracking-[0.18em] text-muted-foreground">
                 {item.period}
               </p>
               <h3 className="mt-2 text-base font-medium sm:text-lg">

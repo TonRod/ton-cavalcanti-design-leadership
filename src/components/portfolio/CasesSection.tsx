@@ -22,7 +22,7 @@ export function CasesSection() {
         <h2 className="display mt-4 max-w-2xl text-3xl sm:text-5xl">
           Três iniciativas, diferentes contextos de negócio.
         </h2>
-        <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-4 max-w-xl font-serif text-sm leading-relaxed text-muted-foreground">
           Selecione um case para ver contexto, estratégia, alinhamento e resultados completos.
         </p>
 
@@ -40,7 +40,7 @@ export function CasesSection() {
                   loading="lazy"
                   className="size-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                 />
-                <span className="absolute left-4 top-4 rounded bg-background/80 px-2 py-1 font-mono text-xs tracking-[0.2em] text-foreground backdrop-blur">
+                <span className="absolute left-4 top-4 rounded bg-background/80 px-2 py-1 font-serif text-xs tracking-[0.2em] text-foreground backdrop-blur">
                   CASE {c.index}
                 </span>
                 <ArrowUpRight className="absolute right-4 top-4 size-4 text-foreground/70 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
