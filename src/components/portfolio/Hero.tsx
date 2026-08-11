@@ -17,7 +17,7 @@ export function Hero() {
             Lidero design para transformar estratégia em produtos relevantes e resultados de
             negócio.
           </h1>
-          <p className="mt-8 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+          <p className="mt-8 max-w-2xl font-serif text-sm leading-relaxed text-muted-foreground sm:text-base">
             Ton Cavalcanti · 16 anos em produto, mais de 6 deles liderando times de até 25
             designers em Try, Bradesco, Motrix e Natura. Estruturo a função de design onde ela
             ainda não existe. São Paulo, Brasil.

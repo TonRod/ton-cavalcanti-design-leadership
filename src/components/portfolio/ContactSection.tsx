@@ -9,7 +9,7 @@ export function ContactSection() {
         <h2 className="display mt-4 max-w-2xl text-3xl sm:text-5xl">
           Vamos construir produtos e times melhores?
         </h2>
-        <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-4 max-w-xl font-serif text-sm leading-relaxed text-muted-foreground">
           Aberto a conversas sobre liderança de design, transformação de produto e consultoria
           estratégica.
         </p>
