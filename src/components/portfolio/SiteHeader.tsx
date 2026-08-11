@@ -45,7 +45,7 @@ export function SiteHeader() {
           Ton Cavalcanti
         </a>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-6 xl:gap-8 lg:flex">
           {links.map((l) => {
             const isActive = activeId === l.href.slice(1);
             return (
@@ -77,7 +77,7 @@ export function SiteHeader() {
           <ThemeToggle />
         </nav>
 
-        <div className="flex items-center gap-2 md:hidden">
+        <div className="flex items-center gap-2 lg:hidden">
           <ThemeToggle />
           <button
             className="p-1.5"
@@ -94,7 +94,7 @@ export function SiteHeader() {
       {open && (
         <nav
           id="menu-mobile"
-          className="flex flex-col gap-1 border-t border-border px-6 py-4 md:hidden"
+          className="flex flex-col gap-1 border-t border-border px-6 py-4 lg:hidden"
         >
           {links.map((l) => {
             const isActive = activeId === l.href.slice(1);
