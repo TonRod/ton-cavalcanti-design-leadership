@@ -62,6 +62,7 @@ export function CasesSection() {
             <button
               key={c.id}
               onClick={() => setActive(c)}
+              aria-label={`Ver case ${c.title}`}
               className="group relative flex flex-col overflow-hidden rounded-lg border border-border bg-surface text-left transition-transform duration-300 hover:-translate-y-1"
             >
               <div
