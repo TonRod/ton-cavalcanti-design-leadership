@@ -74,7 +74,7 @@ export function Hero() {
           <img
             src={portraitNight.url}
             alt="Retrato profissional de Éliton (Ton) Cavalcanti"
-            aria-hidden="true"
+            
             width={912}
             height={1104}
             className="hidden w-full rounded-lg border border-border object-cover dark:block"
