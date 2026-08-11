@@ -7,6 +7,7 @@ const links = [
   { href: "#lideranca", label: "Liderança" },
   { href: "#cases", label: "Cases" },
   { href: "#trajetoria", label: "Trajetória" },
+  { href: "#formacao", label: "Formação" },
   { href: "#contato", label: "Contato" },
 ];
 
