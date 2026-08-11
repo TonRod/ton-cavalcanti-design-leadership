@@ -1,6 +1,7 @@
 import naturaCover from "@/assets/case-natura.png.asset.json";
 import globoCover from "@/assets/case-globo.png.asset.json";
 import bradescoCover from "@/assets/case-bradesco.png.asset.json";
+import liveloCover from "@/assets/case-livelo.jpg";
 
 export type CaseStudy = {
   cover: string;

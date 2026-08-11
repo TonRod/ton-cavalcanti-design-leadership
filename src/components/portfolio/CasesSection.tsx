@@ -26,7 +26,7 @@ export function CasesSection() {
           Selecione um case para ver contexto, estratégia, alinhamento e resultados completos.
         </p>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-3">
+        <div className="mt-12 grid gap-5 md:grid-cols-2">
           {cases.map((c) => (
             <button
               key={c.id}
@@ -40,9 +40,6 @@ export function CasesSection() {
                   loading="lazy"
                   className="size-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                 />
-                <span className="absolute left-4 top-4 rounded bg-background/80 px-2 py-1 font-serif text-xs tracking-[0.2em] text-foreground backdrop-blur">
-                  CASE {c.index}
-                </span>
                 <ArrowUpRight className="absolute right-4 top-4 size-4 text-foreground/70 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </div>
               <div className="flex flex-1 flex-col justify-between p-6">
