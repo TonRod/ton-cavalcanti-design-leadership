@@ -12,11 +12,11 @@ export function LeadershipSection() {
         </p>
 
         <div className="mt-12 grid gap-5 md:grid-cols-3">
-          {proofs.map((p) => (
-            <div key={p.kicker} className="rounded-lg border border-border bg-surface p-6">
-              <p className="kicker">{p.kicker}</p>
+          {leadershipProofs.map((p) => (
+            <div key={p.label} className="rounded-lg border border-border bg-surface p-6">
+              <p className="kicker">{p.label}</p>
               <p className="display mt-4 text-2xl sm:text-3xl">{p.value}</p>
-              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{p.text}</p>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{p.context}</p>
             </div>
           ))}
         </div>
