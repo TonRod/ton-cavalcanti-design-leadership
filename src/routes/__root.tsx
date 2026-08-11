@@ -11,6 +11,47 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { contact, siteUrl } from "@/data/portfolio";
+import portraitDay from "@/assets/portrait-day.jpg.asset.json";
+
+const siteTitle =
+  "Éliton Cavalcanti (Ton) — Design Leadership · Product Strategy · Head of Design";
+const siteDescription =
+  "Ton Cavalcanti · 16 anos em produto, mais de 6 liderando times de design em Try, Bradesco, Motrix, Natura e Porto Seguro. Cases com resultado medido em NPS, tempo de entrega e adoção.";
+const portraitUrl = `${siteUrl}${portraitDay.url}`;
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Éliton R. Cavalcanti",
+  alternateName: "Ton Cavalcanti",
+  jobTitle: "Senior Product Designer",
+  worksFor: { "@type": "Organization", name: "Porto Seguro" },
+  url: siteUrl,
+  image: portraitUrl,
+  email: contact.email,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "São Paulo",
+    addressCountry: "BR",
+  },
+  sameAs: [contact.linkedin, contact.behance],
+  alumniOf: [
+    { "@type": "Organization", name: "ESPM" },
+    { "@type": "Organization", name: "Auckland University of Technology" },
+    { "@type": "Organization", name: "Instituto Superior de Tecnologia" },
+    { "@type": "Organization", name: "Fundação Eurípides Soares da Rocha" },
+  ],
+  knowsAbout: [
+    "Design Leadership",
+    "Product Strategy",
+    "Service Design",
+    "Design Ops",
+    "Pesquisa de Usuário",
+    "Design Thinking",
+  ],
+  description: siteDescription,
+};
 
 function NotFoundComponent() {
   return (
@@ -77,14 +118,32 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
-      { property: "og:type", content: "website" },
+      { title: siteTitle },
+      { name: "description", content: siteDescription },
+      { name: "author", content: "Éliton R. Cavalcanti" },
+      { property: "og:title", content: siteTitle },
+      { property: "og:description", content: siteDescription },
+      { property: "og:type", content: "profile" },
+      { property: "og:url", content: siteUrl },
+      { property: "og:site_name", content: "Ton Cavalcanti" },
+      { property: "og:locale", content: "pt_BR" },
+      { property: "og:image", content: portraitUrl },
+      { property: "og:image:width", content: "1122" },
+      { property: "og:image:height", content: "1402" },
+      {
+        property: "og:image:alt",
+        content: "Retrato profissional de Éliton (Ton) Cavalcanti",
+      },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: siteTitle },
+      { name: "twitter:description", content: siteDescription },
+      { name: "twitter:image", content: portraitUrl },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(personJsonLd),
+      },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },

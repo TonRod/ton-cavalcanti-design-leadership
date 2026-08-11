@@ -9,7 +9,7 @@ import { ContactSection } from "@/components/portfolio/ContactSection";
 
 const title = "Éliton Cavalcanti (Ton) — Design Leadership · Product Strategy · Head of Design";
 const description =
-  "Portfólio de liderança de design de Ton Cavalcanti: 16 anos em produto, times de até 25 designers, cases com NPS 40→60, −50% de abandono e −30% no tempo de lançamento.";
+  "Ton Cavalcanti · 16 anos em produto, mais de 6 liderando times de design em Try, Bradesco, Motrix, Natura e Porto Seguro. Cases com resultado medido em NPS, tempo de entrega e adoção.";
 
 export const Route = createFileRoute("/")({
   head: () => ({

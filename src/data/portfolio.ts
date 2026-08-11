@@ -229,6 +229,10 @@ export const timeline: TimelineItem[] = [
   },
 ];
 
+// URL base do site. Trocar pelo domínio definitivo ao publicar:
+// og:image, og:url e o JSON-LD dependem dela para gerar URLs absolutas.
+export const siteUrl = "https://id-preview--6723f2a1-65ec-4a0f-823f-6b297d115237.lovable.app";
+
 export const contact = {
   email: "meiodoton@gmail.com",
   linkedin: "https://linkedin.com/in/toncavalcanti",
