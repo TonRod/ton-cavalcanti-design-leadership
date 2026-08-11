@@ -1,20 +1,4 @@
-const proofs = [
-  {
-    kicker: "Time",
-    value: "25 designers",
-    text: "Liderados em 2019–2020, no Bradesco.",
-  },
-  {
-    kicker: "Processo",
-    value: "−30% no tempo de lançamento",
-    text: "Design reviews semanais, ritual de handoff com engenharia, onboarding de designers e operação de pesquisa — estruturados na Motrix.",
-  },
-  {
-    kicker: "Pessoas",
-    value: "6 contratações",
-    text: "4 no Bradesco, 2 na Motrix.",
-  },
-];
+import { leadershipProofs } from "@/data/portfolio";
 
 export function LeadershipSection() {
   return (
