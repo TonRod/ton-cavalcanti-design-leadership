@@ -1,6 +1,7 @@
 import naturaCover from "@/assets/case-natura.png.asset.json";
 import globoCover from "@/assets/case-globo.png.asset.json";
 import bradescoCover from "@/assets/case-bradesco.png.asset.json";
+import liveloCover from "@/assets/case-livelo.jpg";
 
 export type CaseStudy = {
   cover: string;
@@ -115,6 +116,38 @@ export const cases: CaseStudy[] = [
       { label: "Entrega de resposta", value: "24h → 15min" },
       { label: "Aprovação de contrato", value: "48h → 4h" },
       { label: "Protótipos por perfil", value: "3" },
+    ],
+  },
+  {
+    id: "livelo-design-servicos",
+    cover: liveloCover,
+    index: "04",
+    title: "Design de Serviços no Atendimento",
+    org: "Try/WPP · Livelo",
+    year: "2018–2019",
+    role: "Designer Líder · 4 designers",
+    highlight: { label: "NPS de atendimento (baseline)", value: "3,3" },
+    duotone: "duotone-graphite",
+    contexto:
+      "O atendimento da Livelo apresentava baixo NPS (3,3) e alto turnover de funcionários (60% ao ano). O sistema de suporte era lento, os fluxos de atendimento desorganizados e a experiência multicanal fragmentada.",
+    problema:
+      "Melhorar a qualidade do atendimento, aumentando o NPS e reduzindo a fricção entre canais, ao mesmo tempo em que se criavam condições melhores de trabalho para os atendentes.",
+    escopo:
+      "Liderei o design de serviços do atendimento Livelo como Designer Líder, com um time de 4 designers, conduzindo o processo do mapeamento à prototipação.",
+    estrategia:
+      "Entrevistas com funcionários e clientes para mapear dores. Shadowing em atendimentos reais. Service Blueprint para entender conexões entre processos, sistemas e pessoas. Reclassificação de atendimentos, dos mais comuns aos mais raros. Prototipação: redesign da interface, protótipos de features e chatbot.",
+    alinhamento:
+      "O Service Blueprint conectou as decisões de design às restrições reais de sistemas, processos e times de atendimento, alinhando a solução entre design, operação e tecnologia.",
+    solucao:
+      "Redesign da interface de atendimento, reduzindo informações em tela e simplificando tarefas; chatbot com storytelling e diálogos mais humanos; jornadas omnichannel integradas, evitando que clientes precisassem repetir problemas em diferentes canais; programa de treinamento e materiais de apoio para os atendentes.",
+    resultados:
+      "Redução do tempo médio de atendimento e maior agilidade na priorização de chamados, experiência mais consistente entre canais e maior engajamento dos atendentes com ferramentas mais rápidas e materiais de suporte atualizados.",
+    aprendizado:
+      "A análise mostrou que o tempo de solução é mais relevante que o tempo de atendimento em si — pequenas falhas no chatbot e na priorização de chamados tinham impacto desproporcional na experiência do cliente.",
+    metricas: [
+      { label: "NPS de atendimento (baseline)", value: "3,3" },
+      { label: "Turnover de atendentes", value: "60%/ano" },
+      { label: "Time de design", value: "4 designers" },
     ],
   },
 ];
