@@ -103,7 +103,7 @@ export function CasesSection() {
       </div>
 
       <Dialog open={!!active} onOpenChange={(o) => !o && setActive(null)}>
-        <DialogContent className="max-h-[88vh] max-w-2xl overflow-y-auto bg-popover">
+        <DialogContent ref={scrollRef} className="max-h-[88vh] max-w-2xl overflow-y-auto bg-popover">
           {active && (
             <>
               <DialogHeader>
@@ -135,8 +135,54 @@ export function CasesSection() {
                 <Block label="Resultados">{active.resultados}</Block>
                 {active.aprendizado && <Block label="Aprendizado">{active.aprendizado}</Block>}
               </div>
+
+              <div className="mt-8 border-t border-border pt-5">
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {prev ? (
+                    <button
+                      onClick={() => setActive(prev)}
+                      aria-label={`Ver case anterior: ${prev.title}`}
+                      className="flex items-start gap-3 rounded-md border border-border p-3 text-left transition-colors hover:bg-secondary"
+                    >
+                      <ArrowLeft className="mt-0.5 size-4 shrink-0" />
+                      <span>
+                        <span className="kicker block">Anterior</span>
+                        <span className="mt-1 block text-sm">{prev.title}</span>
+                      </span>
+                    </button>
+                  ) : (
+                    <span className="hidden sm:block" />
+                  )}
+                  {next && (
+                    <button
+                      onClick={() => setActive(next)}
+                      aria-label={`Ver próximo case: ${next.title}`}
+                      className="flex items-start justify-end gap-3 rounded-md border border-border p-3 text-right transition-colors hover:bg-secondary"
+                    >
+                      <span>
+                        <span className="kicker block">Próximo</span>
+                        <span className="mt-1 block text-sm">{next.title}</span>
+                      </span>
+                      <ArrowRight className="mt-0.5 size-4 shrink-0" />
+                    </button>
+                  )}
+                </div>
+
+                <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-5">
+                  <p className="text-xs text-muted-foreground">
+                    Quer entender como aplico isso no seu contexto?
+                  </p>
+                  <button
+                    onClick={goToContact}
+                    className="rounded-md bg-accent px-5 py-2.5 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
+                  >
+                    Vamos conversar
+                  </button>
+                </div>
+              </div>
             </>
           )}
+
         </DialogContent>
       </Dialog>
     </section>
