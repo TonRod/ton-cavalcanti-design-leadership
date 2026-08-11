@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ArrowLeft, ArrowRight } from "lucide-react";
 import { cases, type CaseStudy } from "@/data/portfolio";
 import { cn } from "@/lib/utils";
 
@@ -15,6 +15,33 @@ function Block({ label, children }: { label: string; children: React.ReactNode }
 
 export function CasesSection() {
   const [active, setActive] = useState<CaseStudy | null>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const activeIndex = active ? cases.findIndex((c) => c.id === active.id) : -1;
+  const prev = activeIndex > 0 ? cases[activeIndex - 1] : null;
+  const next =
+    activeIndex >= 0 && activeIndex < cases.length - 1 ? cases[activeIndex + 1] : null;
+
+  useEffect(() => {
+    if (scrollRef.current) scrollRef.current.scrollTop = 0;
+  }, [active?.id]);
+
+  useEffect(() => {
+    if (!active) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft" && prev) setActive(prev);
+      if (e.key === "ArrowRight" && next) setActive(next);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [active, prev, next]);
+
+  const goToContact = () => {
+    setActive(null);
+    setTimeout(() => {
+      document.getElementById("contato")?.scrollIntoView({ behavior: "smooth" });
+    }, 250);
+  };
+
 
   return (
     <section id="cases" className="border-t border-border py-20 sm:py-28">
