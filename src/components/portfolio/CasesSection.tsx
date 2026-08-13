@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Maximize2, ArrowLeft, ArrowRight } from "lucide-react";
 import { cases, type CaseStudy } from "@/data/portfolio";
-import { cn } from "@/lib/utils";
 
 function Block({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -65,20 +64,12 @@ export function CasesSection() {
               aria-label={`Ver case ${c.title}`}
               className="group relative flex flex-col overflow-hidden rounded-lg border border-border bg-surface text-left transition-transform duration-300 hover:-translate-y-1"
             >
-              <div
-                className={cn(
-                  "relative aspect-[4/3] w-full overflow-hidden",
-                  c.id === "livelo-design-servicos" && "bg-surface p-8 sm:p-12"
-                )}
-              >
+              <div className="relative aspect-[4/3] w-full overflow-hidden">
                 <img
                   src={c.cover}
                   alt={`Capa do case ${c.title} — ${c.org}`}
                   loading="lazy"
-                  className={cn(
-                    "size-full object-center transition-transform duration-500 group-hover:scale-105",
-                    c.id === "livelo-design-servicos" ? "object-contain" : "object-cover"
-                  )}
+                  className="size-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
               <div className="flex flex-1 flex-col justify-between p-6">
