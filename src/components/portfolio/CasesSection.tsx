@@ -141,13 +141,9 @@ export function CasesSection() {
           role="region"
           aria-label="Cases selecionados, lista deslizável"
           tabIndex={0}
-          className="no-scrollbar mt-12 -my-2 flex snap-x snap-mandatory items-stretch gap-5 overflow-x-auto py-2 lg:mt-12 lg:grid lg:grid-cols-3 lg:snap-none lg:overflow-visible"
-          style={{
-            scrollPaddingInline: "1.5rem",
-            maskImage:
-              "linear-gradient(to right, transparent 0, black 4%, black 96%, transparent 100%)",
-          }}
+          className="no-scrollbar cases-scroller mt-10 -mb-2 flex snap-x snap-mandatory items-stretch gap-5 overflow-x-auto py-2 lg:grid lg:grid-cols-3 lg:snap-none lg:overflow-visible"
         >
+
           {cases.map((c, i) => (
             <div
               key={c.id}
