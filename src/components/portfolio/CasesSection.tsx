@@ -136,43 +136,98 @@ export function CasesSection() {
           Selecione um case para ver contexto, estratégia, alinhamento e resultados completos.
         </p>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {cases.map((c) => (
-            <button
+        <div
+          ref={trackRef}
+          role="region"
+          aria-label="Cases selecionados, lista deslizável"
+          tabIndex={0}
+          className="no-scrollbar mt-12 -my-2 flex snap-x snap-mandatory items-stretch gap-5 overflow-x-auto py-2 lg:mt-12 lg:grid lg:grid-cols-3 lg:snap-none lg:overflow-visible"
+          style={{
+            scrollPaddingInline: "1.5rem",
+            maskImage:
+              "linear-gradient(to right, transparent 0, black 4%, black 96%, transparent 100%)",
+          }}
+        >
+          {cases.map((c, i) => (
+            <div
               key={c.id}
-              onClick={() => setActive(c)}
-              aria-label={`Ver case ${c.title}`}
-              className="group relative flex flex-col overflow-hidden rounded-lg border border-border bg-surface text-left transition-transform duration-300 hover:-translate-y-1"
+              ref={(node) => {
+                cardRefs.current[i] = node;
+              }}
+              data-idx={i}
+              className={`flex w-[82%] shrink-0 snap-start sm:w-[46%] lg:w-auto lg:shrink lg:opacity-100 lg:[transform:none] ${
+                focused[i] ? "opacity-100" : "scale-[.97] opacity-55"
+              }`}
+              style={{ transition: "opacity 400ms cubic-bezier(.22,1,.36,1), transform 400ms cubic-bezier(.22,1,.36,1)" }}
             >
-              <div className="relative aspect-[4/3] w-full overflow-hidden">
-                <img
-                  src={c.cover}
-                  alt={`Capa do case ${c.title} — ${c.org}`}
-                  loading="lazy"
-                  className="size-full object-cover object-center transition-transform duration-500 group-hover:scale-105 dark:invert dark:brightness-[0.88] dark:contrast-[1.05]"
-                />
-              </div>
-              <div className="flex flex-1 flex-col justify-between p-6">
-                <div>
-                  <p className="text-xs uppercase tracking-widest text-muted-foreground">
-                    {c.org} · {c.year}
-                  </p>
-                  <h3 className="display mt-2 text-2xl">{c.title}</h3>
+              <button
+                onClick={() => setActive(c)}
+                aria-label={`Ver case ${c.title}`}
+                className="group relative flex w-full flex-col overflow-hidden rounded-lg border border-border bg-surface text-left transition-transform duration-300 hover:-translate-y-1"
+              >
+                <div className="relative aspect-[4/3] w-full overflow-hidden">
+                  <img
+                    src={c.cover}
+                    alt={`Capa do case ${c.title} — ${c.org}`}
+                    loading="lazy"
+                    className="size-full object-cover object-center transition-transform duration-500 group-hover:scale-105 dark:invert dark:brightness-[0.88] dark:contrast-[1.05]"
+                  />
                 </div>
-                <div className="mt-5 border-t border-border pt-4">
-                  <p className="text-[0.7rem] uppercase tracking-widest text-muted-foreground">
-                    {c.highlight.label}
-                  </p>
-                  <p className="metric-num mt-1">{c.highlight.value}</p>
-                  <p className="mt-4 inline-flex items-center gap-1.5 text-xs text-muted-foreground transition-colors group-hover:text-foreground">
-                    <Maximize2 className="size-3.5" aria-hidden="true" />
-                    Ver case
-                  </p>
+                <div className="flex flex-1 flex-col justify-between p-6">
+                  <div>
+                    <p className="text-xs uppercase tracking-widest text-muted-foreground">
+                      {c.org} · {c.year}
+                    </p>
+                    <h3 className="display mt-2 text-2xl">{c.title}</h3>
+                  </div>
+                  <div className="mt-5 border-t border-border pt-4">
+                    <p className="text-[0.7rem] uppercase tracking-widest text-muted-foreground">
+                      {c.highlight.label}
+                    </p>
+                    <p className="metric-num mt-1">{c.highlight.value}</p>
+                    <p className="mt-4 inline-flex items-center gap-1.5 text-xs text-muted-foreground transition-colors group-hover:text-foreground">
+                      <Maximize2 className="size-3.5" aria-hidden="true" />
+                      Ver case
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </button>
+              </button>
+            </div>
           ))}
         </div>
+
+        <div className="mt-6 lg:hidden">
+          <div className="h-px w-full bg-border" aria-hidden="true">
+            <div
+              className="h-px bg-foreground transition-[margin] duration-200"
+              style={{
+                width: `${progress.span * 100}%`,
+                marginLeft: `${progress.ratio * (1 - progress.span) * 100}%`,
+              }}
+            />
+          </div>
+          <div className="mt-4 hidden justify-end gap-3 sm:flex lg:hidden">
+            <button
+              type="button"
+              onClick={() => scrollByCard(-1)}
+              disabled={atStart}
+              aria-label="Ver cases anteriores"
+              className="rounded-md border border-border p-2 transition-colors hover:bg-secondary disabled:opacity-40"
+            >
+              <ArrowLeft className="size-4" />
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollByCard(1)}
+              disabled={atEnd}
+              aria-label="Ver próximos cases"
+              className="rounded-md border border-border p-2 transition-colors hover:bg-secondary disabled:opacity-40"
+            >
+              <ArrowRight className="size-4" />
+            </button>
+          </div>
+        </div>
+
 
         <p className="mt-10 text-xs text-muted-foreground">
           Trajetória completa, incluindo consultorias e atuação anterior, na seção Trajetória
