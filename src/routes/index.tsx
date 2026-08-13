@@ -7,23 +7,7 @@ import { TimelineSection } from "@/components/portfolio/TimelineSection";
 import { ResumeSection } from "@/components/portfolio/ResumeSection";
 import { ContactSection } from "@/components/portfolio/ContactSection";
 
-
-
-const title = "Éliton Cavalcanti (Ton) — Design Leadership · Product Strategy · Head of Design";
-const description =
-  "Ton Cavalcanti · 16 anos em produto, mais de 6 liderando times de design em Try, Bradesco, Globo, Motrix, Natura e Porto Seguro. Cases com resultado medido em CSAT, NPS, tempo de resposta e abandono de jornada.";
-
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title },
-      { name: "description", content: description },
-      { property: "og:title", content: title },
-      { property: "og:description", content: description },
-      { property: "og:type", content: "profile" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
   component: Index,
 });
 
