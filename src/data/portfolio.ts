@@ -168,7 +168,7 @@ export const cases: CaseStudy[] = [
     index: "05",
     title: "Jornada de Matrícula com I.A.",
     org: "St. Paul Escola de Negócios",
-    year: "2018–2019",
+    year: "2019",
     role: "UX Designer Lead · Liderança de projeto e pesquisa",
     highlight: { label: "Atendimento por chat", value: "−70%" },
     duotone: "duotone-graphite",
