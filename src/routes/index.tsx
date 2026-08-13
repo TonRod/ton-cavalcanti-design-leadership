@@ -1,14 +1,12 @@
-import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { GraduationCap } from "lucide-react";
 import { SiteHeader } from "@/components/portfolio/SiteHeader";
 import { Hero } from "@/components/portfolio/Hero";
 import { LeadershipSection } from "@/components/portfolio/LeadershipSection";
 import { CasesSection } from "@/components/portfolio/CasesSection";
 import { TimelineSection } from "@/components/portfolio/TimelineSection";
 import { ResumeSection } from "@/components/portfolio/ResumeSection";
-import { EducationDialog } from "@/components/portfolio/EducationDialog";
 import { ContactSection } from "@/components/portfolio/ContactSection";
+
 
 
 const title = "Éliton Cavalcanti (Ton) — Design Leadership · Product Strategy · Head of Design";
@@ -30,8 +28,6 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const [eduOpen, setEduOpen] = useState(false);
-
   return (
     <div className="min-h-screen bg-background">
       <a
@@ -51,21 +47,12 @@ function Index() {
       </main>
 
       <footer className="border-t border-border py-8">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-6 sm:flex-row sm:items-center sm:justify-between">
-          <button
-            type="button"
-            onClick={() => setEduOpen(true)}
-            className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm transition-colors hover:bg-secondary"
-          >
-            <GraduationCap className="size-4" /> Formação e certificações
-          </button>
-          <p className="text-xs text-muted-foreground">
+        <div className="mx-auto w-full max-w-6xl px-6">
+          <p className="text-center text-xs text-muted-foreground">
             © {new Date().getFullYear()} Éliton R. Cavalcanti. Todos os direitos reservados.
           </p>
         </div>
       </footer>
-
-      <EducationDialog open={eduOpen} onOpenChange={setEduOpen} />
     </div>
   );
 }
