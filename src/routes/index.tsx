@@ -28,8 +28,6 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const [eduOpen, setEduOpen] = useState(false);
-
   return (
     <div className="min-h-screen bg-background">
       <a
@@ -49,21 +47,12 @@ function Index() {
       </main>
 
       <footer className="border-t border-border py-8">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-6 sm:flex-row sm:items-center sm:justify-between">
-          <button
-            type="button"
-            onClick={() => setEduOpen(true)}
-            className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm transition-colors hover:bg-secondary"
-          >
-            <GraduationCap className="size-4" /> Formação e certificações
-          </button>
-          <p className="text-xs text-muted-foreground">
+        <div className="mx-auto w-full max-w-6xl px-6">
+          <p className="text-center text-xs text-muted-foreground">
             © {new Date().getFullYear()} Éliton R. Cavalcanti. Todos os direitos reservados.
           </p>
         </div>
       </footer>
-
-      <EducationDialog open={eduOpen} onOpenChange={setEduOpen} />
     </div>
   );
 }
