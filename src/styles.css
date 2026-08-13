@@ -71,7 +71,7 @@
   --destructive: oklch(0.52 0.2 27);
   --destructive-foreground: oklch(0.97 0.01 85);
   --border: oklch(0.88 0.011 85);
-  --input: oklch(0.88 0.011 85);
+  --ring: oklch(0.24 0.012 60);
   --ring: oklch(0.45 0.14 22);
   --wine: oklch(0.36 0.11 18);
   --graphite: oklch(0.3 0.012 250);
@@ -103,7 +103,7 @@
   --destructive: oklch(0.55 0.2 27);
   --destructive-foreground: oklch(0.97 0.01 85);
   --border: oklch(0.3 0.008 60);
-  --input: oklch(0.3 0.008 60);
+  --ring: oklch(0.93 0.03 85);
   --ring: oklch(0.52 0.13 22);
   --duotone-base: oklch(0.16 0.006 60);
   --on-duotone: oklch(0.95 0.01 85);
