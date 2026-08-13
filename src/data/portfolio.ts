@@ -232,49 +232,49 @@ export const timeline: TimelineItem[] = [
       "Coordenação do departamento de Qualidade e Design, equipe de 5 pessoas, em projetos de software de gestão e PDV.",
   },
   {
-    period: "nov 2018–ago 2019",
+    period: "2018 – 2019",
     role: "Designer Líder",
     org: "Try",
-    description: "Liderança de design em consultoria para a Livelo, com 4 designers.",
+    description: "Liderança de design em consultoria para a Livelo, com 4 designers",
   },
   {
-    period: "nov 2018–ago 2019",
+    period: "2018 – 2019",
     role: "Líder de Design",
     org: "St. Paul Escola de Negócios",
-    description: "Liderança de design em paralelo à Try, na matrícula com IA da St. Paul.",
+    description: "Liderança de design em paralelo à Try, na matrícula com IA da St. Paul",
   },
   {
-    period: "jul 2019–jan 2020",
+    period: "2019 – 2020",
     role: "UX Strategy Lead",
     org: "Bradesco S.A.",
-    description: "Liderança de Discovery, coordenação de designers e parceiros externos.",
+    description: "Liderança de Discovery, coordenação de designers e parceiros externos",
   },
   {
-    period: "mar 2021–jan 2022",
+    period: "2021 – 2022",
     role: "Senior Product Designer",
     org: "Globo S.A.",
-    description: "Liderança da estratégia de experiência do produto, da descoberta ao lançamento.",
+    description: "Liderança da estratégia de experiência do produto, da descoberta ao lançamento",
   },
   {
-    period: "jan 2022–jan 2024",
+    period: "2023 – 2024",
     role: "Lead Product Designer",
     org: "Motrix Techknowledge",
     description:
-      "Estruturei práticas de Design usadas por múltiplas equipes, reduzindo o tempo de lançamento em 30%.",
+      "Estruturei práticas de Design usadas por múltiplas equipes, reduzindo o tempo de lançamento em 30%",
   },
   {
-    period: "abr 2024–set 2025",
+    period: "2024 – 2025",
     role: "Senior Product Designer",
     org: "Natura &Co",
     description:
-      "Liderança de design para iniciativas Omnichannel multi-país. Escopo: time de 4 pessoas, 3 produtos (Omnicanal, Frente de Entrega e Dashboard de Resultados), alcance LATAM.",
+      "Liderança de design para iniciativas Omnichannel multi-país. Escopo: time de 4 pessoas, 3 produtos (Omnicanal, Frente de Entrega e Dashboard de Resultados), alcance LATAM",
   },
   {
-    period: "out 2025–presente",
+    period: "2025 – PRESENTE",
     role: "Senior Product Designer",
     org: "Porto Seguro",
     description:
-      "Liderança de design para a jornada de investimentos. Escopo: time de 3 pessoas, produtos CRM Assessor de Investimentos, Dashboard de Resultados e Painel Online de Acompanhamento CSAT, alcance nacional.",
+      "Liderança de design para a jornada de investimentos. Escopo: time de 3 pessoas, produtos CRM Assessor de Investimentos, Dashboard de Resultados e Painel Online de Acompanhamento CSAT, alcance nacional",
   },
 ];
 
