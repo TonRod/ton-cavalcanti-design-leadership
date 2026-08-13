@@ -1,6 +1,5 @@
 import { Mail, Linkedin, Globe } from "lucide-react";
-import portraitDay from "@/assets/portrait-day.jpg.asset.json";
-import portraitNight from "@/assets/portrait-night.jpg.asset.json";
+import portrait from "@/assets/portrait.jpg.asset.json";
 import { contact } from "@/data/portfolio";
 
 const metrics = [
@@ -12,7 +11,7 @@ const metrics = [
 export function Hero() {
   return (
     <section id="top" className="mx-auto w-full max-w-6xl px-6 py-16 sm:py-24">
-      <div className="grid items-stretch gap-12 lg:grid-cols-[1.4fr_1fr]">
+      <div className="grid items-start gap-12 lg:grid-cols-[1.4fr_1fr]">
         <div>
           <h1 className="display text-4xl sm:text-6xl">
             Lidero design para transformar estratégia em produtos relevantes e resultados de
@@ -25,20 +24,13 @@ export function Hero() {
           </p>
         </div>
 
-        <div className="relative min-h-[380px] sm:min-h-[460px] lg:min-h-0">
+        <div className="relative">
           <img
-            src={portraitDay.url}
+            src={portrait.url}
             alt="Retrato profissional de Éliton (Ton) Cavalcanti"
-            width={912}
-            height={1104}
-            className="absolute inset-0 block h-full w-full rounded-lg border border-border object-cover object-[center_22%] dark:hidden"
-          />
-          <img
-            src={portraitNight.url}
-            alt="Retrato profissional de Éliton (Ton) Cavalcanti"
-            width={912}
-            height={1104}
-            className="absolute inset-0 hidden h-full w-full rounded-lg border border-border object-cover object-[center_22%] dark:block"
+            width={768}
+            height={1365}
+            className="aspect-[768/1365] h-full w-full rounded-lg border border-border object-cover object-center"
           />
         </div>
       </div>

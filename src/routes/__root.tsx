@@ -12,13 +12,13 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { contact, siteUrl } from "@/data/portfolio";
-import portraitDay from "@/assets/portrait-day.jpg.asset.json";
+import portrait from "@/assets/portrait.jpg.asset.json";
 
 const siteTitle =
   "Éliton Cavalcanti (Ton) — Design Leadership · Product Strategy · Head of Design";
 const siteDescription =
   "Ton Cavalcanti · 16 anos em produto, mais de 6 liderando times de design em Try, Bradesco, Globo, Motrix, Natura e Porto Seguro. Cases com resultado medido em CSAT, NPS, tempo de resposta e abandono de jornada.";
-const portraitUrl = `${siteUrl}${portraitDay.url}`;
+const portraitUrl = `${siteUrl}${portrait.url}`;
 
 const personJsonLd = {
   "@context": "https://schema.org",
@@ -128,8 +128,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:site_name", content: "Ton Cavalcanti" },
       { property: "og:locale", content: "pt_BR" },
       { property: "og:image", content: portraitUrl },
-      { property: "og:image:width", content: "1122" },
-      { property: "og:image:height", content: "1402" },
+      { property: "og:image:width", content: "768" },
+      { property: "og:image:height", content: "1365" },
       {
         property: "og:image:alt",
         content: "Retrato profissional de Éliton (Ton) Cavalcanti",
