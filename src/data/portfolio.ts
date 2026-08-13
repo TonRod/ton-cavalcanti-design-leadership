@@ -150,6 +150,38 @@ export const cases: CaseStudy[] = [
       { label: "Time de design", value: "4 designers" },
     ],
   },
+  {
+    id: "stpaul",
+    cover: stpaulCover.url,
+    index: "05",
+    title: "Jornada de Matrícula com I.A.",
+    org: "St. Paul Escola de Negócios",
+    year: "2018–2019",
+    role: "UX Designer Lead · Liderança de projeto e pesquisa",
+    highlight: { label: "Atendimento por chat", value: "−70%" },
+    duotone: "duotone-graphite",
+    contexto:
+      "A principal plataforma de matrícula da St. Paul Escola de Negócios estava desatualizada, com navegação pouco fluida e alto volume de atendimentos via chat e e-mail. Isso gerava custos operacionais altos e perda de relevância frente aos concorrentes.",
+    problema:
+      "Era preciso recriar todo o fluxo de matrícula em harmonia com o fluxo físico do serviço, mantendo os processos existentes e reduzindo o custo de atendimento por chat e e-mail. Ao mesmo tempo, gerar interesse nos candidatos a partir das suas perspectivas de evolução profissional e do seu poder de investimento disponível.",
+    escopo:
+      "Atuei como UX Designer Lead, liderando o projeto e a pesquisa de mercado: entrevistas, facilitação de workshop com stakeholders, definição de business goals, wireframes em Axure, avaliação heurística de usabilidade e acessibilidade e apresentação de reports.",
+    estrategia:
+      'Benchmark, TaskFlow, Personas, Design Thinking, Workshop, Wireframes e Jobs to Be Done. A pesquisa em colaboração com stakeholders levou à descoberta central do projeto: o candidato não escolhe um curso, ele busca evolução profissional. A jornada foi então construída sobre os interesses futuros do candidato, e não sobre a comparação entre cursos.',
+    alinhamento:
+      "O workshop com os stakeholders alinhou os objetivos de negócio — reduzir custo de aquisição e atualizar a relevância da escola no mercado — às restrições do processo físico de matrícula, que precisava ser preservado. Isso garantiu que o redesenho digital fosse implementável sem romper a operação existente.",
+    solucao:
+      'Fluxo de matrícula redesenhado e integrado ao processo físico existente. Plataforma interativa que abria com a pergunta "Onde você quer chegar?" e montava trilhas personalizadas com a I.A. da IBM, considerando orçamento, área de interesse, tempo, disponibilidade e deslocamento presencial. Menu lateral expandido para navegação fluida e adaptável a diferentes dispositivos. Conteúdo cross conectando cursos, trilhas e sugestões geradas pela I.A.',
+    resultados:
+      "Redução de 70% no atendimento por chat e aumento de 65% no número de matrículas. A plataforma passou a resolver sozinha os esclarecimentos que antes chegavam por chat e e-mail.",
+    aprendizado:
+      "O maior insight foi entender que os candidatos não escolhem apenas cursos — buscam evolução profissional. Reposicionar a jornada a partir desse ponto de vista foi o que produziu os resultados.",
+    metricas: [
+      { label: "Atendimento por chat", value: "−70%" },
+      { label: "Número de matrículas", value: "+65%" },
+      { label: "Duração do projeto", value: "3 meses" },
+    ],
+  },
 ];
 
 export type TimelineItem = {
