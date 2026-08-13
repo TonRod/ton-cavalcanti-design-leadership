@@ -138,6 +138,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:title", content: siteTitle },
       { name: "twitter:description", content: siteDescription },
       { name: "twitter:image", content: portraitUrl },
+      { title: "Ton Cavalcanti" },
+      { property: "og:title", content: "Ton Cavalcanti" },
+      { name: "twitter:title", content: "Ton Cavalcanti" },
+      { name: "description", content: "Personal design leadership portfolio showcasing experience in product strategy and team management." },
+      { property: "og:description", content: "Personal design leadership portfolio showcasing experience in product strategy and team management." },
+      { name: "twitter:description", content: "Personal design leadership portfolio showcasing experience in product strategy and team management." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/jPzKGNYSiFTevo0NfKAXN4pYwql1/social-images/social-1786637705493-social-image.webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/jPzKGNYSiFTevo0NfKAXN4pYwql1/social-images/social-1786637705493-social-image.webp" },
     ],
     scripts: [
       {
@@ -156,7 +164,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
   }),
   shellComponent: RootShell,
