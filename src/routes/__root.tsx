@@ -146,12 +146,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         children: JSON.stringify(personJsonLd),
       },
       {
-        src: "https://www.googletagmanager.com/gtag/js?id=G-G63017T1LT",
+        src: "https://www.googletagmanager.com/gtag/js?id=G-D0TFB65BGJ",
         async: true,
       },
       {
         type: "text/javascript",
-        children: "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-G63017T1LT');",
+        children: "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-D0TFB65BGJ');",
       },
     ],
     links: [
