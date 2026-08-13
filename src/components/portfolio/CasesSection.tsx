@@ -69,7 +69,7 @@ export function CasesSection() {
                   src={c.cover}
                   alt={`Capa do case ${c.title} — ${c.org}`}
                   loading="lazy"
-                  className="size-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                  className="size-full object-cover object-center transition-transform duration-500 group-hover:scale-105 dark:invert dark:brightness-[0.88] dark:contrast-[1.05]"
                 />
               </div>
               <div className="flex flex-1 flex-col justify-between p-6">
