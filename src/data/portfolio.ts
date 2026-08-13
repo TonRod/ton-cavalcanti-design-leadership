@@ -137,7 +137,7 @@ export const cases: CaseStudy[] = [
     index: "04",
     title: "Design de Serviços no Atendimento",
     org: "Try/WPP · Livelo",
-    year: "2018–2019",
+    year: "2018",
     role: "Designer Líder · 4 designers",
     highlight: { label: "NPS de atendimento", value: "+3,3 → +6,7" },
     duotone: "duotone-graphite",
