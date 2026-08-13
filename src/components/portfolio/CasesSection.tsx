@@ -16,6 +16,12 @@ function Block({ label, children }: { label: string; children: React.ReactNode }
 export function CasesSection() {
   const [active, setActive] = useState<CaseStudy | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [focused, setFocused] = useState<boolean[]>(() => cases.map(() => true));
+  const [progress, setProgress] = useState({ ratio: 0, span: 1 });
+  const [atStart, setAtStart] = useState(true);
+  const [atEnd, setAtEnd] = useState(false);
   const activeIndex = active ? cases.findIndex((c) => c.id === active.id) : -1;
   const prev = activeIndex > 0 ? cases[activeIndex - 1] : null;
   const next =
@@ -35,6 +41,78 @@ export function CasesSection() {
     return () => window.removeEventListener("keydown", onKey);
   }, [active, prev, next]);
 
+  const updateScrollState = useCallback(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    const max = el.scrollWidth - el.clientWidth;
+    setProgress({
+      ratio: max > 0 ? el.scrollLeft / max : 0,
+      span: max > 0 ? Math.min(1, el.clientWidth / el.scrollWidth) : 1,
+    });
+    setAtStart(el.scrollLeft <= 1);
+    setAtEnd(max <= 1 || el.scrollLeft >= max - 1);
+  }, []);
+
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let observer: IntersectionObserver | null = null;
+
+    const disable = () => {
+      observer?.disconnect();
+      observer = null;
+      setFocused(cases.map(() => true));
+    };
+
+    const enable = () => {
+      if (observer) return;
+      observer = new IntersectionObserver(
+        (entries) => {
+          setFocused((current) => {
+            const nextState = [...current];
+            for (const entry of entries) {
+              const i = Number((entry.target as HTMLElement).dataset["idx"]);
+              if (!Number.isNaN(i)) nextState[i] = entry.intersectionRatio >= 0.9;
+            }
+            return nextState;
+          });
+        },
+        { root: el, threshold: [0, 0.9, 1] },
+      );
+      cardRefs.current.forEach((node) => node && observer?.observe(node));
+    };
+
+    const sync = () => {
+      if (desktop.matches || reduced.matches) disable();
+      else enable();
+      updateScrollState();
+    };
+
+    sync();
+    desktop.addEventListener("change", sync);
+    reduced.addEventListener("change", sync);
+    el.addEventListener("scroll", updateScrollState, { passive: true });
+    window.addEventListener("resize", updateScrollState);
+    return () => {
+      desktop.removeEventListener("change", sync);
+      reduced.removeEventListener("change", sync);
+      el.removeEventListener("scroll", updateScrollState);
+      window.removeEventListener("resize", updateScrollState);
+      observer?.disconnect();
+    };
+  }, [updateScrollState]);
+
+  const scrollByCard = (dir: 1 | -1) => {
+    const el = trackRef.current;
+    if (!el) return;
+    const card = cardRefs.current[0];
+    const amount = (card?.offsetWidth ?? el.clientWidth * 0.82) + 20;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    el.scrollBy({ left: dir * amount, behavior: reduced ? "auto" : "smooth" });
+  };
+
   const goToContact = () => {
     setActive(null);
     setTimeout(() => {
@@ -44,6 +122,7 @@ export function CasesSection() {
         ?.scrollIntoView({ behavior: reduced ? "auto" : "smooth" });
     }, 250);
   };
+
 
 
   return (
