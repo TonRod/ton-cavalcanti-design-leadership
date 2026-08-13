@@ -3,6 +3,9 @@ import globoCover from "@/assets/cover-globo.png.asset.json";
 import bradescoCover from "@/assets/cover-bradesco.png.asset.json";
 import liveloCover from "@/assets/cover-livelo.png.asset.json";
 import stpaulCover from "@/assets/case-stpaul.png.asset.json";
+import stpaulEvidWorkshop from "@/assets/stpaul-evid-01-workshop.jpg.asset.json";
+import stpaulEvidPlanejamento from "@/assets/stpaul-evid-02-planejamento.jpg.asset.json";
+import stpaulEvidJornada from "@/assets/stpaul-evid-03-jornada.jpg.asset.json";
 
 export type CaseEvidence = {
   src: string;
@@ -185,6 +188,26 @@ export const cases: CaseStudy[] = [
       "Redução de 70% no atendimento por chat e aumento de 65% no número de matrículas. A plataforma passou a resolver sozinha os esclarecimentos que antes chegavam por chat e e-mail.",
     aprendizado:
       "O maior insight foi entender que os candidatos não escolhem apenas cursos — buscam evolução profissional. Reposicionar a jornada a partir desse ponto de vista foi o que produziu os resultados.",
+    evidencias: [
+      {
+        src: stpaulEvidWorkshop.url,
+        caption:
+          "Workshop de cocriação com 13 participantes. Benchmark de oito escolas, Crazy 8s e mapa de empatia geraram mais de 100 ideias — conduzi a facilitação.",
+        alt: "Página de processo do workshop: foto da sala em atividade, tabela de benchmark com oito escolas de negócios, painel de Crazy 8s e mapa de empatia.",
+      },
+      {
+        src: stpaulEvidPlanejamento.url,
+        caption:
+          "Cinco fases em três meses, com alocação diária de quatro pessoas — do entendimento aos testes de guerrilha.",
+        alt: "Planejamento do projeto: diagrama das cinco fases e cronograma diário de fevereiro a abril com as atividades de cada integrante do time.",
+      },
+      {
+        src: stpaulEvidJornada.url,
+        caption:
+          "A jornada abria perguntando onde o candidato queria chegar, não que curso queria fazer. Em seis passos a I.A. traduzia a ambição em trilhas — e passou a resolver 70% do que antes ia para o chat.",
+        alt: "Primeira tela da jornada de matrícula: a pergunta \"Onde você quer chegar?\" com quatro opções de ambição profissional e indicador de passo 1 de 6.",
+      },
+    ],
     metricas: [
       { label: "Atendimento por chat", value: "−70%" },
       { label: "Número de matrículas", value: "+65%" },
