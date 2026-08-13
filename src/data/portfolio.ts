@@ -156,7 +156,6 @@ export type TimelineItem = {
   role: string;
   org: string;
   description: string;
-  transition?: boolean;
 };
 
 export const timeline: TimelineItem[] = [
@@ -186,13 +185,6 @@ export const timeline: TimelineItem[] = [
     description: "Liderança de Discovery, coordenação de designers e parceiros externos.",
   },
   {
-    period: "jan 2020–mar 2021",
-    role: "Mentoria de Design Ops para líder de time",
-    org: "Mentoria profissional",
-    description: "Consultoria independente de mentoria em projetos de design.",
-    transition: true,
-  },
-  {
     period: "mar 2021–jan 2022",
     role: "Senior Product Designer",
     org: "Globo S.A.",
@@ -204,13 +196,6 @@ export const timeline: TimelineItem[] = [
     org: "Motrix Techknowledge",
     description:
       "Estruturei práticas de Design usadas por múltiplas equipes, reduzindo o tempo de lançamento em 30%.",
-  },
-  {
-    period: "jan 2024–abr 2024",
-    role: "Mentoria de construção de workshop personalizado",
-    org: "Mentoria profissional",
-    description: "Consultoria independente de mentoria em projetos de design.",
-    transition: true,
   },
   {
     period: "abr 2024–set 2025",
@@ -301,59 +286,16 @@ export const education: Education[] = [
 
 export type Certification = {
   title: string;
-  institution: string;
-  location: string;
-  period: string;
 };
 
 export const certifications: Certification[] = [
-  {
-    title: "Soluções de Alto Impacto com MIT designX",
-    institution: "Massachusetts Institute of Technology (MIT)",
-    location: "São Paulo",
-    period: "mar 2023 – jul 2023",
-  },
-  {
-    title: "Get Your Product Used: Adoption and Appropriation",
-    institution: "The Institute Design Foundation",
-    location: "São Paulo",
-    period: "fev 2021 – mar 2021",
-  },
-  {
-    title: "Accessibility: How to Design for All",
-    institution: "The Institute Design Foundation",
-    location: "São Paulo",
-    period: "jul 2020 – ago 2020",
-  },
-  {
-    title: "UX Management: Strategy and Tactics",
-    institution: "The Institute Design Foundation",
-    location: "São Paulo",
-    period: "jan 2020 – fev 2020",
-  },
-  {
-    title: "Design de Processos",
-    institution: "Fluxe School",
-    location: "São Paulo",
-    period: "jan 2020",
-  },
-  {
-    title: "Emotional Design — How to Make Products People Will Love",
-    institution: "The Institute Design Foundation",
-    location: "São Paulo",
-    period: "nov 2019 – dez 2019",
-  },
-  {
-    title: "Operacionalização em Design",
-    institution: "Instituto Superior de Tecnologia",
-    location: "Marília",
-    period: "jul 2004 – jan 2005",
-  },
-  {
-    title: "Planejamento e Técnicas de Design",
-    institution: "Instituto Superior de Tecnologia",
-    location: "Marília",
-    period: "jan 2003 – jul 2003",
-  },
+  { title: "Soluções de Alto Impacto com MIT designX" },
+  { title: "Get Your Product Used: Adoption and Appropriation" },
+  { title: "Accessibility: How to Design for All" },
+  { title: "UX Management: Strategy and Tactics" },
+  { title: "Design de Processos" },
+  { title: "Emotional Design — How to Make Products People Will Love" },
+  { title: "Operacionalização em Design" },
+  { title: "Planejamento e Técnicas de Design" },
 ];
 
