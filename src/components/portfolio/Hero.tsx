@@ -30,7 +30,7 @@ export function Hero() {
             alt="Retrato profissional de Éliton (Ton) Cavalcanti"
             width={768}
             height={1365}
-            className="aspect-[768/1365] h-full w-full rounded-lg border border-border object-cover object-center"
+            className="mx-auto aspect-[768/1365] w-[70%] rounded-lg border border-border object-cover object-center"
           />
         </div>
       </div>
