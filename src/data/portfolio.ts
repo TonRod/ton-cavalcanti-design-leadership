@@ -4,6 +4,12 @@ import bradescoCover from "@/assets/cover-bradesco.png.asset.json";
 import liveloCover from "@/assets/cover-livelo.png.asset.json";
 import stpaulCover from "@/assets/case-stpaul.png.asset.json";
 
+export type CaseEvidence = {
+  src: string;
+  caption: string;
+  alt?: string;
+};
+
 export type CaseStudy = {
   cover: string;
   id: string;
@@ -22,8 +28,10 @@ export type CaseStudy = {
   solucao?: string;
   resultados: string;
   aprendizado?: string;
+  evidencias?: CaseEvidence[];
   metricas: { label: string; value: string }[];
 };
+
 
 export const cases: CaseStudy[] = [
   {
@@ -53,6 +61,7 @@ export const cases: CaseStudy[] = [
     aprendizado:
       "A integração de tecnologia em processos físicos exige mais do que ferramentas digitais: depende de um profundo entendimento das jornadas dos usuários.",
     metricas: [
+
       { label: "CSAT de atendimento", value: "40% → 80%" },
       { label: "Processamento de pedidos", value: "−25%" },
       { label: "Chamados ao suporte", value: "−13%" },
