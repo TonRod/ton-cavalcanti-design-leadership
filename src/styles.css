@@ -165,6 +165,15 @@
   border-top: 1px solid var(--border);
 }
 
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+
 @utility metric-num {
   font-family: var(--font-display);
   font-size: clamp(2rem, 4vw, 3rem);
