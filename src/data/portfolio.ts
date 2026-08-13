@@ -58,14 +58,10 @@ export const cases: CaseStudy[] = [
       "Dashboards em tempo real, notificações proativas, redesenho do Retira em Loja com QR Code e interface simplificada para uso em loja.",
     resultados:
       "CSAT de 40% para 80%, −25% no tempo de processamento de pedidos, −13% nos chamados ao suporte, 97% de aprovação entre gerentes de loja.",
-    evidencias: [
-      { src: naturaCover.url, caption: "Fluxo de QR Code no ponto de venda — teste A", alt: "Protótipo do fluxo QR Code" },
-      { src: globoCover.url, caption: "Dashboard de visibilidade em tempo real para gerentes de loja" },
-    ],
     aprendizado:
       "A integração de tecnologia em processos físicos exige mais do que ferramentas digitais: depende de um profundo entendimento das jornadas dos usuários.",
-
     metricas: [
+
       { label: "CSAT de atendimento", value: "40% → 80%" },
       { label: "Processamento de pedidos", value: "−25%" },
       { label: "Chamados ao suporte", value: "−13%" },
