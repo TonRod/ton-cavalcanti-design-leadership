@@ -173,6 +173,15 @@
   }
 }
 
+@utility cases-scroller {
+  scroll-padding-inline: 1.5rem;
+  mask-image: linear-gradient(to right, transparent 0, black 4%, black 96%, transparent 100%);
+  @media (min-width: 1024px) {
+    mask-image: none;
+  }
+}
+
+
 
 @utility metric-num {
   font-family: var(--font-display);
