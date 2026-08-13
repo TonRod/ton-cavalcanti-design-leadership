@@ -145,6 +145,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         type: "application/ld+json",
         children: JSON.stringify(personJsonLd),
       },
+      {
+        src: "https://www.googletagmanager.com/gtag/js?id=G-G63017T1LT",
+        async: true,
+      },
+      {
+        type: "text/javascript",
+        children: "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-G63017T1LT');",
+      },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
