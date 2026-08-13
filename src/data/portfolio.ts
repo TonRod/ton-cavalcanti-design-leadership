@@ -192,8 +192,8 @@ export const cases: CaseStudy[] = [
       {
         src: stpaulEvidWorkshop.url,
         caption:
-          "Workshop de cocriação com 13 participantes. Benchmark de oito escolas, Crazy 8s e mapa de empatia geraram mais de 100 ideias — conduzi a facilitação.",
-        alt: "Página de processo do workshop: foto da sala em atividade, tabela de benchmark com oito escolas de negócios, painel de Crazy 8s e mapa de empatia.",
+          "Workshop de cocriação que conduzi com 13 participantes. Benchmark de oito escolas, Crazy 8s e mapa de empatia levaram o grupo a mais de 100 ideias.",
+        alt: "Sala de workshop em preto e branco, com cerca de treze participantes sentados em círculo e um facilitador em pé junto ao quadro branco.",
       },
       {
         src: stpaulEvidPlanejamento.url,
