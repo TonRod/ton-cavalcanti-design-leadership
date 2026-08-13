@@ -2,6 +2,7 @@ import naturaCover from "@/assets/cover-natura.png.asset.json";
 import globoCover from "@/assets/cover-globo.png.asset.json";
 import bradescoCover from "@/assets/cover-bradesco.png.asset.json";
 import liveloCover from "@/assets/cover-livelo.png.asset.json";
+import stpaulCover from "@/assets/case-stpaul.png.asset.json";
 
 export type CaseStudy = {
   cover: string;
