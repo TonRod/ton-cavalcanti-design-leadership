@@ -4,6 +4,12 @@ import bradescoCover from "@/assets/cover-bradesco.png.asset.json";
 import liveloCover from "@/assets/cover-livelo.png.asset.json";
 import stpaulCover from "@/assets/case-stpaul.png.asset.json";
 
+export type CaseEvidence = {
+  src: string;
+  caption: string;
+  alt?: string;
+};
+
 export type CaseStudy = {
   cover: string;
   id: string;
@@ -22,8 +28,10 @@ export type CaseStudy = {
   solucao?: string;
   resultados: string;
   aprendizado?: string;
+  evidencias?: CaseEvidence[];
   metricas: { label: string; value: string }[];
 };
+
 
 export const cases: CaseStudy[] = [
   {

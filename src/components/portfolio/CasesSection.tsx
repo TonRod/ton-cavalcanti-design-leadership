@@ -232,7 +232,7 @@ export function CasesSection() {
       </div>
 
       <Dialog open={!!active} onOpenChange={(o) => !o && setActive(null)}>
-        <DialogContent ref={scrollRef} className="max-h-[88vh] max-w-2xl overflow-y-auto bg-popover">
+        <DialogContent ref={scrollRef} className="max-h-[88vh] max-w-2xl overflow-y-auto bg-popover lg:max-w-4xl">
           {active && (
             <>
               <DialogHeader>
@@ -243,7 +243,7 @@ export function CasesSection() {
               </DialogHeader>
               <p className="text-sm text-muted-foreground">{active.role}</p>
 
-              <div className="mt-2 grid grid-cols-2 gap-3 sm:grid-cols-4">
+              <div className="mt-2 grid grid-cols-2 gap-3 lg:grid-cols-4">
                 {active.metricas.map((m) => (
                   <div key={m.label} className="rounded-md border border-border bg-surface p-3">
                     <p className="font-display text-lg leading-tight">{m.value}</p>
@@ -261,9 +261,29 @@ export function CasesSection() {
                 <Block label="Estratégia">{active.estrategia}</Block>
                 <Block label="Alinhamento">{active.alinhamento}</Block>
                 {active.solucao && <Block label="Solução">{active.solucao}</Block>}
+                {active.evidencias && active.evidencias.length > 0 && (
+                  <Block label="Evidências">
+                    <div className="space-y-4">
+                      {active.evidencias.map((ev, idx) => (
+                        <figure key={idx}>
+                          <img
+                            src={ev.src}
+                            alt={ev.alt ?? ev.caption}
+                            loading="lazy"
+                            className="w-full rounded-md border border-border"
+                          />
+                          <figcaption className="mt-2 text-xs text-muted-foreground">
+                            {ev.caption}
+                          </figcaption>
+                        </figure>
+                      ))}
+                    </div>
+                  </Block>
+                )}
                 <Block label="Resultados">{active.resultados}</Block>
                 {active.aprendizado && <Block label="Aprendizado">{active.aprendizado}</Block>}
               </div>
+
 
               <div className="mt-8 border-t border-border pt-5">
                 <div className="grid gap-3 sm:grid-cols-2">
