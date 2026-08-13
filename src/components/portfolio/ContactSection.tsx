@@ -58,15 +58,6 @@ export function ContactSection() {
           >
             <Mail className="size-4" /> {contact.email}
           </a>
-          <button
-            type="button"
-            onClick={copyEmail}
-            aria-label="Copiar endereço de e-mail"
-            className="flex items-center gap-2 rounded-md border border-border px-5 py-3 text-sm transition-colors hover:bg-secondary"
-          >
-            {copied ? <Check className="size-4" /> : <Copy className="size-4" />}
-            {copied ? "Copiado!" : "Copiar e-mail"}
-          </button>
           <a
             href={contact.linkedin}
             target="_blank"
@@ -85,9 +76,22 @@ export function ContactSection() {
           </a>
         </div>
 
-        <p aria-live="polite" className="mt-3 min-h-5 text-xs text-muted-foreground">
+        <div className="mt-4">
+          <button
+            type="button"
+            onClick={copyEmail}
+            aria-label="Copiar endereço de e-mail"
+            className="inline-flex items-center gap-1.5 text-xs text-muted-foreground underline underline-offset-4 transition-colors hover:text-foreground"
+          >
+            {copied ? <Check className="size-3.5" /> : <Copy className="size-3.5" />}
+            {copied ? "Copiado!" : "Copiar e-mail"}
+          </button>
+        </div>
+
+        <p aria-live="polite" className="mt-2 min-h-5 text-xs text-muted-foreground">
           {message}
         </p>
+
       </div>
     </section>
   );
