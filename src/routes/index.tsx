@@ -1,14 +1,12 @@
-import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { GraduationCap } from "lucide-react";
 import { SiteHeader } from "@/components/portfolio/SiteHeader";
 import { Hero } from "@/components/portfolio/Hero";
 import { LeadershipSection } from "@/components/portfolio/LeadershipSection";
 import { CasesSection } from "@/components/portfolio/CasesSection";
 import { TimelineSection } from "@/components/portfolio/TimelineSection";
 import { ResumeSection } from "@/components/portfolio/ResumeSection";
-import { EducationDialog } from "@/components/portfolio/EducationDialog";
 import { ContactSection } from "@/components/portfolio/ContactSection";
+
 
 
 const title = "Éliton Cavalcanti (Ton) — Design Leadership · Product Strategy · Head of Design";
