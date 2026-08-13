@@ -1,6 +1,5 @@
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { contact } from "@/data/portfolio";
 import { ThemeToggle } from "@/components/portfolio/ThemeToggle";
 import { cn } from "@/lib/utils";
 
@@ -8,11 +7,8 @@ const links = [
   { href: "#lideranca", label: "Liderança" },
   { href: "#cases", label: "Cases" },
   { href: "#trajetoria", label: "Trajetória" },
-  { href: "#formacao", label: "Formação" },
   { href: "#contato", label: "Contato" },
 ];
-
-const cvLabel = "Baixar CV em PDF, 940 KB (abre em nova aba)";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -64,16 +60,6 @@ export function SiteHeader() {
               </a>
             );
           })}
-          <a
-            href={contact.cv}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={cvLabel}
-            className="rounded-md border border-border px-4 py-2 text-sm leading-tight transition-colors hover:bg-secondary"
-          >
-            Baixar CV{" "}
-            <span className="text-xs text-muted-foreground">PDF · 940 KB</span>
-          </a>
           <ThemeToggle />
         </nav>
 
@@ -113,16 +99,6 @@ export function SiteHeader() {
               </a>
             );
           })}
-          <a
-            href={contact.cv}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={cvLabel}
-            className="py-2 text-sm"
-          >
-            Baixar CV{" "}
-            <span className="text-xs text-muted-foreground">PDF · 940 KB</span>
-          </a>
         </nav>
       )}
     </header>
