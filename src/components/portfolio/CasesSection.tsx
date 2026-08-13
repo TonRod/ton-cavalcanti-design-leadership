@@ -56,7 +56,7 @@ export function CasesSection() {
           Selecione um case para ver contexto, estratégia, alinhamento e resultados completos.
         </p>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-2">
+        <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {cases.map((c) => (
             <button
               key={c.id}
