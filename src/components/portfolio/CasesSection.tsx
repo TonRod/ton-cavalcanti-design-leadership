@@ -265,7 +265,7 @@ export function CasesSection() {
                   <Block label="Evidências">
                     <div className="space-y-4">
                       {active.evidencias.map((ev, idx) => (
-                        <figure key={idx} className="mx-auto w-full max-w-[640px]">
+                        <figure key={idx} className="mx-auto w-full max-w-[320px]">
                           <img
                             src={ev.src}
                             alt={ev.alt ?? ev.caption}
