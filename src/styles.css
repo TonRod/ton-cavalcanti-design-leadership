@@ -97,8 +97,9 @@
   --secondary-foreground: oklch(0.94 0.008 85);
   --muted: oklch(0.24 0.008 60);
   --muted-foreground: oklch(0.68 0.012 75);
-  --accent: oklch(0.52 0.13 22);
-  --accent-foreground: oklch(0.97 0.01 85);
+  /* Temporário: accent espelha o primary até definirmos a nova cor de marca — trocar aqui. */
+  --accent: oklch(0.93 0.03 85);
+  --accent-foreground: oklch(0.16 0.006 60);
   --destructive: oklch(0.55 0.2 27);
   --destructive-foreground: oklch(0.97 0.01 85);
   --border: oklch(0.3 0.008 60);
