@@ -1,3 +1,4 @@
+import cvAsset from "@/assets/CV.pdf.asset.json";
 import naturaCover from "@/assets/cover-natura.png.asset.json";
 import globoCover from "@/assets/cover-globo.png.asset.json";
 import bradescoCover from "@/assets/cover-bradesco.png.asset.json";
@@ -286,7 +287,7 @@ export const contact = {
   email: "meiodoton@gmail.com",
   linkedin: "https://linkedin.com/in/toncavalcanti",
   behance: "https://behance.net/quattro",
-  cv: "https://drive.google.com/uc?export=download&id=1rbA3k0bmXsh3mllrTn5R95aKfmmqIzRL",
+  cv: cvAsset.url,
 };
 
 export type LeadershipProof = {
