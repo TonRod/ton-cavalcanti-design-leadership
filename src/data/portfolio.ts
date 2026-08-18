@@ -1,3 +1,4 @@
+import cvAsset from "@/assets/CV.pdf.asset.json";
 import naturaCover from "@/assets/cover-natura.png.asset.json";
 import globoCover from "@/assets/cover-globo.png.asset.json";
 import bradescoCover from "@/assets/cover-bradesco.png.asset.json";
