@@ -35,7 +35,7 @@ export function ResumeSection() {
               >
                 <Download className="size-4" /> Baixar currículo
               </a>
-              <p className="mt-3 text-xs text-muted-foreground">PDF · 940 KB</p>
+              <p className="mt-3 text-xs text-muted-foreground">PDF · 801 KB</p>
             </div>
           </div>
 
