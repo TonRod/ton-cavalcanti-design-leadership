@@ -38,7 +38,58 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
     return () => mq.removeEventListener("change", onChange);
   }, [theme, mounted]);
 
-  const select = useCallback((value: Theme) => setTheme(value), []);
+  // Revela o tema novo em círculo, crescendo do centro do botão clicado
+  const select = useCallback(
+    (value: Theme, event: React.MouseEvent<HTMLButtonElement>) => {
+      setTheme(value);
+
+      const reduced =
+        typeof window !== "undefined" &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const startViewTransition = (
+        document as Document & {
+          startViewTransition?: (cb: () => void) => { ready: Promise<void> };
+        }
+      ).startViewTransition?.bind(document);
+
+      if (!startViewTransition || reduced) {
+        applyTheme(value);
+        return;
+      }
+
+      const rect = event.currentTarget.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
+      const raio = Math.hypot(
+        Math.max(x, window.innerWidth - x),
+        Math.max(y, window.innerHeight - y)
+      );
+
+      const transicao = startViewTransition(() => {
+        // Precisa ser síncrono: troca a classe direto no documentElement
+        applyTheme(value);
+      });
+
+      transicao.ready
+        .then(() => {
+          document.documentElement.animate(
+            {
+              clipPath: [
+                `circle(0px at ${x}px ${y}px)`,
+                `circle(${raio}px at ${x}px ${y}px)`,
+              ],
+            },
+            {
+              duration: 520,
+              easing: "cubic-bezier(.22,1,.36,1)",
+              pseudoElement: "::view-transition-new(root)",
+            }
+          );
+        })
+        .catch(() => {});
+    },
+    []
+  );
 
   return (
     <div
@@ -56,7 +107,8 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
             aria-checked={active}
             aria-label={label}
             title={label}
-            onClick={() => select(value)}
+            onClick={(e) => select(value, e)}
+
             className={`rounded-[0.25rem] p-1.5 transition-colors ${
               active
                 ? "bg-secondary text-foreground"
