@@ -17,14 +17,15 @@ export function Hero() {
             Lidero design para transformar estratégia em produtos relevantes e resultados de
             negócio.
           </h1>
-          <p className="mt-8 max-w-2xl font-serif text-sm leading-relaxed text-muted-foreground sm:text-base">
+          <p className="rise mt-8 max-w-2xl font-serif text-sm leading-relaxed text-muted-foreground sm:text-base">
             Ton Cavalcanti · 16 anos em produto, mais de 6 deles liderando times de design.
             Passagens por Try, Bradesco, Globo, Motrix, Natura e hoje Porto Seguro. Estruturo a
             função de design onde ela ainda não existe. São Paulo, Brasil.
           </p>
         </div>
 
-        <div className="relative">
+        <div className="rise relative [animation-delay:70ms]">
+
           <img
             src={portrait.url}
             alt="Retrato profissional de Éliton (Ton) Cavalcanti"
