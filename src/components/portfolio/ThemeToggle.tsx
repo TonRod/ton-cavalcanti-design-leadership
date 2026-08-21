@@ -40,7 +40,7 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
 
   // Revela o tema novo em círculo, crescendo do centro do botão clicado
   const select = useCallback(
-    (value: Theme, event: React.MouseEvent<HTMLButtonElement>) => {
+    (value: Theme, event: MouseEvent<HTMLButtonElement>) => {
       setTheme(value);
 
       const reduced =
