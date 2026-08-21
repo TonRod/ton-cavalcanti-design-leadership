@@ -157,7 +157,17 @@
   }
 }
 
-/* Revelação circular do tema: desliga o cross-fade padrão */
+/* Revelação circular do tema: desliga o cross-fade padrão e cresce um círculo
+   a partir do botão clicado (centro e raio vêm de --vt-x / --vt-y / --vt-r). */
+@keyframes revelar-tema {
+  from {
+    clip-path: circle(0px at var(--vt-x, 50%) var(--vt-y, 50%));
+  }
+  to {
+    clip-path: circle(var(--vt-r, 150vmax) at var(--vt-x, 50%) var(--vt-y, 50%));
+  }
+}
+
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
@@ -168,6 +178,7 @@
 }
 ::view-transition-new(root) {
   z-index: 1;
+  animation: revelar-tema var(--dur-reveal) linear both;
 }
 
 /* Entrada em cascata do hero — CSS puro, dispara na primeira pintura */
