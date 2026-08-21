@@ -47,7 +47,7 @@ export function Hero() {
         ))}
       </div>
 
-      <div className="mt-10 flex flex-wrap gap-3">
+      <div className="rise mt-10 flex flex-wrap gap-3 [animation-delay:210ms]">
         <a
           href="#cases"
           className="rounded-md bg-accent px-5 py-3 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
