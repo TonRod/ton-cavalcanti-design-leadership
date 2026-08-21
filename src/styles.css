@@ -216,7 +216,7 @@
     animation-timeline: view();
     /* Zera quando o topo da lista chega ao terço inferior; completa quando
        o fim da lista está confortavelmente dentro da tela. */
-    animation-range: entry 30% exit 90%;
+    animation-range: entry 30% exit 10%;
   }
 
   .ponto-trajetoria {
