@@ -1,5 +1,6 @@
 import { Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+
 import { ThemeToggle } from "@/components/portfolio/ThemeToggle";
 import { cn } from "@/lib/utils";
 
