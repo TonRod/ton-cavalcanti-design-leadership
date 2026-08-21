@@ -51,6 +51,12 @@
 :root {
   color-scheme: light;
   --radius: 0.375rem;
+  /* Sistema de movimento — durações e curva únicas para todo o site */
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-micro: 180ms;
+  --dur-state: 380ms;
+  --dur-large: 520ms;
+
   --background: oklch(0.972 0.008 85);
   --foreground: oklch(0.21 0.01 60);
   --surface: oklch(0.99 0.005 85);
