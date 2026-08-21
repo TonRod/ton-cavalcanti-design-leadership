@@ -62,7 +62,7 @@ export function Hero() {
         </a>
       </div>
 
-      <div className="mt-8 flex flex-wrap items-center gap-6 text-sm text-muted-foreground">
+      <div className="rise mt-8 flex flex-wrap items-center gap-6 text-sm text-muted-foreground [animation-delay:280ms]">
         <a href={`mailto:${contact.email}`} className="flex items-center gap-2 hover:text-foreground">
           <Mail className="size-4" /> {contact.email}
         </a>
