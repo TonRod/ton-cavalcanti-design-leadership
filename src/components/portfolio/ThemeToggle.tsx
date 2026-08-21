@@ -39,7 +39,10 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
     return () => mq.removeEventListener("change", onChange);
   }, [theme, mounted]);
 
-  // Revela o tema novo em círculo, crescendo do centro do botão clicado
+  // Revela o tema novo em círculo, crescendo do centro do botão clicado.
+  // A animação é declarada em CSS (::view-transition-new(root)); aqui só passamos
+  // centro e raio por variáveis, porque nem todo navegador aceita `pseudoElement`
+  // em Element.animate().
   const select = useCallback(
     (value: Theme, event: MouseEvent<HTMLButtonElement>) => {
       const reduced =
@@ -65,28 +68,15 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
         Math.max(y, window.innerHeight - y)
       );
 
-      const transicao = startViewTransition(() => {
+      const raiz = document.documentElement;
+      raiz.style.setProperty("--vt-x", `${x}px`);
+      raiz.style.setProperty("--vt-y", `${y}px`);
+      raiz.style.setProperty("--vt-r", `${raio}px`);
+
+      startViewTransition(() => {
         flushSync(() => setTheme(value));
         applyTheme(value);
       });
-
-      transicao.ready
-        .then(() => {
-          document.documentElement.animate(
-            {
-              clipPath: [
-                `circle(0px at ${x}px ${y}px)`,
-                `circle(${raio}px at ${x}px ${y}px)`,
-              ],
-            },
-            {
-              duration: 700,
-              easing: "cubic-bezier(.35, 0, .25, 1)",
-              pseudoElement: "::view-transition-new(root)",
-            }
-          );
-        })
-        .catch(() => {});
     },
     []
   );

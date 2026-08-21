@@ -56,8 +56,9 @@
   --dur-micro: 180ms;
   --dur-state: 380ms;
   --dur-large: 520ms;
-  /* Exceção ao --ease-soft: a revelação percorre a tela inteira e usa uma curva mais uniforme. */
-  --dur-reveal: 700ms;
+  /* Exceção ao --ease-soft: a revelação varre a tela inteira e roda em `linear`,
+     porque uma varredura desse tamanho não deve ter aceleração perceptível. */
+  --dur-reveal: 900ms;
 
   --background: oklch(0.972 0.008 85);
   --foreground: oklch(0.21 0.01 60);
@@ -156,7 +157,17 @@
   }
 }
 
-/* Revelação circular do tema: desliga o cross-fade padrão */
+/* Revelação circular do tema: desliga o cross-fade padrão e cresce um círculo
+   a partir do botão clicado (centro e raio vêm de --vt-x / --vt-y / --vt-r). */
+@keyframes revelar-tema {
+  from {
+    clip-path: circle(0px at var(--vt-x, 50%) var(--vt-y, 50%));
+  }
+  to {
+    clip-path: circle(var(--vt-r, 150vmax) at var(--vt-x, 50%) var(--vt-y, 50%));
+  }
+}
+
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
@@ -167,6 +178,7 @@
 }
 ::view-transition-new(root) {
   z-index: 1;
+  animation: revelar-tema var(--dur-reveal) linear both;
 }
 
 /* Entrada em cascata do hero — CSS puro, dispara na primeira pintura */
