@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState, type MouseEvent } from "react";
+import { flushSync } from "react-dom";
 import { Monitor, Moon, Sun } from "lucide-react";
 
 export type Theme = "light" | "dark" | "system";
@@ -41,8 +42,6 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
   // Revela o tema novo em círculo, crescendo do centro do botão clicado
   const select = useCallback(
     (value: Theme, event: MouseEvent<HTMLButtonElement>) => {
-      setTheme(value);
-
       const reduced =
         typeof window !== "undefined" &&
         window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -53,6 +52,7 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
       ).startViewTransition?.bind(document);
 
       if (!startViewTransition || reduced) {
+        setTheme(value);
         applyTheme(value);
         return;
       }
@@ -66,7 +66,7 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
       );
 
       const transicao = startViewTransition(() => {
-        // Precisa ser síncrono: troca a classe direto no documentElement
+        flushSync(() => setTheme(value));
         applyTheme(value);
       });
 
@@ -80,8 +80,8 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
               ],
             },
             {
-              duration: 520,
-              easing: "cubic-bezier(.22,1,.36,1)",
+              duration: 700,
+              easing: "cubic-bezier(.35, 0, .25, 1)",
               pseudoElement: "::view-transition-new(root)",
             }
           );
