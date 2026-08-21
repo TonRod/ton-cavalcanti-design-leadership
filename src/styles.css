@@ -169,6 +169,87 @@
   z-index: 1;
 }
 
+/* Entrada em cascata do hero — CSS puro, dispara na primeira pintura */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility rise {
+  animation: rise-in var(--dur-state) var(--ease-soft) both;
+}
+
+/* Linha da trajetória dirigida pelo scroll */
+@keyframes desenhar-linha {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes acender-ponto {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.linha-trajetoria {
+  transform-origin: top;
+}
+
+@supports (animation-timeline: view()) {
+  /* Timelines nomeadas nos elementos de layout (ol / li): os elementos animados
+     recebem transform e não podem servir de sujeito da própria view timeline. */
+  .lista-trajetoria {
+    view-timeline-name: --traj;
+    view-timeline-axis: block;
+  }
+
+  .item-trajetoria {
+    view-timeline-name: --item;
+    view-timeline-axis: block;
+  }
+
+  .linha-trajetoria {
+    animation: desenhar-linha linear both;
+    animation-timeline: --traj;
+    /* Zera quando o topo da lista chega ao terço inferior da tela; completa
+       quando o fim da lista já está confortavelmente visível. */
+    animation-range: entry 30% exit 10%;
+  }
+
+  .ponto-trajetoria {
+    animation: acender-ponto linear both;
+    animation-timeline: --item;
+    animation-range: entry 40% entry 85%;
+  }
+}
+
+
+/* Animações dirigidas por scroll ignoram duração: precisam de desligamento explícito */
+@media (prefers-reduced-motion: reduce) {
+  .linha-trajetoria,
+  .ponto-trajetoria {
+    animation-timeline: none !important;
+    animation: none !important;
+    transform: none;
+    opacity: 1;
+  }
+}
+
 
 @utility display {
   font-family: var(--font-display);

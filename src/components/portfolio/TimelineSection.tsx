@@ -7,10 +7,15 @@ export function TimelineSection() {
         <p className="kicker">Trajetória</p>
         <h2 className="display mt-4 text-3xl sm:text-5xl">16 anos, em ordem.</h2>
 
-        <ol className="mt-12 border-l border-border">
+        <ol className="lista-trajetoria relative mt-12">
+          <span
+            aria-hidden="true"
+            className="linha-trajetoria absolute bottom-0 left-0 top-0 w-px bg-border"
+          />
           {timeline.map((item, i) => (
-            <li key={`${item.period}-${i}`} className="relative pb-10 pl-8">
-              <span className="absolute -left-[5px] top-1.5 size-2.5 rounded-full bg-accent" />
+            <li key={`${item.period}-${i}`} className="item-trajetoria relative pb-10 pl-8">
+              <span className="ponto-trajetoria absolute -left-[5px] top-1.5 size-2.5 rounded-full bg-accent" />
+
               <p className="font-serif text-[0.7rem] uppercase tracking-[0.18em] text-muted-foreground">
                 {item.period}
               </p>
