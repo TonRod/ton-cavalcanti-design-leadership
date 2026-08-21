@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, type MouseEvent } from "react";
 import { Monitor, Moon, Sun } from "lucide-react";
 
 export type Theme = "light" | "dark" | "system";
