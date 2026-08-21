@@ -173,7 +173,7 @@
 @keyframes rise-in {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(18px);
   }
   to {
     opacity: 1;
@@ -182,8 +182,9 @@
 }
 
 @utility rise {
-  animation: rise-in var(--dur-state) var(--ease-soft) both;
+  animation: rise-in var(--dur-large) var(--ease-soft) both;
 }
+
 
 /* Linha da trajetória dirigida pelo scroll */
 @keyframes desenhar-linha {

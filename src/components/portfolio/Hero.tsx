@@ -24,7 +24,7 @@ export function Hero() {
           </p>
         </div>
 
-        <div className="rise relative [animation-delay:70ms]">
+        <div className="rise relative [animation-delay:90ms]">
 
           <img
             src={portrait.url}
@@ -36,7 +36,7 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="rise mt-12 grid gap-px overflow-hidden rounded-lg border border-border bg-border [animation-delay:140ms] sm:grid-cols-3">
+      <div className="rise mt-12 grid gap-px overflow-hidden rounded-lg border border-border bg-border [animation-delay:180ms] sm:grid-cols-3">
         {metrics.map((m) => (
           <div key={m.label} className="flex flex-col bg-surface p-5">
             <p className="metric-num text-accent">{m.value}</p>
@@ -47,7 +47,7 @@ export function Hero() {
         ))}
       </div>
 
-      <div className="rise mt-10 flex flex-wrap gap-3 [animation-delay:210ms]">
+      <div className="rise mt-10 flex flex-wrap gap-3 [animation-delay:270ms]">
         <a
           href="#cases"
           className="rounded-md bg-accent px-5 py-3 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
@@ -62,7 +62,7 @@ export function Hero() {
         </a>
       </div>
 
-      <div className="rise mt-8 flex flex-wrap items-center gap-6 text-sm text-muted-foreground [animation-delay:280ms]">
+      <div className="rise mt-8 flex flex-wrap items-center gap-6 text-sm text-muted-foreground [animation-delay:360ms]">
         <a href={`mailto:${contact.email}`} className="flex items-center gap-2 hover:text-foreground">
           <Mail className="size-4" /> {contact.email}
         </a>
