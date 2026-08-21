@@ -36,7 +36,7 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="mt-12 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-3">
+      <div className="rise mt-12 grid gap-px overflow-hidden rounded-lg border border-border bg-border [animation-delay:140ms] sm:grid-cols-3">
         {metrics.map((m) => (
           <div key={m.label} className="flex flex-col bg-surface p-5">
             <p className="metric-num text-accent">{m.value}</p>
