@@ -51,6 +51,7 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
         }
       ).startViewTransition?.bind(document);
 
+      console.log("DIAG select", value, { hasSVT: !!startViewTransition, reduced });
       if (!startViewTransition || reduced) {
         setTheme(value);
         applyTheme(value);
@@ -64,6 +65,7 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
         Math.max(x, window.innerWidth - x),
         Math.max(y, window.innerHeight - y)
       );
+      console.log("DIAG geo", { x, y, raio, clip: `circle(${raio}px at ${x}px ${y}px)` });
 
       const transicao = startViewTransition(() => {
         flushSync(() => setTheme(value));
