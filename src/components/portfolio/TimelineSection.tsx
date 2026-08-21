@@ -8,10 +8,13 @@ export function TimelineSection() {
         <h2 className="display mt-4 text-3xl sm:text-5xl">16 anos, em ordem.</h2>
 
         <ol className="lista-trajetoria relative mt-12">
+          {/* Trilho estático + linha de progresso que cresce com o scroll */}
+          <span aria-hidden="true" className="absolute bottom-0 left-0 top-0 w-px bg-border" />
           <span
             aria-hidden="true"
-            className="linha-trajetoria absolute bottom-0 left-0 top-0 w-px bg-border"
+            className="linha-trajetoria absolute bottom-0 left-0 top-0 w-[2px] bg-accent"
           />
+
           {timeline.map((item, i) => (
             <li key={`${item.period}-${i}`} className="item-trajetoria relative pb-10 pl-8">
               <span className="ponto-trajetoria absolute -left-[5px] top-1.5 size-2.5 rounded-full bg-accent" />
