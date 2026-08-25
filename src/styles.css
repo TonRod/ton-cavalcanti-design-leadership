@@ -224,13 +224,8 @@
 }
 
 @supports (animation-timeline: view()) {
-  /* Timelines nomeadas nos elementos de layout (ol / li): os elementos animados
-     recebem transform e não podem servir de sujeito da própria view timeline. */
-  .lista-trajetoria {
-    view-timeline-name: --traj;
-    view-timeline-axis: block;
-  }
-
+  /* Timeline nomeada em cada item: o segmento de linha e o ponto daquele item
+     avançam conforme o próprio <li> atravessa a viewport. */
   .item-trajetoria {
     view-timeline-name: --item;
     view-timeline-axis: block;
@@ -238,16 +233,15 @@
 
   .linha-trajetoria {
     animation: desenhar-linha linear both;
-    animation-timeline: --traj;
-    /* Zera quando o topo da lista chega ao terço inferior da tela; completa
-       quando o fim da lista já está confortavelmente visível. */
-    animation-range: entry 30% exit 10%;
+    animation-timeline: --item;
+    /* Termina onde o segmento seguinte começa: sem intervalo morto nem sobreposição. */
+    animation-range: entry 45% entry 90%;
   }
 
   .ponto-trajetoria {
     animation: acender-ponto linear both;
     animation-timeline: --item;
-    animation-range: entry 40% entry 85%;
+    animation-range: entry 40% entry 60%;
   }
 }
 
