@@ -155,7 +155,7 @@ export function SiteHeader() {
       >
         <nav
           id="menu-mobile"
-          {...(open ? {} : { inert: "" })}
+          inert={!open}
           className={cn(
             "min-h-0 overflow-hidden px-6",
             open ? "border-t border-border" : "border-t border-transparent"
