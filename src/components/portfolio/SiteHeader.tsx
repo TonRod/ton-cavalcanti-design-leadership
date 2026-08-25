@@ -114,41 +114,74 @@ export function SiteHeader() {
         <div className="flex items-center gap-2 lg:hidden">
           <ThemeToggle />
           <button
-            className="p-1.5"
+            className="relative size-8 p-1.5"
             aria-label={open ? "Fechar menu" : "Abrir menu"}
             aria-expanded={open}
             aria-controls="menu-mobile"
             onClick={() => setOpen((v) => !v)}
           >
-            {open ? <X className="size-5" /> : <Menu className="size-5" />}
+            {/* Ícones empilhados: giram e trocam de opacidade */}
+            <Menu
+              className="absolute left-1.5 top-1.5 size-5"
+              style={{
+                opacity: open ? 0 : 1,
+                transform: open ? "rotate(90deg) scale(0.7)" : "none",
+                transition:
+                  "transform var(--dur-micro) var(--ease-soft), opacity var(--dur-micro) var(--ease-soft)",
+              }}
+            />
+            <X
+              className="absolute left-1.5 top-1.5 size-5"
+              style={{
+                opacity: open ? 1 : 0,
+                transform: open ? "none" : "rotate(-90deg) scale(0.7)",
+                transition:
+                  "transform var(--dur-micro) var(--ease-soft), opacity var(--dur-micro) var(--ease-soft)",
+              }}
+            />
           </button>
         </div>
       </div>
 
-      {open && (
+      {/* Painel mobile: altura animada pela técnica de grid (0fr → 1fr) */}
+      <div
+        className={cn(
+          "grid overflow-hidden lg:hidden",
+          open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+        )}
+        style={{
+          transition: "grid-template-rows var(--dur-state) var(--ease-soft)",
+        }}
+      >
         <nav
           id="menu-mobile"
-          className="flex flex-col gap-1 border-t border-border px-6 py-4 lg:hidden"
+          {...(open ? {} : { inert: "" })}
+          className={cn(
+            "min-h-0 overflow-hidden px-6",
+            open ? "border-t border-border" : "border-t border-transparent"
+          )}
         >
-          {links.map((l) => {
-            const isActive = activeId === l.href.slice(1);
-            return (
-              <a
-                key={l.href}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                aria-current={isActive ? "true" : undefined}
-                className={cn(
-                  "py-2 text-sm",
-                  isActive ? "text-foreground" : "text-muted-foreground"
-                )}
-              >
-                {l.label}
-              </a>
-            );
-          })}
+          <div className="flex flex-col gap-1 py-4">
+            {links.map((l) => {
+              const isActive = activeId === l.href.slice(1);
+              return (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  aria-current={isActive ? "true" : undefined}
+                  className={cn(
+                    "py-2 text-sm",
+                    isActive ? "text-foreground" : "text-muted-foreground"
+                  )}
+                >
+                  {l.label}
+                </a>
+              );
+            })}
+          </div>
         </nav>
-      )}
+      </div>
     </header>
   );
 }
