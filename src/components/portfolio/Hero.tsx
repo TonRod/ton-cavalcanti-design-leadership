@@ -11,13 +11,13 @@ const metrics = [
 export function Hero() {
   return (
     <section id="top" className="mx-auto w-full max-w-6xl px-6 py-16 sm:py-24">
-      <div className="grid items-start gap-12 lg:grid-cols-[1.4fr_1fr]">
+      <div className="grid items-start gap-12 lg:grid-cols-[1.6fr_1fr]">
         <div>
           <h1 className="display text-4xl sm:text-6xl">
             Lidero design para transformar estratégia em produtos relevantes e resultados de
             negócio.
           </h1>
-          <p className="rise mt-8 max-w-2xl font-serif text-sm leading-relaxed text-muted-foreground sm:text-base">
+          <p className="rise mt-8 max-w-2xl font-serif text-sm leading-relaxed text-muted-foreground sm:text-base lg:max-w-3xl">
             Ton Cavalcanti · 16 anos em produto, mais de 6 deles liderando times de design.
             Passagens por Try, Bradesco, Globo, Motrix, Natura e hoje Porto Seguro. Estruturo a
             função de design onde ela ainda não existe. São Paulo, Brasil.
@@ -25,13 +25,12 @@ export function Hero() {
         </div>
 
         <div className="rise relative [animation-delay:90ms]">
-
           <img
             src={portrait.url}
             alt="Retrato profissional de Éliton (Ton) Cavalcanti"
             width={768}
             height={1365}
-            className="mx-auto aspect-[768/1365] w-[70%] rounded-lg border border-border object-cover object-center"
+            className="mx-auto aspect-[768/1365] w-[70%] rounded-lg border border-border object-cover object-center lg:ml-auto lg:mr-0 lg:w-full"
           />
         </div>
       </div>
