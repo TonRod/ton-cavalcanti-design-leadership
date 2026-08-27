@@ -31,7 +31,13 @@ function Index() {
       </main>
 
       <footer className="border-t border-border py-8">
-        <div className="mx-auto w-full max-w-6xl px-6">
+        <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-2 px-6">
+          <a
+            href="/mentoria"
+            className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Mentoria para designers · Pinguins que voam
+          </a>
           <p className="text-center text-xs text-muted-foreground">
             © {new Date().getFullYear()} Éliton R. Cavalcanti. Todos os direitos reservados.
           </p>

@@ -4,14 +4,35 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { ThemeToggle } from "@/components/portfolio/ThemeToggle";
 import { cn } from "@/lib/utils";
 
-const links = [
+export interface SiteHeaderLink {
+  href: string;
+  label: string;
+}
+
+const defaultLinks: SiteHeaderLink[] = [
   { href: "#lideranca", label: "Liderança" },
   { href: "#cases", label: "Cases" },
   { href: "#trajetoria", label: "Trajetória" },
   { href: "#contato", label: "Contato" },
 ];
 
-export function SiteHeader() {
+export interface SiteHeaderProps {
+  /** Nome exibido à esquerda. */
+  brand?: string;
+  /** Destino do nome — âncora no topo por padrão. */
+  homeHref?: string;
+  /**
+   * Links da nav. Defina em escopo de módulo (não inline) para manter a
+   * referência estável entre renders — o observer depende disso.
+   */
+  links?: SiteHeaderLink[];
+}
+
+export function SiteHeader({
+  brand = "Ton Cavalcanti",
+  homeHref = "#top",
+  links = defaultLinks,
+}: SiteHeaderProps = {}) {
   const [open, setOpen] = useState(false);
   const [activeId, setActiveId] = useState<string | null>(null);
 
@@ -33,7 +54,7 @@ export function SiteHeader() {
 
     sections.forEach((s) => observer.observe(s));
     return () => observer.disconnect();
-  }, []);
+  }, [links]);
 
   // Indicador deslizante da nav desktop: mede o link ativo e move o traço
   const navRef = useRef<HTMLElement | null>(null);
@@ -69,8 +90,8 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur-md">
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
-        <a href="#top" className="display text-lg tracking-tight">
-          Ton Cavalcanti
+        <a href={homeHref} className="display text-lg tracking-tight">
+          {brand}
         </a>
 
         <nav
