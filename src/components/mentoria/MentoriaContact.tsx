@@ -3,7 +3,11 @@ import { mentoriaLinks } from "@/data/mentoria";
 
 export function MentoriaContact() {
   return (
-    <section id="contato" className="bg-surface-2 py-20 sm:py-28">
+    <section
+      id="contato"
+      tabIndex={-1}
+      className="flex min-h-[calc(100svh-5rem)] scroll-mt-20 items-center bg-surface-2 py-20 outline-none sm:py-28"
+    >
       <div className="mx-auto w-full max-w-6xl px-6">
         <p className="kicker">Contato</p>
         <h2 className="display mt-4 text-3xl sm:text-5xl">Vamos conversar sobre seu momento?</h2>

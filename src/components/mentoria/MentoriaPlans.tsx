@@ -3,7 +3,7 @@ import { mentoriaLinks, mentoriaPlanos } from "@/data/mentoria";
 
 export function MentoriaPlans() {
   return (
-    <section id="planos" className="py-20 sm:py-28">
+    <section id="planos" tabIndex={-1} className="scroll-mt-20 py-20 outline-none sm:py-28">
       <div className="mx-auto w-full max-w-6xl px-6">
         <p className="kicker">Planos</p>
         <h2 className="display mt-4 text-3xl sm:text-5xl">

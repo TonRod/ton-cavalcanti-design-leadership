@@ -2,7 +2,7 @@ import { mentoriaSobre } from "@/data/mentoria";
 
 export function MentoriaAbout() {
   return (
-    <section id="sobre" className="py-20 sm:py-28">
+    <section id="sobre" tabIndex={-1} className="scroll-mt-20 py-20 outline-none sm:py-28">
       <div className="mx-auto w-full max-w-6xl px-6">
         <p className="kicker">Sobre mim</p>
         <h2 className="display mt-4 max-w-3xl text-3xl sm:text-5xl">{mentoriaSobre.title}</h2>

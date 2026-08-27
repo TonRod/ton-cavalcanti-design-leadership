@@ -3,7 +3,11 @@ import { mentoriaEixos, mentoriaParaQuem } from "@/data/mentoria";
 
 export function MentoriaWork() {
   return (
-    <section id="trabalho" className="bg-surface-2 py-20 sm:py-28">
+    <section
+      id="trabalho"
+      tabIndex={-1}
+      className="scroll-mt-20 bg-surface-2 py-20 outline-none sm:py-28"
+    >
       <div className="mx-auto w-full max-w-6xl px-6">
         <p className="kicker">O que vamos trabalhar</p>
         <h2 className="display mt-4 text-3xl sm:text-5xl">Três frentes, uma carreira.</h2>
