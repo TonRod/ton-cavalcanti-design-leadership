@@ -36,24 +36,54 @@ export function SiteHeader({
   const [open, setOpen] = useState(false);
   const [activeId, setActiveId] = useState<string | null>(null);
 
+  // Seção ativa = a última cujo início já passou logo abaixo do header.
+  // Cálculo direto, e não IntersectionObserver: o callback do observer só
+  // recebe as seções que mudaram de estado, então quando uma sai da faixa
+  // sem que outra entre no mesmo evento, o item ativo trava no anterior.
   useEffect(() => {
-    const sections = links
-      .map((l) => document.getElementById(l.href.slice(1)))
-      .filter((el): el is HTMLElement => !!el);
-    if (!sections.length) return;
+    const ids = links.map((l) => l.href.slice(1));
+    if (!ids.length) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-        if (visible[0]) setActiveId(visible[0].target.id);
-      },
-      { rootMargin: "-80px 0px -55% 0px", threshold: 0 }
-    );
+    let frame = 0;
 
-    sections.forEach((s) => observer.observe(s));
-    return () => observer.disconnect();
+    const calcular = () => {
+      frame = 0;
+      // Meio da janela: medido contra a geometria real das duas páginas, é o
+      // ponto que menos diverge da seção que ocupa a maior área da tela
+      // (3–5% na mentoria e 11% na home, contra 13–25% com um ponto fixo).
+      const marca = window.scrollY + window.innerHeight * 0.5;
+      let atual: string | null = null;
+
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        if (el.getBoundingClientRect().top + window.scrollY <= marca) atual = id;
+      }
+
+      // No fim da página a rolagem acaba antes da última seção chegar ao topo;
+      // sem esta regra o indicador nunca alcançaria o último item.
+      const noFim =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+      if (noFim) {
+        const ultimo = ids[ids.length - 1];
+        if (document.getElementById(ultimo)) atual = ultimo;
+      }
+
+      setActiveId(atual);
+    };
+
+    const agendar = () => {
+      if (!frame) frame = requestAnimationFrame(calcular);
+    };
+
+    calcular();
+    window.addEventListener("scroll", agendar, { passive: true });
+    window.addEventListener("resize", agendar);
+    return () => {
+      window.removeEventListener("scroll", agendar);
+      window.removeEventListener("resize", agendar);
+      if (frame) cancelAnimationFrame(frame);
+    };
   }, [links]);
 
   // Indicador deslizante da nav desktop: mede o link ativo e move o traço
