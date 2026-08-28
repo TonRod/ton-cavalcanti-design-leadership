@@ -36,7 +36,6 @@ export type CaseStudy = {
   metricas: { label: string; value: string }[];
 };
 
-
 export const cases: CaseStudy[] = [
   {
     id: "natura",
@@ -65,7 +64,6 @@ export const cases: CaseStudy[] = [
     aprendizado:
       "A integração de tecnologia em processos físicos exige mais do que ferramentas digitais: depende de um profundo entendimento das jornadas dos usuários.",
     metricas: [
-
       { label: "CSAT de atendimento", value: "40% → 80%" },
       { label: "Processamento de pedidos", value: "−25%" },
       { label: "Chamados ao suporte", value: "−13%" },
@@ -180,7 +178,7 @@ export const cases: CaseStudy[] = [
     escopo:
       "Atuei como UX Designer Lead, liderando o projeto e a pesquisa de mercado: entrevistas, facilitação de workshop com stakeholders, definição de business goals, wireframes em Axure, avaliação heurística de usabilidade e acessibilidade e apresentação de reports.",
     estrategia:
-      'Benchmark, TaskFlow, Personas, Design Thinking, Workshop, Wireframes e Jobs to Be Done. A pesquisa em colaboração com stakeholders levou à descoberta central do projeto: o candidato não escolhe um curso, ele busca evolução profissional. A jornada foi então construída sobre os interesses futuros do candidato, e não sobre a comparação entre cursos.',
+      "Benchmark, TaskFlow, Personas, Design Thinking, Workshop, Wireframes e Jobs to Be Done. A pesquisa em colaboração com stakeholders levou à descoberta central do projeto: o candidato não escolhe um curso, ele busca evolução profissional. A jornada foi então construída sobre os interesses futuros do candidato, e não sobre a comparação entre cursos.",
     alinhamento:
       "O workshop com os stakeholders alinhou os objetivos de negócio — reduzir custo de aquisição e atualizar a relevância da escola no mercado — às restrições do processo físico de matrícula, que precisava ser preservado. Isso garantiu que o redesenho digital fosse implementável sem romper a operação existente.",
     solucao:
@@ -206,7 +204,7 @@ export const cases: CaseStudy[] = [
         src: stpaulEvidJornada.url,
         caption:
           "A jornada abria perguntando onde o candidato queria chegar, não que curso queria fazer. Em seis passos a I.A. traduzia a ambição em trilhas — e passou a resolver 70% do que antes ia para o chat.",
-        alt: "Primeira tela da jornada de matrícula: a pergunta \"Onde você quer chegar?\" com quatro opções de ambição profissional e indicador de passo 1 de 6.",
+        alt: 'Primeira tela da jornada de matrícula: a pergunta "Onde você quer chegar?" com quatro opções de ambição profissional e indicador de passo 1 de 6.',
       },
     ],
     metricas: [
@@ -287,6 +285,7 @@ export const contact = {
   email: "meiodoton@gmail.com",
   linkedin: "https://linkedin.com/in/toncavalcanti",
   behance: "https://behance.net/quattro",
+  medium: "https://medium.com/@elitonrodrigo",
   cv: cvAsset.url,
 };
 
@@ -364,4 +363,3 @@ export const certifications: Certification[] = [
   { title: "Operacionalização em Design" },
   { title: "Planejamento e Técnicas de Design" },
 ];
-

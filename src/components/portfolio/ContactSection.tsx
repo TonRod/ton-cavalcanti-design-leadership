@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Mail, Linkedin, Globe, MapPin, Copy, Check, Briefcase } from "lucide-react";
+import { Mail, Linkedin, Globe, MapPin, Copy, Check, Briefcase, PenLine } from "lucide-react";
 import { contact } from "@/data/portfolio";
 
 export function ContactSection() {
@@ -7,7 +7,12 @@ export function ContactSection() {
   const [message, setMessage] = useState("");
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  useEffect(() => () => { if (timer.current) clearTimeout(timer.current); }, []);
+  useEffect(
+    () => () => {
+      if (timer.current) clearTimeout(timer.current);
+    },
+    [],
+  );
 
   const copyEmail = async () => {
     try {
@@ -74,6 +79,14 @@ export function ContactSection() {
           >
             <Globe className="size-4" /> Behance
           </a>
+          <a
+            href={contact.medium}
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center gap-2 rounded-md border border-border px-5 py-3 text-sm transition-colors hover:bg-secondary"
+          >
+            <PenLine className="size-4" /> Medium
+          </a>
         </div>
 
         <div className="mt-4">
@@ -91,7 +104,6 @@ export function ContactSection() {
         <p aria-live="polite" className="mt-2 min-h-5 text-xs text-muted-foreground">
           {message}
         </p>
-
       </div>
     </section>
   );

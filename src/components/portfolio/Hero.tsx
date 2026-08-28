@@ -1,4 +1,4 @@
-import { Mail, Linkedin, Globe } from "lucide-react";
+import { Mail, Linkedin, Globe, PenLine } from "lucide-react";
 import portrait from "@/assets/portrait.jpg.asset.json";
 import { contact } from "@/data/portfolio";
 
@@ -62,14 +62,35 @@ export function Hero() {
       </div>
 
       <div className="rise mt-8 flex flex-wrap items-center gap-6 text-sm text-muted-foreground [animation-delay:360ms]">
-        <a href={`mailto:${contact.email}`} className="flex items-center gap-2 hover:text-foreground">
+        <a
+          href={`mailto:${contact.email}`}
+          className="flex items-center gap-2 hover:text-foreground"
+        >
           <Mail className="size-4" /> {contact.email}
         </a>
-        <a href={contact.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-foreground">
+        <a
+          href={contact.linkedin}
+          target="_blank"
+          rel="noreferrer"
+          className="flex items-center gap-2 hover:text-foreground"
+        >
           <Linkedin className="size-4" /> LinkedIn
         </a>
-        <a href={contact.behance} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-foreground">
+        <a
+          href={contact.behance}
+          target="_blank"
+          rel="noreferrer"
+          className="flex items-center gap-2 hover:text-foreground"
+        >
           <Globe className="size-4" /> Behance
+        </a>
+        <a
+          href={contact.medium}
+          target="_blank"
+          rel="noreferrer"
+          className="flex items-center gap-2 hover:text-foreground"
+        >
+          <PenLine className="size-4" /> Medium
         </a>
       </div>
     </section>

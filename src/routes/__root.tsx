@@ -14,8 +14,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { contact, siteUrl } from "@/data/portfolio";
 import portrait from "@/assets/portrait.jpg.asset.json";
 
-const siteTitle =
-  "Éliton Cavalcanti (Ton) — Design Leadership · Product Strategy · Head of Design";
+const siteTitle = "Éliton Cavalcanti (Ton) — Design Leadership · Product Strategy · Head of Design";
 const siteDescription =
   "Ton Cavalcanti · 16 anos em produto, mais de 6 liderando times de design em Try, Bradesco, Globo, Motrix, Natura e Porto Seguro. Cases com resultado medido em CSAT, NPS, tempo de resposta e abandono de jornada.";
 const portraitUrl = `${siteUrl}${portrait.url}`;
@@ -35,7 +34,7 @@ const personJsonLd = {
     addressLocality: "São Paulo",
     addressCountry: "BR",
   },
-  sameAs: [contact.linkedin, contact.behance],
+  sameAs: [contact.linkedin, contact.behance, contact.medium],
   alumniOf: [
     { "@type": "Organization", name: "ESPM" },
     { "@type": "Organization", name: "Auckland University of Technology" },
@@ -120,10 +119,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "google-site-verification", content: "dlvXDkWxxs0bpieFPKxB9jNQ0LBGUiLvMvvuYVueoK8" },
       { title: "Ton Cavalcanti" },
-      { name: "description", content: "Personal design leadership portfolio showcasing experience in product strategy and team management." },
+      {
+        name: "description",
+        content:
+          "Personal design leadership portfolio showcasing experience in product strategy and team management.",
+      },
       { name: "author", content: "Éliton R. Cavalcanti" },
       { property: "og:title", content: "Ton Cavalcanti" },
-      { property: "og:description", content: "Personal design leadership portfolio showcasing experience in product strategy and team management." },
+      {
+        property: "og:description",
+        content:
+          "Personal design leadership portfolio showcasing experience in product strategy and team management.",
+      },
       { property: "og:type", content: "profile" },
       { property: "og:url", content: siteUrl },
       { property: "og:site_name", content: "Ton Cavalcanti" },
@@ -137,7 +144,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Ton Cavalcanti" },
-      { name: "twitter:description", content: "Personal design leadership portfolio showcasing experience in product strategy and team management." },
+      {
+        name: "twitter:description",
+        content:
+          "Personal design leadership portfolio showcasing experience in product strategy and team management.",
+      },
       { name: "twitter:image", content: portraitUrl },
     ],
     scripts: [
@@ -151,7 +162,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       {
         type: "text/javascript",
-        children: "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-D0TFB65BGJ');",
+        children:
+          "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-D0TFB65BGJ');",
       },
     ],
     links: [
