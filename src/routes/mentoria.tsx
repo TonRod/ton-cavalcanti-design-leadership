@@ -8,6 +8,7 @@ import { MentoriaPlans } from "@/components/mentoria/MentoriaPlans";
 import { MentoriaTestimonials } from "@/components/mentoria/MentoriaTestimonials";
 import { MentoriaAbout } from "@/components/mentoria/MentoriaAbout";
 import { MentoriaContact } from "@/components/mentoria/MentoriaContact";
+import { useRevelar } from "@/components/mentoria/useRevelar";
 import { mentoria } from "@/data/mentoria";
 import { siteUrl } from "@/data/portfolio";
 
@@ -44,6 +45,8 @@ export const Route = createFileRoute("/mentoria")({
 });
 
 function Mentoria() {
+  useRevelar();
+
   return (
     <div className="min-h-screen bg-background">
       <a

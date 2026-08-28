@@ -569,3 +569,112 @@
     animation: none;
   }
 }
+
+/* ─────────────────────────────────────────────────────────────
+   Ritmo tipográfico — gramática da página de mentoria.
+
+   A regra que a página seguia antes era sempre a mesma: rótulo,
+   título, parágrafo com a mesma medida, grade de cards. Repetida
+   seis vezes, virava ruído de fundo. Aqui a hierarquia vem do
+   contraste de escala e de medida de linha, não de caixas.
+
+   Quatro decisões, aplicadas em conjunto:
+   1. Título grande, entrelinha fechada (.98) e medida curta.
+   2. Texto de apoio em medida curta — 42ch, contra os ~65ch de antes.
+   3. Respiro generoso e desigual entre blocos: o espaço faz a pausa
+      que a régua de um jornal não faz.
+   4. Entrada suave ao chegar na seção, uma vez só.
+   ───────────────────────────────────────────────────────────── */
+
+@utility titulo-grande {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.4rem, 6.4vw, 4.4rem);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+@utility medida-curta {
+  max-width: 42ch;
+}
+
+/* Máscara de linha: o texto sobe de dentro dela na entrada. */
+.linha-mascara {
+  display: block;
+  overflow: hidden;
+}
+
+.linha-mascara > span {
+  display: block;
+  transform: translateY(102%);
+  opacity: 0;
+}
+
+[data-revelar].revelada .linha-mascara > span {
+  transform: none;
+  opacity: 1;
+  transition:
+    transform 620ms var(--ease-soft),
+    opacity 620ms var(--ease-soft);
+  transition-delay: var(--atraso, 0ms);
+}
+
+/* Entrada padrão dos demais elementos. */
+[data-revelar] .entra {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+[data-revelar].revelada .entra {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--dur-large) var(--ease-soft),
+    transform var(--dur-large) var(--ease-soft);
+  transition-delay: var(--atraso, 0ms);
+}
+
+/* Item da lista numerada: marcador em coluna estreita, respiro largo. */
+.item-ritmo {
+  display: grid;
+  grid-template-columns: 4ch 1fr;
+  gap: 1.75rem;
+  align-items: baseline;
+}
+
+.item-ritmo > .marcador {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--muted-foreground);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Frase de fecho: fecha a seção e dá a pausa antes da próxima. */
+.fecho-secao {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.6vw, 2rem);
+  line-height: 1.24;
+  letter-spacing: -0.015em;
+  text-align: center;
+  max-width: 26ch;
+  margin-inline: auto;
+  padding-top: 2.75rem;
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 640px) {
+  .item-ritmo {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .linha-mascara > span,
+  [data-revelar] .entra {
+    transform: none !important;
+    opacity: 1 !important;
+    transition: none !important;
+  }
+}

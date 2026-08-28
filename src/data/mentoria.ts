@@ -10,9 +10,17 @@ export const mentoria = {
   brand: "Pinguins que voam",
   kicker: "Mentoria",
   title: "Mentoria para quem está construindo carreira em Product Design.",
+  /**
+   * O mesmo título quebrado em blocos, para a entrada linha a linha do hero.
+   * Cada bloco sobe de dentro de uma máscara — se um deles quebrar em duas
+   * linhas numa tela estreita, a animação continua correta.
+   */
+  titleLines: ["Mentoria para quem está", "construindo carreira", "em Product Design."],
   intro:
     "Sou Ton, Product Designer com 16 anos em produto. Nesta mentoria compartilho o que aprendi na prática — sem fórmulas prontas nem promessas milagrosas — para você construir um portfólio mais forte, ganhar confiança e acelerar sua evolução.",
   proof: "Meus mentorados tiveram 100% de satisfação em seus resultados.",
+  /** Frase que fecha a seção de frentes e dá a pausa antes dos recursos. */
+  fechoTrabalho: "Ninguém precisa aprender tudo sozinho.",
 };
 
 /** Links externos — agendamento, diagnóstico e canais diretos. */

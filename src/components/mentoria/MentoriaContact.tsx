@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import {
   CalendarCheck,
   ClipboardCheck,
@@ -13,17 +14,29 @@ export function MentoriaContact() {
     <section
       id="contato"
       tabIndex={-1}
+      data-revelar
       className="flex min-h-[calc(100svh-5rem)] scroll-mt-20 items-center bg-surface-2 py-20 outline-none sm:py-28"
     >
       <div className="mx-auto w-full max-w-6xl px-6">
-        <p className="kicker">Contato</p>
-        <h2 className="display mt-4 text-3xl sm:text-5xl">Vamos conversar sobre seu momento?</h2>
-        <p className="mt-4 max-w-2xl font-serif text-sm leading-relaxed text-muted-foreground">
+        <p className="kicker entra">Contato</p>
+        <h2
+          className="titulo-grande entra mt-6 max-w-[16ch]"
+          style={{ "--atraso": "60ms" } as CSSProperties}
+        >
+          Vamos conversar sobre seu momento?
+        </h2>
+        <p
+          className="entra medida-curta mt-8 font-serif text-base leading-relaxed text-muted-foreground"
+          style={{ "--atraso": "120ms" } as CSSProperties}
+        >
           Agende uma conversa inicial para entendermos onde você está e definirmos como posso
           ajudar. Sem custo, sem compromisso.
         </p>
 
-        <div className="mt-10 flex flex-wrap gap-3">
+        <div
+          className="entra mt-14 flex flex-wrap gap-3"
+          style={{ "--atraso": "200ms" } as CSSProperties}
+        >
           <a
             href={mentoriaLinks.agendarConversa}
             target="_blank"
@@ -42,7 +55,10 @@ export function MentoriaContact() {
           </a>
         </div>
 
-        <div className="mt-8 flex flex-wrap items-center gap-6 text-sm text-muted-foreground">
+        <div
+          className="entra mt-10 flex flex-wrap items-center gap-6 text-sm text-muted-foreground"
+          style={{ "--atraso": "280ms" } as CSSProperties}
+        >
           <a
             href={`mailto:${mentoriaLinks.email}`}
             className="flex items-center gap-2 hover:text-foreground"
