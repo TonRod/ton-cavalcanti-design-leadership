@@ -1,4 +1,11 @@
-import { CalendarCheck, ClipboardCheck, Instagram, Mail, MessageCircle } from "lucide-react";
+import {
+  CalendarCheck,
+  ClipboardCheck,
+  Instagram,
+  Linkedin,
+  Mail,
+  MessageCircle,
+} from "lucide-react";
 import { mentoriaLinks } from "@/data/mentoria";
 
 export function MentoriaContact() {
@@ -49,6 +56,14 @@ export function MentoriaContact() {
             className="flex items-center gap-2 hover:text-foreground"
           >
             <Instagram className="size-4" aria-hidden="true" /> {mentoriaLinks.instagramLabel}
+          </a>
+          <a
+            href={mentoriaLinks.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 hover:text-foreground"
+          >
+            <Linkedin className="size-4" aria-hidden="true" /> {mentoriaLinks.linkedinLabel}
           </a>
           <a
             href={mentoriaLinks.diagnostico}

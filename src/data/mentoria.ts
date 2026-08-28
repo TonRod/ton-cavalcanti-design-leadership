@@ -26,6 +26,8 @@ export const mentoriaLinks = {
   email: "pinguinsquevoam@gmail.com",
   instagram: "https://www.instagram.com/pinguinsquevoam/",
   instagramLabel: "@pinguinsquevoam",
+  linkedin: "https://www.linkedin.com/in/toncavalcanti/",
+  linkedinLabel: "LinkedIn",
 };
 
 /** Os três eixos de trabalho da mentoria. */
