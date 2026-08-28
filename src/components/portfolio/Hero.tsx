@@ -1,4 +1,6 @@
-import { Mail, Linkedin, Globe, PenLine } from "lucide-react";
+import { Mail, Linkedin } from "lucide-react";
+import { BehanceIcon } from "@/components/portfolio/BehanceIcon";
+import { MediumIcon } from "@/components/portfolio/MediumIcon";
 import portrait from "@/assets/portrait.jpg.asset.json";
 import { contact } from "@/data/portfolio";
 
@@ -82,7 +84,7 @@ export function Hero() {
           rel="noreferrer"
           className="flex items-center gap-2 hover:text-foreground"
         >
-          <Globe className="size-4" /> Behance
+          <BehanceIcon className="size-4" /> Behance
         </a>
         <a
           href={contact.medium}
@@ -90,7 +92,7 @@ export function Hero() {
           rel="noreferrer"
           className="flex items-center gap-2 hover:text-foreground"
         >
-          <PenLine className="size-4" /> Medium
+          <MediumIcon className="size-4" /> Medium
         </a>
       </div>
     </section>

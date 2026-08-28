@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { Mail, Linkedin, Globe, MapPin, Copy, Check, Briefcase, PenLine } from "lucide-react";
+import { Mail, Linkedin, MapPin, Copy, Check, Briefcase } from "lucide-react";
+import { BehanceIcon } from "@/components/portfolio/BehanceIcon";
+import { MediumIcon } from "@/components/portfolio/MediumIcon";
 import { contact } from "@/data/portfolio";
 
 export function ContactSection() {
@@ -77,7 +79,7 @@ export function ContactSection() {
             rel="noreferrer"
             className="flex items-center gap-2 rounded-md border border-border px-5 py-3 text-sm transition-colors hover:bg-secondary"
           >
-            <Globe className="size-4" /> Behance
+            <BehanceIcon className="size-4" /> Behance
           </a>
           <a
             href={contact.medium}
@@ -85,7 +87,7 @@ export function ContactSection() {
             rel="noreferrer"
             className="flex items-center gap-2 rounded-md border border-border px-5 py-3 text-sm transition-colors hover:bg-secondary"
           >
-            <PenLine className="size-4" /> Medium
+            <MediumIcon className="size-4" /> Medium
           </a>
         </div>
 
