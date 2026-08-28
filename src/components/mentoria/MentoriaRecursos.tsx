@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { mentoriaRecursos } from "@/data/mentoria";
+import { RecursoArte } from "@/components/mentoria/RecursoArte";
 
 export function MentoriaRecursos() {
   return (
@@ -31,17 +32,21 @@ export function MentoriaRecursos() {
               href={r.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="entra group flex flex-col rounded-lg border border-border bg-surface p-6 transition-colors hover:bg-secondary"
+              className="recurso-card entra group relative isolate flex flex-col overflow-hidden rounded-lg border border-border bg-surface p-6 transition-colors hover:bg-secondary"
             >
-              <div className="flex items-baseline justify-between gap-3">
+              <RecursoArte tipo={r.tipo} semente={i + 1} />
+
+              <div className="relative z-10 flex items-baseline justify-between gap-3">
                 <span className="kicker">{r.tipo}</span>
                 <span className="text-xs text-muted-foreground">{r.meta}</span>
               </div>
 
-              <h3 className="display mt-4 text-2xl">{r.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{r.description}</p>
+              <h3 className="relative z-10 display mt-4 text-2xl">{r.title}</h3>
+              <p className="relative z-10 mt-3 text-sm leading-relaxed text-muted-foreground">
+                {r.description}
+              </p>
 
-              <span className="mt-auto inline-flex items-center gap-1.5 pt-6 text-sm text-accent">
+              <span className="relative z-10 mt-auto inline-flex items-center gap-1.5 pt-6 text-sm text-accent">
                 {r.cta}
                 <ArrowUpRight
                   className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"

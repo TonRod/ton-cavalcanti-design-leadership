@@ -678,3 +678,87 @@
     transition: none !important;
   }
 }
+
+/* ─────────────────────────────────────────────────────────────
+   Desenho de fundo dos cards de Recursos.
+
+   Carta celeste no que mapeia onde você está (diagnóstico e
+   teste), curva de nível no que faz subir um degrau (artigo).
+
+   Ancorado no topo direito, com metade da largura do card e
+   opacidade baixa: o texto ocupa a esquerda e a base, então o
+   desenho nunca disputa a leitura.
+   ───────────────────────────────────────────────────────────── */
+.recurso-arte {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 62%;
+  aspect-ratio: 200 / 140;
+  z-index: 0;
+  pointer-events: none;
+  color: var(--foreground);
+  opacity: 0.16;
+  mask-image: radial-gradient(120% 110% at 90% 0%, #000 42%, transparent 82%);
+  -webkit-mask-image: radial-gradient(120% 110% at 90% 0%, #000 42%, transparent 82%);
+  transition: opacity var(--dur-state) var(--ease-soft);
+}
+
+.dark .recurso-arte {
+  opacity: 0.22;
+}
+
+/* O card inteiro é um link: ao passar o mouse, o desenho ganha presença. */
+.recurso-card:hover .recurso-arte {
+  opacity: 0.3;
+}
+
+.recurso-arte svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.recurso-traco {
+  fill: none;
+  stroke: currentColor;
+  vector-effect: non-scaling-stroke;
+}
+
+.recurso-astro {
+  fill: currentColor;
+}
+
+[data-revelar] .recurso-desenha {
+  stroke-dasharray: var(--comp, 600);
+  stroke-dashoffset: var(--comp, 600);
+}
+
+[data-revelar].revelada .recurso-desenha {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1600ms var(--ease-soft);
+  transition-delay: var(--atraso, 0ms);
+}
+
+[data-revelar] .recurso-acende {
+  opacity: 0;
+}
+
+[data-revelar].revelada .recurso-acende {
+  opacity: 1;
+  transition: opacity 700ms var(--ease-soft);
+  transition-delay: var(--atraso, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-revelar] .recurso-desenha,
+  [data-revelar].revelada .recurso-desenha {
+    stroke-dashoffset: 0;
+    transition: none;
+  }
+  [data-revelar] .recurso-acende,
+  [data-revelar].revelada .recurso-acende {
+    opacity: 1;
+    transition: none;
+  }
+}
