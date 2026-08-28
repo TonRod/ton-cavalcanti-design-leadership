@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { mentoriaLinks, mentoriaPlanos } from "@/data/mentoria";
 
 export function MentoriaPlans() {
@@ -38,7 +38,19 @@ export function MentoriaPlans() {
                     {plano.priceNote}
                   </p>
                 ) : null}
+                <p className="mt-3 inline-block rounded-full border border-border px-3 py-1 text-xs text-muted-foreground">
+                  {plano.payment}
+                </p>
               </div>
+
+              <ul className="mt-6 space-y-2.5 border-t border-border pt-6">
+                {plano.includes.map((item) => (
+                  <li key={item} className="flex items-start gap-2.5 text-sm leading-relaxed">
+                    <Check className="mt-0.5 size-3.5 shrink-0 text-accent" aria-hidden="true" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
 
               <div className="mt-auto pt-8">
                 <a

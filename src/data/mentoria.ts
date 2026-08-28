@@ -75,6 +75,9 @@ export interface MentoriaPlano {
   format: string;
   price: string | null;
   priceNote?: string;
+  payment: string;
+  /** O que está incluso — o que o visitante compara antes de decidir. */
+  includes: string[];
   cta: string;
 }
 
@@ -84,6 +87,14 @@ export const mentoriaPlanos: MentoriaPlano[] = [
     summary: "Para necessidades específicas.",
     format: "1 encontro de 60 min",
     price: "R$ 260",
+    payment: "Pix ou cartão de crédito",
+    includes: [
+      "Revisão de portfólio",
+      "Preparação para entrevista",
+      "Feedback sobre currículo",
+      "Dúvidas de carreira",
+      "Casos reais de trabalho",
+    ],
     cta: "Agendar",
   },
   {
@@ -92,6 +103,15 @@ export const mentoriaPlanos: MentoriaPlano[] = [
     format: "4 encontros de 60 min",
     price: "R$ 890",
     priceNote: "R$ 222,50 por encontro",
+    payment: "Pix ou 10x no cartão de crédito",
+    includes: [
+      "Diagnóstico inicial",
+      "Plano de desenvolvimento",
+      "Revisão de portfólio",
+      "Simulação de entrevistas",
+      "Feedback contínuo",
+      "Apoio entre encontros",
+    ],
     cta: "Agendar",
   },
   {
@@ -100,6 +120,16 @@ export const mentoriaPlanos: MentoriaPlano[] = [
     format: "8 encontros de 60 min",
     price: "R$ 1.590",
     priceNote: "R$ 198,75 por encontro",
+    payment: "Pix ou 10x no cartão de crédito",
+    includes: [
+      "Construção de portfólio",
+      "Mapa de evolução",
+      "Preparação para entrevistas",
+      "Desenvolvimento de narrativa",
+      "Simulação de apresentações",
+      "Desenvolvimento de habilidades",
+      "Plano de evolução",
+    ],
     cta: "Agendar",
   },
 ];
