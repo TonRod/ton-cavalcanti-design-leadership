@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SiteHeader, type SiteHeaderLink } from "@/components/portfolio/SiteHeader";
 import { MentoriaHero } from "@/components/mentoria/MentoriaHero";
 import { MentoriaWork } from "@/components/mentoria/MentoriaWork";
+import { MentoriaRecursos } from "@/components/mentoria/MentoriaRecursos";
 import { MentoriaPlans } from "@/components/mentoria/MentoriaPlans";
 import { MentoriaTestimonials } from "@/components/mentoria/MentoriaTestimonials";
 import { MentoriaAbout } from "@/components/mentoria/MentoriaAbout";
@@ -13,6 +14,7 @@ import { siteUrl } from "@/data/portfolio";
 /** Escopo de módulo: referência estável para o observer da nav. */
 const links: SiteHeaderLink[] = [
   { href: "#trabalho", label: "A mentoria" },
+  { href: "#recursos", label: "Recursos" },
   { href: "#planos", label: "Planos" },
   { href: "#depoimentos", label: "Depoimentos" },
   { href: "#sobre", label: "Sobre" },
@@ -54,6 +56,7 @@ function Mentoria() {
       <main id="conteudo">
         <MentoriaHero />
         <MentoriaWork />
+        <MentoriaRecursos />
         <MentoriaPlans />
         <MentoriaTestimonials />
         <MentoriaAbout />
@@ -62,7 +65,10 @@ function Mentoria() {
 
       <footer className="border-t border-border py-8">
         <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-2 px-6">
-          <a href="/" className="text-xs text-muted-foreground transition-colors hover:text-foreground">
+          <a
+            href="/"
+            className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+          >
             Ver o portfólio de liderança de design de Ton Cavalcanti
           </a>
           <p className="text-center text-xs text-muted-foreground">

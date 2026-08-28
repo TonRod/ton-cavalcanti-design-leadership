@@ -137,6 +137,55 @@ export const mentoriaPlanos: MentoriaPlano[] = [
   },
 ];
 
+/**
+ * Recursos gratuitos — diagnósticos, testes e leituras.
+ *
+ * Este é o espaço que cresce: para publicar um teste ou artigo novo,
+ * basta acrescentar um item aqui. A seção se ajusta sozinha, e a ordem
+ * do array é a ordem que aparece na página — o mais recente primeiro.
+ */
+export type MentoriaRecursoTipo = "Diagnóstico" | "Teste" | "Artigo";
+
+export interface MentoriaRecurso {
+  tipo: MentoriaRecursoTipo;
+  title: string;
+  description: string;
+  /** Esforço ou duração — ajuda a pessoa a decidir se começa agora. */
+  meta: string;
+  url: string;
+  cta: string;
+}
+
+export const mentoriaRecursos: MentoriaRecurso[] = [
+  {
+    tipo: "Diagnóstico",
+    title: "Onde você está em UX",
+    description:
+      "Um diagnóstico rápido das suas competências, com os gaps e os próximos passos organizados por prioridade. Sem custo e sem compromisso.",
+    meta: "5 a 10 minutos",
+    url: "https://tally.so/r/EkgvBr",
+    cta: "Fazer o diagnóstico",
+  },
+  {
+    tipo: "Artigo",
+    title: "Designers não sabem dizer não",
+    description:
+      "Sobre o custo de aceitar tudo, e como recusar escopo sem queimar a relação com quem pediu.",
+    meta: "Leitura de 6 min",
+    url: "https://medium.com/@elitonrodrigo/designers-n%C3%A3o-sabem-dizer-n%C3%A3o-91d27c40ca57",
+    cta: "Ler no Medium",
+  },
+  {
+    tipo: "Artigo",
+    title: "Uma I.A. para cada etapa do seu Design Thinking",
+    description:
+      "Onde a inteligência artificial ajuda de verdade em cada fase do processo, e onde ela atrapalha mais do que acelera.",
+    meta: "Leitura de 8 min",
+    url: "https://medium.com/@elitonrodrigo/uma-i-a-para-cada-etapa-do-seu-design-thinking-19ccde7fb320",
+    cta: "Ler no Medium",
+  },
+];
+
 /** Depoimentos de mentorados. */
 export interface MentoriaDepoimento {
   quote: string;
