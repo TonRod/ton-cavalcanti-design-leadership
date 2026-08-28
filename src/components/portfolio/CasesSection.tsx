@@ -1,21 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Maximize2, ArrowLeft, ArrowRight } from "lucide-react";
+import { CaseReader } from "@/components/portfolio/CaseReader";
 import { cases, type CaseStudy } from "@/data/portfolio";
-
-
-function Block({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div className="border-t border-border pt-4">
-      <p className="kicker mb-2">{label}</p>
-      <p className="text-sm leading-relaxed text-muted-foreground">{children}</p>
-    </div>
-  );
-}
 
 export function CasesSection() {
   const [active, setActive] = useState<CaseStudy | null>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [focused, setFocused] = useState<boolean[]>(() => cases.map(() => true));
@@ -23,23 +12,7 @@ export function CasesSection() {
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
   const activeIndex = active ? cases.findIndex((c) => c.id === active.id) : -1;
-  const prev = activeIndex > 0 ? cases[activeIndex - 1] : null;
-  const next =
-    activeIndex >= 0 && activeIndex < cases.length - 1 ? cases[activeIndex + 1] : null;
-
-  useEffect(() => {
-    if (scrollRef.current) scrollRef.current.scrollTop = 0;
-  }, [active?.id]);
-
-  useEffect(() => {
-    if (!active) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft" && prev) setActive(prev);
-      if (e.key === "ArrowRight" && next) setActive(next);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [active, prev, next]);
+  const next = activeIndex >= 0 && activeIndex < cases.length - 1 ? cases[activeIndex + 1] : null;
 
   const updateScrollState = useCallback(() => {
     const el = trackRef.current;
@@ -117,13 +90,9 @@ export function CasesSection() {
     setActive(null);
     setTimeout(() => {
       const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      document
-        .getElementById("contato")
-        ?.scrollIntoView({ behavior: reduced ? "auto" : "smooth" });
+      document.getElementById("contato")?.scrollIntoView({ behavior: reduced ? "auto" : "smooth" });
     }, 250);
   };
-
-
 
   return (
     <section id="cases" className="border-t border-border py-20 sm:py-28">
@@ -143,7 +112,6 @@ export function CasesSection() {
           tabIndex={0}
           className="no-scrollbar cases-scroller mt-10 -mb-2 flex snap-x snap-mandatory items-stretch gap-5 overflow-x-auto py-2 lg:grid lg:grid-cols-3 lg:snap-none lg:overflow-visible"
         >
-
           {cases.map((c, i) => (
             <div
               key={c.id}
@@ -154,7 +122,10 @@ export function CasesSection() {
               className={`flex w-[82%] shrink-0 snap-start sm:w-[46%] lg:w-auto lg:shrink lg:opacity-100 lg:[transform:none] ${
                 focused[i] ? "opacity-100" : "scale-[.97] opacity-55"
               }`}
-              style={{ transition: "opacity 400ms cubic-bezier(.22,1,.36,1), transform 400ms cubic-bezier(.22,1,.36,1)" }}
+              style={{
+                transition:
+                  "opacity 400ms cubic-bezier(.22,1,.36,1), transform 400ms cubic-bezier(.22,1,.36,1)",
+              }}
             >
               <button
                 onClick={() => setActive(c)}
@@ -224,116 +195,21 @@ export function CasesSection() {
           </div>
         </div>
 
-
         <p className="mt-10 text-xs text-muted-foreground">
           Trajetória completa, incluindo consultorias e atuação anterior, na seção Trajetória
           abaixo.
         </p>
       </div>
 
-      <Dialog open={!!active} onOpenChange={(o) => !o && setActive(null)}>
-        <DialogContent ref={scrollRef} className="max-h-[88vh] max-w-2xl overflow-y-auto bg-popover lg:max-w-4xl">
-          {active && (
-            <>
-              <DialogHeader>
-                <p className="kicker">
-                  Case {active.index} · {active.org} · {active.year}
-                </p>
-                <DialogTitle className="display text-left text-3xl">{active.title}</DialogTitle>
-              </DialogHeader>
-              <p className="text-sm text-muted-foreground">{active.role}</p>
-
-              <div className="mt-2 grid grid-cols-2 gap-3 lg:grid-cols-4">
-                {active.metricas.map((m) => (
-                  <div key={m.label} className="rounded-md border border-border bg-surface p-3">
-                    <p className="font-display text-lg leading-tight">{m.value}</p>
-                    <p className="mt-1 text-[0.65rem] uppercase tracking-widest text-muted-foreground">
-                      {m.label}
-                    </p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-4 space-y-5">
-                <Block label="Contexto de negócio">{active.contexto}</Block>
-                <Block label="Problema">{active.problema}</Block>
-                <Block label="Escopo">{active.escopo}</Block>
-                <Block label="Estratégia">{active.estrategia}</Block>
-                <Block label="Alinhamento">{active.alinhamento}</Block>
-                {active.solucao && <Block label="Solução">{active.solucao}</Block>}
-                {active.evidencias && active.evidencias.length > 0 && (
-                  <Block label="Evidências">
-                    <div className="space-y-4">
-                      {active.evidencias.map((ev, idx) => (
-                        <figure key={idx} className="mx-auto w-full max-w-[640px]">
-                          <img
-                            src={ev.src}
-                            alt={ev.alt ?? ev.caption}
-                            loading="lazy"
-                            className="w-full rounded-md border border-border"
-                          />
-                          <figcaption className="mt-2 text-xs text-muted-foreground">
-                            {ev.caption}
-                          </figcaption>
-                        </figure>
-                      ))}
-                    </div>
-                  </Block>
-                )}
-                <Block label="Resultados">{active.resultados}</Block>
-                {active.aprendizado && <Block label="Aprendizado">{active.aprendizado}</Block>}
-              </div>
-
-
-              <div className="mt-8 border-t border-border pt-5">
-                <div className="grid gap-3 sm:grid-cols-2">
-                  {prev ? (
-                    <button
-                      onClick={() => setActive(prev)}
-                      aria-label={`Ver case anterior: ${prev.title}`}
-                      className="flex items-start gap-3 rounded-md border border-border p-3 text-left transition-colors hover:bg-secondary"
-                    >
-                      <ArrowLeft className="mt-0.5 size-4 shrink-0" />
-                      <span>
-                        <span className="kicker block">Anterior</span>
-                        <span className="mt-1 block text-sm">{prev.title}</span>
-                      </span>
-                    </button>
-                  ) : (
-                    <span className="hidden sm:block" />
-                  )}
-                  {next && (
-                    <button
-                      onClick={() => setActive(next)}
-                      aria-label={`Ver próximo case: ${next.title}`}
-                      className="flex items-start justify-end gap-3 rounded-md border border-border p-3 text-right transition-colors hover:bg-secondary"
-                    >
-                      <span>
-                        <span className="kicker block">Próximo</span>
-                        <span className="mt-1 block text-sm">{next.title}</span>
-                      </span>
-                      <ArrowRight className="mt-0.5 size-4 shrink-0" />
-                    </button>
-                  )}
-                </div>
-
-                <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-5">
-                  <p className="text-xs text-muted-foreground">
-                    Quer entender como aplico isso no seu contexto?
-                  </p>
-                  <button
-                    onClick={goToContact}
-                    className="rounded-md bg-accent px-5 py-2.5 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
-                  >
-                    Vamos conversar
-                  </button>
-                </div>
-              </div>
-            </>
-          )}
-
-        </DialogContent>
-      </Dialog>
+      {active && (
+        <CaseReader
+          caso={active}
+          proximo={next}
+          onFechar={() => setActive(null)}
+          onIrPara={setActive}
+          onContato={goToContact}
+        />
+      )}
     </section>
   );
 }
