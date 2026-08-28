@@ -197,7 +197,6 @@
   animation: rise-in var(--dur-large) var(--ease-soft) both;
 }
 
-
 /* Linha da trajetória dirigida pelo scroll */
 @keyframes desenhar-linha {
   from {
@@ -245,7 +244,6 @@
   }
 }
 
-
 /* Animações dirigidas por scroll ignoram duração: precisam de desligamento explícito */
 @media (prefers-reduced-motion: reduce) {
   .linha-trajetoria,
@@ -256,7 +254,6 @@
     opacity: 1;
   }
 }
-
 
 @utility display {
   font-family: var(--font-display);
@@ -293,8 +290,6 @@
   }
 }
 
-
-
 @utility metric-num {
   font-family: var(--font-display);
   font-size: clamp(2rem, 4vw, 3rem);
@@ -327,4 +322,244 @@
     color-mix(in oklch, var(--moss) 80%, black),
     color-mix(in oklch, var(--duotone-base) 70%, var(--moss))
   );
+}
+
+/* ─────────────────────────────────────────────────────────────
+   O céu — fundo do hero da mentoria.
+
+   O hero é um céu que muda com o tema: de dia, azul com nuvens
+   passando devagar; à noite, aurora austral. Austral, e não
+   boreal, porque pinguim é bicho do hemisfério sul.
+
+   As camadas ficam na metade direita e são mascaradas antes do
+   texto. Isso não é estética: verde luminoso a 50% sob o
+   parágrafo derruba o contraste para 3,07:1. Com o véu, o texto
+   fica sobre céu limpo. Pior caso medido: 4,97:1 de dia e
+   6,69:1 à noite, ambos acima do mínimo AA de 4,5:1.
+   ───────────────────────────────────────────────────────────── */
+:root {
+  --ceu-fundo: linear-gradient(180deg, #cfdeeb 0%, #e4ecf1 44%, oklch(0.972 0.008 85) 100%);
+  --ceu-veu: linear-gradient(
+    to right,
+    oklch(0.972 0.008 85) 0%,
+    color-mix(in oklch, oklch(0.972 0.008 85) 55%, transparent) 44%,
+    transparent 74%
+  );
+}
+
+.dark {
+  --ceu-fundo: linear-gradient(180deg, #0b0e12 0%, oklch(0.16 0.006 60) 82%);
+  --ceu-veu: linear-gradient(to right, #0b0e12 0%, rgba(11, 14, 18, 0.55) 44%, transparent 74%);
+}
+
+.hero-ceu {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--ceu-fundo);
+}
+
+.ceu {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.ceu-camada {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to left, #000 46%, transparent 88%);
+  mask-image: linear-gradient(to left, #000 46%, transparent 88%);
+}
+
+.ceu-veu {
+  position: absolute;
+  inset: 0;
+  background: var(--ceu-veu);
+}
+
+/* ---- dia: nuvens ---- */
+.nuvem {
+  position: absolute;
+  border-radius: 50%;
+  background: #fdfcf8;
+  filter: blur(34px);
+  will-change: transform;
+}
+
+.nuvem-1 {
+  right: -6%;
+  top: 6%;
+  width: 46%;
+  aspect-ratio: 2.2 / 1;
+  opacity: 0.85;
+  animation: ceu-passar-1 128s linear infinite;
+}
+
+.nuvem-2 {
+  right: 18%;
+  top: 34%;
+  width: 38%;
+  aspect-ratio: 2.6 / 1;
+  opacity: 0.6;
+  animation: ceu-passar-2 172s linear infinite;
+}
+
+.nuvem-3 {
+  right: 2%;
+  top: 58%;
+  width: 30%;
+  aspect-ratio: 3 / 1;
+  opacity: 0.45;
+  animation: ceu-passar-3 148s linear infinite;
+}
+
+/* Atravessam a tela inteira e voltam: fluxo contínuo, sem vaivém. */
+@keyframes ceu-passar-1 {
+  from {
+    transform: translateX(46%);
+  }
+  to {
+    transform: translateX(-190%);
+  }
+}
+@keyframes ceu-passar-2 {
+  from {
+    transform: translateX(70%);
+  }
+  to {
+    transform: translateX(-200%);
+  }
+}
+@keyframes ceu-passar-3 {
+  from {
+    transform: translateX(60%);
+  }
+  to {
+    transform: translateX(-210%);
+  }
+}
+
+/* ---- noite: estrelas e aurora ---- */
+.ceu-estrelas {
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+  background-image:
+    radial-gradient(1px 1px at 18% 22%, rgba(238, 235, 229, 0.7), transparent),
+    radial-gradient(1px 1px at 34% 12%, rgba(238, 235, 229, 0.5), transparent),
+    radial-gradient(1px 1px at 58% 30%, rgba(238, 235, 229, 0.6), transparent),
+    radial-gradient(1px 1px at 72% 16%, rgba(238, 235, 229, 0.45), transparent),
+    radial-gradient(1px 1px at 86% 38%, rgba(238, 235, 229, 0.6), transparent),
+    radial-gradient(1px 1px at 64% 54%, rgba(238, 235, 229, 0.35), transparent),
+    radial-gradient(1px 1px at 92% 12%, rgba(238, 235, 229, 0.5), transparent);
+}
+
+.cortina {
+  position: absolute;
+  top: -24%;
+  height: 112%;
+  width: 27%;
+  filter: blur(32px);
+  mix-blend-mode: screen;
+  transform-origin: top center;
+  will-change: transform, opacity;
+}
+
+.cortina-1 {
+  right: 4%;
+  background: linear-gradient(to bottom, transparent 2%, #3f8f63 34%, transparent 76%);
+  opacity: 0.58;
+  animation: ceu-ondular-1 52s ease-in-out infinite alternate;
+}
+
+.cortina-2 {
+  right: 24%;
+  background: linear-gradient(to bottom, transparent 6%, #2f6b73 40%, transparent 80%);
+  opacity: 0.42;
+  animation: ceu-ondular-2 68s ease-in-out infinite alternate;
+}
+
+.cortina-3 {
+  right: 44%;
+  background: linear-gradient(to bottom, transparent 10%, #4a2340 44%, transparent 82%);
+  opacity: 0.4;
+  animation: ceu-ondular-3 84s ease-in-out infinite alternate;
+}
+
+@keyframes ceu-ondular-1 {
+  from {
+    transform: translateX(0) skewX(-16deg) scaleY(1);
+    opacity: 0.58;
+  }
+  to {
+    transform: translateX(-14%) skewX(-4deg) scaleY(1.12);
+    opacity: 0.34;
+  }
+}
+@keyframes ceu-ondular-2 {
+  from {
+    transform: translateX(0) skewX(-6deg) scaleY(1.05);
+    opacity: 0.42;
+  }
+  to {
+    transform: translateX(12%) skewX(-18deg) scaleY(0.92);
+    opacity: 0.26;
+  }
+}
+@keyframes ceu-ondular-3 {
+  from {
+    transform: translateX(0) skewX(-11deg) scaleY(0.95);
+    opacity: 0.4;
+  }
+  to {
+    transform: translateX(-9%) skewX(-2deg) scaleY(1.14);
+    opacity: 0.22;
+  }
+}
+
+/* Cada tema mostra o seu céu. */
+.ceu-noite {
+  display: none;
+}
+.dark .ceu-noite {
+  display: block;
+}
+.dark .ceu-dia {
+  display: none;
+}
+
+/* No celular o texto ocupa a largura toda: menos desfoque, uma
+   camada a menos, e o véu passa a vir de cima — desfoque grande
+   em área grande custa caro em GPU. */
+@media (max-width: 640px) {
+  .cortina {
+    filter: blur(22px);
+  }
+  .cortina-3,
+  .nuvem-3 {
+    display: none;
+  }
+  .nuvem {
+    filter: blur(24px);
+  }
+  :root {
+    --ceu-veu: linear-gradient(
+      to bottom,
+      color-mix(in oklch, oklch(0.972 0.008 85) 62%, transparent),
+      color-mix(in oklch, oklch(0.972 0.008 85) 30%, transparent)
+    );
+  }
+  .dark {
+    --ceu-veu: linear-gradient(to bottom, rgba(11, 14, 18, 0.72), rgba(11, 14, 18, 0.4));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cortina,
+  .nuvem {
+    animation: none;
+  }
 }
