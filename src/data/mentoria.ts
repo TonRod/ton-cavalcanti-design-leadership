@@ -97,7 +97,7 @@ export const mentoriaPlanos: MentoriaPlano[] = [
   {
     name: "Plano transição",
     summary: "Para mudança de carreira.",
-    format: "8 encontros",
+    format: "8 encontros de 60 min",
     price: "R$ 1.590",
     priceNote: "R$ 198,75 por encontro",
     cta: "Agendar",
