@@ -38,14 +38,12 @@ export const mentoriaEixos: MentoriaEixo[] = [
   {
     label: "Mercado",
     title: "Entrar no mercado",
-    description:
-      "Aprender a construir um portfólio que demonstre raciocínio, e não apenas telas.",
+    description: "Aprender a construir um portfólio que demonstre raciocínio, e não apenas telas.",
   },
   {
     label: "Confiança",
     title: "Ganhar confiança",
-    description:
-      "Apresentar ideias, receber feedback e defender suas decisões sem travar.",
+    description: "Apresentar ideias, receber feedback e defender suas decisões sem travar.",
   },
   {
     label: "Senioridade",
@@ -67,10 +65,14 @@ export const mentoriaParaQuem: string[] = [
 /**
  * Planos. `price` aceita string livre — deixe `null` para exibir
  * "Valor sob consulta" enquanto o valor não estiver definido.
+ * `priceNote` mostra o preço por encontro, que é o que torna a
+ * economia dos planos maiores legível na comparação.
  */
 export interface MentoriaPlano {
   name: string;
   summary: string;
+  /** Formato: quantos encontros e de quanto tempo. */
+  format: string;
   price: string | null;
   priceNote?: string;
   cta: string;
@@ -80,19 +82,24 @@ export const mentoriaPlanos: MentoriaPlano[] = [
   {
     name: "Sessão avulsa",
     summary: "Para necessidades específicas.",
-    price: null,
+    format: "1 encontro de 60 min",
+    price: "R$ 260",
     cta: "Agendar",
   },
   {
     name: "Plano de crescimento",
     summary: "Para evolução estruturada.",
-    price: null,
+    format: "4 encontros de 60 min",
+    price: "R$ 890",
+    priceNote: "R$ 222,50 por encontro",
     cta: "Agendar",
   },
   {
     name: "Plano transição",
     summary: "Para mudança de carreira.",
-    price: null,
+    format: "8 encontros",
+    price: "R$ 1.590",
+    priceNote: "R$ 198,75 por encontro",
     cta: "Agendar",
   },
 ];
@@ -118,8 +125,7 @@ export const mentoriaDepoimentos: MentoriaDepoimento[] = [
     author: "Ivanir E. Toroco",
   },
   {
-    quote:
-      "Sair de uma profissão com mais de 30 anos e migrar para UX não é fácil sem orientação.",
+    quote: "Sair de uma profissão com mais de 30 anos e migrar para UX não é fácil sem orientação.",
     author: "Saulo Messias A.",
   },
   {

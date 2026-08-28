@@ -23,14 +23,20 @@ export function MentoriaPlans() {
               <h3 className="display text-2xl">{plano.name}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{plano.summary}</p>
 
+              <p className="mt-4 text-[0.7rem] uppercase tracking-[0.15em] text-muted-foreground">
+                {plano.format}
+              </p>
+
               <div className="mt-6">
                 {plano.price ? (
-                  <p className="metric-num text-accent">{plano.price}</p>
+                  <p className="metric-num tabular-nums text-accent">{plano.price}</p>
                 ) : (
                   <p className="font-serif text-base text-muted-foreground">Valor sob consulta</p>
                 )}
                 {plano.priceNote ? (
-                  <p className="mt-2 text-xs text-muted-foreground">{plano.priceNote}</p>
+                  <p className="mt-2 text-xs tabular-nums text-muted-foreground">
+                    {plano.priceNote}
+                  </p>
                 ) : null}
               </div>
 
