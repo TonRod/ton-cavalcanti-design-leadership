@@ -23,6 +23,7 @@ export const mentoriaLinks = {
   agendarPlano: "https://calendar.app.google/kW726cWW8BEShUHh6",
   diagnostico: "https://tally.so/r/EkgvBr",
   whatsapp: "https://wa.me/message/FXEZOVCU562EI1",
+  email: "pinguinsquevoam@gmail.com",
   instagram: "https://www.instagram.com/pinguinsquevoam/",
   instagramLabel: "@pinguinsquevoam",
 };

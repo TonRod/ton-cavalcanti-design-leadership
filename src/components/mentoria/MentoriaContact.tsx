@@ -1,4 +1,4 @@
-import { CalendarCheck, ClipboardCheck, Instagram, MessageCircle } from "lucide-react";
+import { CalendarCheck, ClipboardCheck, Instagram, Mail, MessageCircle } from "lucide-react";
 import { mentoriaLinks } from "@/data/mentoria";
 
 export function MentoriaContact() {
@@ -36,6 +36,12 @@ export function MentoriaContact() {
         </div>
 
         <div className="mt-8 flex flex-wrap items-center gap-6 text-sm text-muted-foreground">
+          <a
+            href={`mailto:${mentoriaLinks.email}`}
+            className="flex items-center gap-2 hover:text-foreground"
+          >
+            <Mail className="size-4" aria-hidden="true" /> {mentoriaLinks.email}
+          </a>
           <a
             href={mentoriaLinks.instagram}
             target="_blank"
