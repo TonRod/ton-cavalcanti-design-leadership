@@ -22,7 +22,7 @@ export function Hero() {
               aparece inteira, opaca, ao lado do texto. */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute right-0 top-0 w-[70%] opacity-[0.28] [mask-image:linear-gradient(215deg,#000_18%,transparent_68%)] lg:inset-y-6 lg:right-8 lg:top-auto lg:w-auto lg:opacity-100 lg:[mask-image:none]"
+            className="pointer-events-none absolute right-0 top-0 w-[70%] opacity-[0.28] [mask-image:linear-gradient(215deg,#000_18%,transparent_68%)] lg:bottom-0 lg:right-8 lg:top-20 lg:w-auto lg:opacity-100 lg:[mask-image:none]"
           >
             <picture>
               <source srcSet={hero.portrait.webp} type="image/webp" />
