@@ -207,7 +207,7 @@ export function CaseReader({
             ref={fecharRef}
             type="button"
             onClick={onFechar}
-            className="inline-flex shrink-0 items-center gap-2 rounded-md border border-border px-3 py-1.5 text-sm transition-colors hover:bg-secondary"
+            className="inline-flex shrink-0 items-center gap-2 rounded-full border border-border px-3 py-1.5 text-sm transition-colors hover:bg-secondary"
           >
             <X className="size-4" aria-hidden="true" /> Fechar
           </button>
@@ -316,7 +316,7 @@ export function CaseReader({
                     <button
                       type="button"
                       onClick={() => onIrPara(proximo)}
-                      className="mt-6 inline-flex items-center gap-2 self-start rounded-md border border-border px-5 py-3 text-sm transition-colors hover:bg-secondary"
+                      className="mt-6 inline-flex items-center gap-2 self-start rounded-full border border-border px-5 py-3 text-sm transition-colors hover:bg-secondary"
                     >
                       Abrir {proximo.index} <ArrowRight className="size-4" aria-hidden="true" />
                     </button>
@@ -332,7 +332,7 @@ export function CaseReader({
                   <button
                     type="button"
                     onClick={onContato}
-                    className="mt-4 rounded-md bg-accent px-5 py-2.5 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
+                    className="mt-4 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
                   >
                     Vamos conversar
                   </button>
@@ -356,7 +356,7 @@ export function CaseReader({
             onClick={() => irPara(atual - 1)}
             disabled={atual === 0}
             aria-label="Capítulo anterior"
-            className="rounded-md border border-border p-2 transition-colors hover:bg-secondary disabled:opacity-40"
+            className="rounded-full border border-border p-2 transition-colors hover:bg-secondary disabled:opacity-40"
           >
             <ArrowLeft className="size-4" />
           </button>
@@ -365,7 +365,7 @@ export function CaseReader({
             onClick={() => irPara(atual + 1)}
             disabled={atual === total - 1}
             aria-label="Próximo capítulo"
-            className="rounded-md border border-border p-2 transition-colors hover:bg-secondary disabled:opacity-40"
+            className="rounded-full border border-border p-2 transition-colors hover:bg-secondary disabled:opacity-40"
           >
             <ArrowRight className="size-4" />
           </button>

@@ -42,7 +42,7 @@ export function ResumeSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Baixar currículo em PDF, 940 KB (abre em nova aba)"
-                  className="inline-flex items-center gap-2 rounded-md border border-border px-5 py-3 text-sm transition-colors hover:bg-secondary"
+                  className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm transition-colors hover:bg-secondary"
                 >
                   <Download className="size-4" /> Baixar currículo
                 </a>
@@ -61,7 +61,7 @@ export function ResumeSection() {
               <button
                 type="button"
                 onClick={() => setEduOpen(true)}
-                className="inline-flex items-center gap-2 rounded-md border border-border px-5 py-3 text-sm transition-colors hover:bg-secondary"
+                className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm transition-colors hover:bg-secondary"
               >
                 <GraduationCap className="size-4" /> Ver formação
               </button>

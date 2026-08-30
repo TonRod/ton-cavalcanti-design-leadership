@@ -41,7 +41,7 @@ export function MentoriaContact() {
             href={mentoriaLinks.agendarConversa}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
+            className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
           >
             <CalendarCheck className="size-4" aria-hidden="true" /> Agendar conversa
           </a>
@@ -49,7 +49,7 @@ export function MentoriaContact() {
             href={mentoriaLinks.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-md border border-border px-5 py-3 text-sm font-medium transition-colors hover:bg-secondary"
+            className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-medium transition-colors hover:bg-secondary"
           >
             <MessageCircle className="size-4" aria-hidden="true" /> WhatsApp
           </a>

@@ -69,7 +69,7 @@ export function ContactSection() {
             href={contact.linkedin}
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-2 rounded-md border border-border px-5 py-3 text-sm transition-colors hover:bg-secondary"
+            className="flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm transition-colors hover:bg-secondary"
           >
             <Linkedin className="size-4" /> LinkedIn
           </a>
@@ -77,7 +77,7 @@ export function ContactSection() {
             href={contact.behance}
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-2 rounded-md border border-border px-5 py-3 text-sm transition-colors hover:bg-secondary"
+            className="flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm transition-colors hover:bg-secondary"
           >
             <BehanceIcon className="size-4" /> Behance
           </a>
@@ -85,7 +85,7 @@ export function ContactSection() {
             href={contact.medium}
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-2 rounded-md border border-border px-5 py-3 text-sm transition-colors hover:bg-secondary"
+            className="flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm transition-colors hover:bg-secondary"
           >
             <MediumIcon className="size-4" /> Medium
           </a>

@@ -68,7 +68,7 @@ export function MentoriaPlans() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${plano.cta} — ${plano.name} (abre em nova aba)`}
-                  className="inline-flex items-center gap-2 rounded-md border border-border px-5 py-3 text-sm transition-colors hover:bg-secondary"
+                  className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm transition-colors hover:bg-secondary"
                 >
                   {plano.cta} <ArrowRight className="size-4" aria-hidden="true" />
                 </a>

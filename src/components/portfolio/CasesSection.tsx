@@ -179,7 +179,7 @@ export function CasesSection() {
               onClick={() => scrollByCard(-1)}
               disabled={atStart}
               aria-label="Ver cases anteriores"
-              className="rounded-md border border-border p-2 transition-colors hover:bg-secondary disabled:opacity-40"
+              className="rounded-full border border-border p-2 transition-colors hover:bg-secondary disabled:opacity-40"
             >
               <ArrowLeft className="size-4" />
             </button>
@@ -188,7 +188,7 @@ export function CasesSection() {
               onClick={() => scrollByCard(1)}
               disabled={atEnd}
               aria-label="Ver próximos cases"
-              className="rounded-md border border-border p-2 transition-colors hover:bg-secondary disabled:opacity-40"
+              className="rounded-full border border-border p-2 transition-colors hover:bg-secondary disabled:opacity-40"
             >
               <ArrowRight className="size-4" />
             </button>

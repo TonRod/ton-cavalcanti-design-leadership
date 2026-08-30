@@ -279,6 +279,36 @@ export const timeline: TimelineItem[] = [
 
 // URL base do site — domínio definitivo.
 // og:image, og:url e o JSON-LD dependem dela para gerar URLs absolutas.
+/**
+ * Conteúdo do hero, deliberadamente curto.
+ *
+ * A versão anterior tinha 51 palavras entre título e apoio — três vezes o
+ * que as referências do gênero usam. As empresas saíram do parágrafo e
+ * viraram tira própria; o nome saiu porque já está no cabeçalho; a cidade
+ * subiu para o kicker.
+ */
+export const hero = {
+  kicker: "Design Leadership · São Paulo",
+  title: "Lidero design para transformar estratégia em resultado.",
+  support:
+    "16 anos em produto, 6 liderando times. Estruturo design onde a função ainda não existe.",
+  /** Rótulos curtos: o do meio tinha 38 caracteres e comia duas linhas. */
+  metrics: [
+    { label: "CSAT · Natura", value: "40% → 80%" },
+    { label: "Resposta · Bradesco", value: "24h → 15min" },
+    { label: "Lançamento · Motrix", value: "−30%" },
+  ],
+  companies: ["Try", "Bradesco", "Globo", "Motrix", "Natura", "Porto Seguro"],
+  portrait: {
+    /* WebP, e não AVIF: o AVIF gerado pelo sips decodifica com o canal alfa
+       todo transparente — a foto simplesmente não aparece. Verificado
+       desenhando num canvas e contando pixels opacos. */
+    webp: "/hero/ton-recorte.webp",
+    png: "/hero/ton-recorte.png",
+    alt: "Ton Cavalcanti, recortado sobre o fundo",
+  },
+};
+
 export const siteUrl = "https://toncavalcanti.com";
 
 export const contact = {
