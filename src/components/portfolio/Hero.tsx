@@ -5,7 +5,7 @@ export function Hero() {
     <section id="top" className="mx-auto w-full max-w-6xl px-6 pb-4 pt-16 sm:pt-24">
       {/* A banda dá o fundo do texto; a figura sai dela por cima e por baixo. */}
       <div className="relative">
-        <div className="relative rounded-lg bg-surface-2 px-7 py-10 sm:px-12 sm:py-14 lg:pr-[27rem]">
+        <div className="relative overflow-hidden rounded-lg bg-surface-2 px-7 py-10 sm:px-12 sm:py-14 lg:min-h-[26rem] lg:pr-[27rem]">
           <p className="kicker">{hero.kicker}</p>
 
           <h1 className="display mt-5 max-w-[15ch] text-4xl sm:text-5xl lg:text-[3.4rem]">
@@ -36,7 +36,7 @@ export function Hero() {
             ocupa a largura toda e a sobreposição atrapalharia a leitura. */}
         <div
           aria-hidden="true"
-          className="pointer-events-none mx-auto mt-[-2rem] w-[16rem] sm:w-[19rem] lg:absolute lg:bottom-[-1.5rem] lg:right-6 lg:mt-0 lg:w-[26rem]"
+          className="pointer-events-none mx-auto mt-[-1rem] w-[15rem] overflow-hidden sm:w-[18rem] lg:absolute lg:bottom-0 lg:right-8 lg:top-8 lg:mt-0 lg:w-[23rem]"
         >
           {/* Halo: no tema escuro o suéter marinho quase encosta no fundo. */}
           <div className="halo-retrato">
@@ -47,7 +47,7 @@ export function Hero() {
                 alt={hero.portrait.alt}
                 width={1012}
                 height={1056}
-                className="w-full select-none"
+                className="h-full w-full select-none object-cover object-[50%_6%] grayscale"
               />
             </picture>
           </div>

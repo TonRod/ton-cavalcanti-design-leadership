@@ -765,23 +765,10 @@
 
 /* Retrato recortado do hero.
 
-   No tema escuro o suéter marinho fica a poucos pontos de luminância do
-   fundo, então a silhueta some pela borda. O halo é um brilho radial
-   muito baixo atrás da figura, que devolve o contorno sem virar sombra
-   dura — e não existe no tema claro, onde o contraste já basta. */
+   Em P&B e contido pela banda, o contorno já se resolve sozinho: o cinza
+   do suéter fica bem acima do fundo escuro. O halo que existia aqui virou
+   ruído e saiu. */
 .halo-retrato {
   position: relative;
-}
-
-.dark .halo-retrato::before {
-  content: "";
-  position: absolute;
-  inset: 6% -10% -4%;
-  border-radius: 999px;
-  background: radial-gradient(
-    58% 46% at 50% 44%,
-    color-mix(in oklch, var(--foreground) 13%, transparent),
-    transparent 72%
-  );
-  z-index: -1;
+  height: 100%;
 }
