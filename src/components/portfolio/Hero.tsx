@@ -5,18 +5,38 @@ export function Hero() {
     <section id="top" className="mx-auto w-full max-w-6xl px-6 pb-4 pt-16 sm:pt-24">
       {/* A banda dá o fundo do texto; a figura sai dela por cima e por baixo. */}
       <div className="relative">
-        <div className="relative overflow-hidden rounded-lg bg-surface-2 px-7 py-10 sm:px-12 sm:py-14 lg:min-h-[26rem] lg:pr-[27rem]">
-          <p className="kicker">{hero.kicker}</p>
+        <div className="relative overflow-hidden rounded-lg bg-surface-2 px-7 pb-10 pt-12 sm:px-12 sm:pb-14 sm:pt-16 lg:min-h-[26rem] lg:py-14 lg:pr-[27rem]">
+          <p className="kicker relative z-10">{hero.kicker}</p>
 
-          <h1 className="display mt-5 max-w-[15ch] text-4xl sm:text-5xl lg:text-[3.4rem]">
+          <h1 className="display relative z-10 mt-5 max-w-[15ch] text-4xl sm:text-5xl lg:text-[3.4rem]">
             {hero.title}
           </h1>
 
-          <p className="rise mt-6 max-w-[38ch] font-serif text-sm leading-relaxed text-muted-foreground sm:text-base">
+          <p className="rise relative z-10 mt-6 max-w-[38ch] font-serif text-sm leading-relaxed text-muted-foreground sm:text-base">
             {hero.support}
           </p>
 
-          <div className="rise mt-9 flex flex-wrap gap-3 [animation-delay:90ms]">
+          {/* No celular e no tablet a foto entra por trás do título, no canto
+              superior direito, e se dissolve antes do parágrafo — atrás dele
+              nem 10% de opacidade passaria no contraste. A partir de lg ela
+              aparece inteira, opaca, ao lado do texto. */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute right-0 top-0 w-[70%] opacity-[0.28] [mask-image:linear-gradient(215deg,#000_18%,transparent_68%)] lg:inset-y-6 lg:right-8 lg:top-auto lg:w-auto lg:opacity-100 lg:[mask-image:none]"
+          >
+            <picture>
+              <source srcSet={hero.portrait.webp} type="image/webp" />
+              <img
+                src={hero.portrait.png}
+                alt={hero.portrait.alt}
+                width={1012}
+                height={1056}
+                className="aspect-[5/4] w-full select-none object-cover object-top grayscale lg:aspect-auto lg:h-full lg:w-auto lg:object-contain"
+              />
+            </picture>
+          </div>
+
+          <div className="rise relative z-10 mt-9 flex flex-wrap gap-3 [animation-delay:90ms]">
             <a
               href="#cases"
               className="rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
@@ -34,24 +54,6 @@ export function Hero() {
 
         {/* Só a partir de lg a figura ultrapassa a banda: abaixo disso o texto
             ocupa a largura toda e a sobreposição atrapalharia a leitura. */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none mx-auto mt-[-1rem] w-[15rem] overflow-hidden sm:w-[18rem] lg:absolute lg:bottom-0 lg:right-8 lg:top-8 lg:mt-0 lg:w-[23rem]"
-        >
-          {/* Halo: no tema escuro o suéter marinho quase encosta no fundo. */}
-          <div className="halo-retrato">
-            <picture>
-              <source srcSet={hero.portrait.webp} type="image/webp" />
-              <img
-                src={hero.portrait.png}
-                alt={hero.portrait.alt}
-                width={1012}
-                height={1056}
-                className="h-full w-full select-none object-cover object-[50%_6%] grayscale"
-              />
-            </picture>
-          </div>
-        </div>
       </div>
 
       <div className="mt-10 grid border-t border-border sm:grid-cols-3">
