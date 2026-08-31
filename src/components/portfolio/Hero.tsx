@@ -16,26 +16,6 @@ export function Hero() {
             {hero.support}
           </p>
 
-          {/* No celular e no tablet a foto entra por trás do título, no canto
-              superior direito, e se dissolve antes do parágrafo — atrás dele
-              nem 10% de opacidade passaria no contraste. A partir de lg ela
-              aparece inteira, opaca, ao lado do texto. */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute right-0 top-0 w-[70%] opacity-[0.28] [mask-image:linear-gradient(215deg,#000_18%,transparent_68%)] md:bottom-0 md:right-6 md:top-auto md:h-[28rem] md:w-auto md:opacity-100 md:[mask-image:none] lg:right-8 lg:h-[35rem]"
-          >
-            <picture>
-              <source srcSet={hero.portrait.webp} type="image/webp" />
-              <img
-                src={hero.portrait.png}
-                alt={hero.portrait.alt}
-                width={1012}
-                height={1056}
-                className="aspect-[5/4] w-full select-none object-cover object-top grayscale md:aspect-auto md:h-full md:w-auto md:object-contain"
-              />
-            </picture>
-          </div>
-
           <div className="rise relative z-10 mt-9 flex flex-wrap gap-3 [animation-delay:90ms]">
             <a
               href="#cases"
@@ -49,6 +29,27 @@ export function Hero() {
             >
               Vamos conversar
             </a>
+          </div>
+
+          {/* A silhueta é a mesma em toda largura: inteira, sem recorte, com a
+              base rente à base da banda — a margem negativa cancela o padding
+              inferior. No celular ela entra no fluxo, justificada à direita,
+              abaixo dos botões; a partir de md sobe para a lateral e passa a
+              ultrapassar o topo. */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none relative -mb-10 ml-auto mt-8 w-[58%] sm:-mb-14 sm:w-[46%] md:absolute md:bottom-0 md:right-6 md:top-auto md:m-0 md:h-[28rem] md:w-auto lg:right-8 lg:h-[35rem]"
+          >
+            <picture>
+              <source srcSet={hero.portrait.webp} type="image/webp" />
+              <img
+                src={hero.portrait.png}
+                alt={hero.portrait.alt}
+                width={1012}
+                height={1056}
+                className="w-full select-none grayscale md:h-full md:w-auto md:object-contain"
+              />
+            </picture>
           </div>
         </div>
 
