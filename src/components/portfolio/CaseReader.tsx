@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, X } from "lucide-react";
-import type { CaseStudy } from "@/data/portfolio";
+import type { CaseEvidence, CaseStudy } from "@/data/portfolio";
 
 /**
  * Leitura do case em percurso horizontal.
@@ -16,9 +16,8 @@ import type { CaseStudy } from "@/data/portfolio";
 
 type Painel =
   | { tipo: "abertura" }
-  | { tipo: "texto"; rotulo: string; texto: string }
+  | { tipo: "texto"; rotulo: string; texto: string; imagens: CaseEvidence[] }
   | { tipo: "metricas" }
-  | { tipo: "evidencias" }
   | { tipo: "fim" };
 
 const CAPITULOS: { chave: keyof CaseStudy; rotulo: string }[] = [
@@ -34,12 +33,21 @@ const CAPITULOS: { chave: keyof CaseStudy; rotulo: string }[] = [
 
 function montarPaineis(c: CaseStudy): Painel[] {
   const lista: Painel[] = [{ tipo: "abertura" }];
+  const usadas = new Set<CaseEvidence>();
   for (const { chave, rotulo } of CAPITULOS) {
     const texto = c[chave];
     if (typeof texto !== "string" || !texto) continue;
-    lista.push({ tipo: "texto", rotulo, texto });
-    if (chave === "solucao" && c.evidencias?.length) lista.push({ tipo: "evidencias" });
+    const imagens = c.evidencias?.filter((e) => e.apos === chave) ?? [];
+    imagens.forEach((e) => usadas.add(e));
+    lista.push({ tipo: "texto", rotulo, texto, imagens });
     if (chave === "resultados" && c.metricas.length) lista.push({ tipo: "metricas" });
+  }
+  // Nenhuma evidência pode sumir: se `apos` apontar para um capítulo que o
+  // case não tem, a imagem entra no último painel de texto montado.
+  const orfas = c.evidencias?.filter((e) => !usadas.has(e)) ?? [];
+  if (orfas.length) {
+    const ultimoTexto = [...lista].reverse().find((p) => p.tipo === "texto");
+    if (ultimoTexto && ultimoTexto.tipo === "texto") ultimoTexto.imagens.push(...orfas);
   }
   lista.push({ tipo: "fim" });
   return lista;
@@ -173,6 +181,7 @@ export function CaseReader({
       if (!alvos.length) return;
       const primeiro = alvos[0];
       const ultimo = alvos[alvos.length - 1];
+      if (!primeiro || !ultimo) return;
       if (e.shiftKey && document.activeElement === primeiro) {
         e.preventDefault();
         ultimo.focus();
@@ -237,8 +246,10 @@ export function CaseReader({
           <section
             key={i}
             data-painel
-            className={`flex shrink-0 snap-center flex-col justify-center overflow-y-auto px-8 py-[6vh] sm:px-10 ${
-              p.tipo === "evidencias" ? "w-[min(64ch,92vw)]" : "w-[min(46ch,90vw)]"
+            className={`flex shrink-0 snap-center flex-col overflow-y-auto px-8 py-[6vh] sm:px-10 ${
+              p.tipo === "texto" && p.imagens.length
+                ? "w-[min(64ch,92vw)] justify-start"
+                : "w-[min(46ch,90vw)] justify-center"
             } ${i > 0 ? "border-l border-border" : ""}`}
           >
             {p.tipo === "abertura" && (
@@ -264,6 +275,23 @@ export function CaseReader({
               <>
                 <p className="kicker mb-5">{p.rotulo}</p>
                 <p className="font-serif text-base leading-relaxed sm:text-lg">{p.texto}</p>
+                {p.imagens.length > 0 && (
+                  <div className="mt-7 grid gap-6">
+                    {p.imagens.map((ev, idx) => (
+                      <figure key={idx}>
+                        <img
+                          src={ev.src}
+                          alt={ev.alt ?? ev.caption}
+                          loading="lazy"
+                          className="w-full rounded-md border border-border"
+                        />
+                        <figcaption className="mt-2 text-xs text-muted-foreground">
+                          {ev.caption}
+                        </figcaption>
+                      </figure>
+                    ))}
+                  </div>
+                )}
               </>
             )}
 
@@ -278,27 +306,6 @@ export function CaseReader({
                         {m.label}
                       </p>
                     </div>
-                  ))}
-                </div>
-              </>
-            )}
-
-            {p.tipo === "evidencias" && (
-              <>
-                <p className="kicker mb-5">Evidências</p>
-                <div className="grid gap-6">
-                  {caso.evidencias?.map((ev, idx) => (
-                    <figure key={idx}>
-                      <img
-                        src={ev.src}
-                        alt={ev.alt ?? ev.caption}
-                        loading="lazy"
-                        className="w-full rounded-md border border-border"
-                      />
-                      <figcaption className="mt-2 text-xs text-muted-foreground">
-                        {ev.caption}
-                      </figcaption>
-                    </figure>
                   ))}
                 </div>
               </>

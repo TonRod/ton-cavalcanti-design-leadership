@@ -66,7 +66,7 @@ export function SiteHeader({
         window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
       if (noFim) {
         const ultimo = ids[ids.length - 1];
-        if (document.getElementById(ultimo)) atual = ultimo;
+        if (ultimo && document.getElementById(ultimo)) atual = ultimo;
       }
 
       setActiveId(atual);

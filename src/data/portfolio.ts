@@ -8,10 +8,23 @@ import stpaulEvidWorkshop from "@/assets/stpaul-evid-01-workshop.jpg.asset.json"
 import stpaulEvidPlanejamento from "@/assets/stpaul-evid-02-planejamento.jpg.asset.json";
 import stpaulEvidJornada from "@/assets/stpaul-evid-03-jornada.jpg.asset.json";
 
+export type CaseChapter =
+  | "contexto"
+  | "problema"
+  | "escopo"
+  | "estrategia"
+  | "alinhamento"
+  | "solucao"
+  | "resultados"
+  | "aprendizado";
+
+// `apos` ancora cada evidência no capítulo que ela comprova — obrigatório
+// para que nenhuma imagem fique órfã e invisível no leitor.
 export type CaseEvidence = {
   src: string;
   caption: string;
   alt?: string;
+  apos: CaseChapter;
 };
 
 export type CaseStudy = {
@@ -193,18 +206,21 @@ export const cases: CaseStudy[] = [
         caption:
           "Workshop de cocriação que conduzi com 13 participantes. Benchmark de oito escolas, Crazy 8s e mapa de empatia levaram o grupo a mais de 100 ideias.",
         alt: "Sala de workshop em preto e branco, com cerca de treze participantes sentados em círculo e um facilitador em pé junto ao quadro branco.",
+        apos: "estrategia",
       },
       {
         src: stpaulEvidPlanejamento.url,
         caption:
           "Cinco fases em três meses, com alocação diária de quatro pessoas — do entendimento aos testes de guerrilha.",
         alt: "Planejamento do projeto: diagrama das cinco fases e cronograma diário de fevereiro a abril com as atividades de cada integrante do time.",
+        apos: "escopo",
       },
       {
         src: stpaulEvidJornada.url,
         caption:
           "A jornada abria perguntando onde o candidato queria chegar, não que curso queria fazer. Em seis passos a I.A. traduzia a ambição em trilhas — e passou a resolver 70% do que antes ia para o chat.",
         alt: 'Primeira tela da jornada de matrícula: a pergunta "Onde você quer chegar?" com quatro opções de ambição profissional e indicador de passo 1 de 6.',
+        apos: "solucao",
       },
     ],
     metricas: [
