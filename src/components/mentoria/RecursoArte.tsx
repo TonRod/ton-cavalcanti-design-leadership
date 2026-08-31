@@ -36,14 +36,17 @@ function CartaCeleste({ semente }: { semente: number }) {
   return (
     <svg viewBox="0 0 200 140" aria-hidden="true">
       {ligacoes.map(([a, b], i) => {
-        const comp = Math.hypot(estrelas[b].x - estrelas[a].x, estrelas[b].y - estrelas[a].y);
+        const ea = estrelas[a];
+        const eb = estrelas[b];
+        if (!ea || !eb) return null;
+        const comp = Math.hypot(eb.x - ea.x, eb.y - ea.y);
         return (
           <line
             key={`${a}-${b}`}
-            x1={estrelas[a].x}
-            y1={estrelas[a].y}
-            x2={estrelas[b].x}
-            y2={estrelas[b].y}
+            x1={ea.x}
+            y1={ea.y}
+            x2={eb.x}
+            y2={eb.y}
             className="recurso-traco recurso-desenha"
             strokeWidth={1}
             style={{ "--comp": comp, "--atraso": `${i * 110}ms` } as CSSProperties}
