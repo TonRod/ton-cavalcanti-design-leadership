@@ -16,9 +16,8 @@ import type { CaseStudy } from "@/data/portfolio";
 
 type Painel =
   | { tipo: "abertura" }
-  | { tipo: "texto"; rotulo: string; texto: string }
+  | { tipo: "texto"; rotulo: string; texto: string; imagens: CaseEvidence[] }
   | { tipo: "metricas" }
-  | { tipo: "evidencias" }
   | { tipo: "fim" };
 
 const CAPITULOS: { chave: keyof CaseStudy; rotulo: string }[] = [
