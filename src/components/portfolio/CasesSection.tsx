@@ -12,7 +12,8 @@ export function CasesSection() {
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
   const activeIndex = active ? cases.findIndex((c) => c.id === active.id) : -1;
-  const next = activeIndex >= 0 && activeIndex < cases.length - 1 ? cases[activeIndex + 1] : null;
+  const next =
+    activeIndex >= 0 && activeIndex < cases.length - 1 ? (cases[activeIndex + 1] ?? null) : null;
 
   const updateScrollState = useCallback(() => {
     const el = trackRef.current;

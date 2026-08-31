@@ -173,6 +173,7 @@ export function CaseReader({
       if (!alvos.length) return;
       const primeiro = alvos[0];
       const ultimo = alvos[alvos.length - 1];
+      if (!primeiro || !ultimo) return;
       if (e.shiftKey && document.activeElement === primeiro) {
         e.preventDefault();
         ultimo.focus();
