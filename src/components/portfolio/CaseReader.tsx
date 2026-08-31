@@ -246,8 +246,10 @@ export function CaseReader({
           <section
             key={i}
             data-painel
-            className={`flex shrink-0 snap-center flex-col justify-center overflow-y-auto px-8 py-[6vh] sm:px-10 ${
-              p.tipo === "evidencias" ? "w-[min(64ch,92vw)]" : "w-[min(46ch,90vw)]"
+            className={`flex shrink-0 snap-center flex-col overflow-y-auto px-8 py-[6vh] sm:px-10 ${
+              p.tipo === "texto" && p.imagens.length
+                ? "w-[min(64ch,92vw)] justify-start"
+                : "w-[min(46ch,90vw)] justify-center"
             } ${i > 0 ? "border-l border-border" : ""}`}
           >
             {p.tipo === "abertura" && (
