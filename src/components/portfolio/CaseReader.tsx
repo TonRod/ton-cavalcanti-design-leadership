@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, X } from "lucide-react";
-import type { CaseStudy } from "@/data/portfolio";
+import type { CaseEvidence, CaseStudy } from "@/data/portfolio";
 
 /**
  * Leitura do case em percurso horizontal.
@@ -33,12 +33,21 @@ const CAPITULOS: { chave: keyof CaseStudy; rotulo: string }[] = [
 
 function montarPaineis(c: CaseStudy): Painel[] {
   const lista: Painel[] = [{ tipo: "abertura" }];
+  const usadas = new Set<CaseEvidence>();
   for (const { chave, rotulo } of CAPITULOS) {
     const texto = c[chave];
     if (typeof texto !== "string" || !texto) continue;
-    lista.push({ tipo: "texto", rotulo, texto });
-    if (chave === "solucao" && c.evidencias?.length) lista.push({ tipo: "evidencias" });
+    const imagens = c.evidencias?.filter((e) => e.apos === chave) ?? [];
+    imagens.forEach((e) => usadas.add(e));
+    lista.push({ tipo: "texto", rotulo, texto, imagens });
     if (chave === "resultados" && c.metricas.length) lista.push({ tipo: "metricas" });
+  }
+  // Nenhuma evidência pode sumir: se `apos` apontar para um capítulo que o
+  // case não tem, a imagem entra no último painel de texto montado.
+  const orfas = c.evidencias?.filter((e) => !usadas.has(e)) ?? [];
+  if (orfas.length) {
+    const ultimoTexto = [...lista].reverse().find((p) => p.tipo === "texto");
+    if (ultimoTexto && ultimoTexto.tipo === "texto") ultimoTexto.imagens.push(...orfas);
   }
   lista.push({ tipo: "fim" });
   return lista;
