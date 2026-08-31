@@ -7,8 +7,7 @@ const STORAGE_KEY = "ton-theme";
 
 export function applyTheme(theme: Theme) {
   const prefersDark =
-    typeof window !== "undefined" &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches;
+    typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches;
   const isDark = theme === "dark" || (theme === "system" && prefersDark);
   document.documentElement.classList.toggle("dark", isDark);
 }
@@ -43,49 +42,46 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
   // A animação é declarada em CSS (::view-transition-new(root)); aqui só passamos
   // centro e raio por variáveis, porque nem todo navegador aceita `pseudoElement`
   // em Element.animate().
-  const select = useCallback(
-    (value: Theme, event: MouseEvent<HTMLButtonElement>) => {
-      const reduced =
-        typeof window !== "undefined" &&
-        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const startViewTransition = (
-        document as Document & {
-          startViewTransition?: (cb: () => void) => { ready: Promise<void> };
-        }
-      ).startViewTransition?.bind(document);
-
-      if (!startViewTransition || reduced) {
-        setTheme(value);
-        applyTheme(value);
-        return;
+  const select = useCallback((value: Theme, event: MouseEvent<HTMLButtonElement>) => {
+    const reduced =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const startViewTransition = (
+      document as Document & {
+        startViewTransition?: (cb: () => void) => { ready: Promise<void> };
       }
+    ).startViewTransition?.bind(document);
 
-      const rect = event.currentTarget.getBoundingClientRect();
-      const x = rect.left + rect.width / 2;
-      const y = rect.top + rect.height / 2;
-      const raio = Math.hypot(
-        Math.max(x, window.innerWidth - x),
-        Math.max(y, window.innerHeight - y)
-      );
+    if (!startViewTransition || reduced) {
+      setTheme(value);
+      applyTheme(value);
+      return;
+    }
 
-      const raiz = document.documentElement;
-      raiz.style.setProperty("--vt-x", `${x}px`);
-      raiz.style.setProperty("--vt-y", `${y}px`);
-      raiz.style.setProperty("--vt-r", `${raio}px`);
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    const raio = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y),
+    );
 
-      startViewTransition(() => {
-        flushSync(() => setTheme(value));
-        applyTheme(value);
-      });
-    },
-    []
-  );
+    const raiz = document.documentElement;
+    raiz.style.setProperty("--vt-x", `${x}px`);
+    raiz.style.setProperty("--vt-y", `${y}px`);
+    raiz.style.setProperty("--vt-r", `${raio}px`);
+
+    startViewTransition(() => {
+      flushSync(() => setTheme(value));
+      applyTheme(value);
+    });
+  }, []);
 
   return (
     <div
       role="radiogroup"
       aria-label="Tema"
-      className={`inline-flex items-center gap-0.5 rounded-md border border-border p-0.5 ${className}`}
+      className={`inline-flex items-center gap-0.5 rounded-full border border-border p-0.5 ${className}`}
     >
       {options.map(({ value, label, Icon }) => {
         const active = mounted && theme === value;
@@ -99,7 +95,7 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
             title={label}
             onClick={(e) => select(value, e)}
 
-            className={`rounded-[0.25rem] p-1.5 transition-colors ${
+            className={`rounded-full p-1.5 transition-colors ${
               active
                 ? "bg-secondary text-foreground"
                 : "text-muted-foreground hover:text-foreground"

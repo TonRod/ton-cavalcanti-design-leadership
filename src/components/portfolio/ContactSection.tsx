@@ -61,7 +61,7 @@ export function ContactSection() {
         <div className="mt-8 flex flex-wrap gap-3">
           <a
             href={`mailto:${contact.email}`}
-            className="flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+            className="flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
           >
             <Mail className="size-4" /> {contact.email}
           </a>
