@@ -26,12 +26,19 @@ export interface SiteHeaderProps {
    * referência estável entre renders — o observer depende disso.
    */
   links?: SiteHeaderLink[];
+  /**
+   * Header sem borda, com fundo mais translúcido que se dissolve na base.
+   * O conteúdo passa por baixo perdendo o desfoque aos poucos, sem aresta —
+   * a página não parece começar depois da barra, parece continuar sob ela.
+   */
+  imersivo?: boolean;
 }
 
 export function SiteHeader({
   brand = "Ton Cavalcanti",
   homeHref = "#top",
   links = defaultLinks,
+  imersivo = false,
 }: SiteHeaderProps = {}) {
   const [open, setOpen] = useState(false);
   const [activeId, setActiveId] = useState<string | null>(null);
@@ -118,87 +125,109 @@ export function SiteHeader({
   }, [measure]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur-md">
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
-        <a href={homeHref} className="display text-lg tracking-tight">
-          {brand}
-        </a>
-
-        <nav
-          ref={navRef}
-          className="relative hidden items-center gap-6 xl:gap-8 lg:flex"
-        >
-          {links.map((l) => {
-            const id = l.href.slice(1);
-            const isActive = activeId === id;
-            return (
-              <a
-                key={l.href}
-                href={l.href}
-                ref={(el) => {
-                  linkRefs.current[id] = el;
-                }}
-                aria-current={isActive ? "true" : undefined}
-                className={cn(
-                  "text-sm transition-colors hover:text-foreground",
-                  isActive ? "text-foreground" : "text-muted-foreground"
-                )}
-              >
-                {l.label}
-              </a>
-            );
-          })}
-          <span
+    <header
+      className={cn(
+        "sticky top-0 z-50",
+        !imersivo && "border-b border-border bg-background/85 backdrop-blur-md",
+      )}
+    >
+      <div className="relative">
+        {/*
+          Camada de fundo só da barra. A máscara apaga o desfoque de cima para
+          baixo, então não existe linha onde o header termina: o conteúdo vai
+          ficando nítido conforme sobe. Fica atrás do conteúdo porque este é
+          posicionado (relative) e pinta depois.
+        */}
+        {imersivo && (
+          <div
             aria-hidden="true"
-            className="pointer-events-none absolute bottom-[-6px] left-0 h-px w-px origin-left bg-foreground"
+            className="pointer-events-none absolute inset-0 bg-background/60 backdrop-blur-xl"
             style={{
-              opacity: indicator ? 1 : 0,
-              transform: `translateX(${indicator?.x ?? 0}px) scaleX(${indicator?.w ?? 0})`,
-              transition:
-                "transform var(--dur-state) var(--ease-soft), opacity var(--dur-state) var(--ease-soft)",
+              maskImage: "linear-gradient(to bottom, black 58%, transparent)",
+              WebkitMaskImage: "linear-gradient(to bottom, black 58%, transparent)",
             }}
           />
-          <ThemeToggle />
-        </nav>
+        )}
+        <div className="relative mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
+          <a href={homeHref} className="display text-lg tracking-tight">
+            {brand}
+          </a>
 
-
-        <div className="flex items-center gap-2 lg:hidden">
-          <ThemeToggle />
-          <button
-            className="relative size-8 p-1.5"
-            aria-label={open ? "Fechar menu" : "Abrir menu"}
-            aria-expanded={open}
-            aria-controls="menu-mobile"
-            onClick={() => setOpen((v) => !v)}
-          >
-            {/* Ícones empilhados: giram e trocam de opacidade */}
-            <Menu
-              className="absolute left-1.5 top-1.5 size-5"
+          <nav ref={navRef} className="relative hidden items-center gap-6 xl:gap-8 lg:flex">
+            {links.map((l) => {
+              const id = l.href.slice(1);
+              const isActive = activeId === id;
+              return (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  ref={(el) => {
+                    linkRefs.current[id] = el;
+                  }}
+                  aria-current={isActive ? "true" : undefined}
+                  className={cn(
+                    "text-sm transition-colors hover:text-foreground",
+                    isActive ? "text-foreground" : "text-muted-foreground",
+                  )}
+                >
+                  {l.label}
+                </a>
+              );
+            })}
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute bottom-[-6px] left-0 h-px w-px origin-left bg-foreground"
               style={{
-                opacity: open ? 0 : 1,
-                transform: open ? "rotate(90deg) scale(0.7)" : "none",
+                opacity: indicator ? 1 : 0,
+                transform: `translateX(${indicator?.x ?? 0}px) scaleX(${indicator?.w ?? 0})`,
                 transition:
-                  "transform var(--dur-micro) var(--ease-soft), opacity var(--dur-micro) var(--ease-soft)",
+                  "transform var(--dur-state) var(--ease-soft), opacity var(--dur-state) var(--ease-soft)",
               }}
             />
-            <X
-              className="absolute left-1.5 top-1.5 size-5"
-              style={{
-                opacity: open ? 1 : 0,
-                transform: open ? "none" : "rotate(-90deg) scale(0.7)",
-                transition:
-                  "transform var(--dur-micro) var(--ease-soft), opacity var(--dur-micro) var(--ease-soft)",
-              }}
-            />
-          </button>
+            <ThemeToggle />
+          </nav>
+
+          <div className="flex items-center gap-2 lg:hidden">
+            <ThemeToggle />
+            <button
+              className="relative size-8 p-1.5"
+              aria-label={open ? "Fechar menu" : "Abrir menu"}
+              aria-expanded={open}
+              aria-controls="menu-mobile"
+              onClick={() => setOpen((v) => !v)}
+            >
+              {/* Ícones empilhados: giram e trocam de opacidade */}
+              <Menu
+                className="absolute left-1.5 top-1.5 size-5"
+                style={{
+                  opacity: open ? 0 : 1,
+                  transform: open ? "rotate(90deg) scale(0.7)" : "none",
+                  transition:
+                    "transform var(--dur-micro) var(--ease-soft), opacity var(--dur-micro) var(--ease-soft)",
+                }}
+              />
+              <X
+                className="absolute left-1.5 top-1.5 size-5"
+                style={{
+                  opacity: open ? 1 : 0,
+                  transform: open ? "none" : "rotate(-90deg) scale(0.7)",
+                  transition:
+                    "transform var(--dur-micro) var(--ease-soft), opacity var(--dur-micro) var(--ease-soft)",
+                }}
+              />
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Painel mobile: altura animada pela técnica de grid (0fr → 1fr) */}
+      {/* Painel mobile: altura animada pela técnica de grid (0fr → 1fr).
+          No modo imersivo ganha fundo próprio: a máscara da barra pararia no
+          meio do menu e os itens ficariam sobre conteúdo em movimento. */}
       <div
         className={cn(
           "grid overflow-hidden lg:hidden",
-          open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+          imersivo && "bg-background/95 backdrop-blur-xl",
+          open ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
         )}
         style={{
           transition: "grid-template-rows var(--dur-state) var(--ease-soft)",
@@ -209,7 +238,7 @@ export function SiteHeader({
           inert={!open}
           className={cn(
             "min-h-0 overflow-hidden px-6",
-            open ? "border-t border-border" : "border-t border-transparent"
+            open ? "border-t border-border" : "border-t border-transparent",
           )}
         >
           <div className="flex flex-col gap-1 py-4">
@@ -223,7 +252,7 @@ export function SiteHeader({
                   aria-current={isActive ? "true" : undefined}
                   className={cn(
                     "py-2 text-sm",
-                    isActive ? "text-foreground" : "text-muted-foreground"
+                    isActive ? "text-foreground" : "text-muted-foreground",
                   )}
                 >
                   {l.label}
