@@ -275,6 +275,23 @@ export function CaseReader({
               <>
                 <p className="kicker mb-5">{p.rotulo}</p>
                 <p className="font-serif text-base leading-relaxed sm:text-lg">{p.texto}</p>
+                {p.imagens.length > 0 && (
+                  <div className="mt-7 grid gap-6">
+                    {p.imagens.map((ev, idx) => (
+                      <figure key={idx}>
+                        <img
+                          src={ev.src}
+                          alt={ev.alt ?? ev.caption}
+                          loading="lazy"
+                          className="w-full rounded-md border border-border"
+                        />
+                        <figcaption className="mt-2 text-xs text-muted-foreground">
+                          {ev.caption}
+                        </figcaption>
+                      </figure>
+                    ))}
+                  </div>
+                )}
               </>
             )}
 
@@ -289,27 +306,6 @@ export function CaseReader({
                         {m.label}
                       </p>
                     </div>
-                  ))}
-                </div>
-              </>
-            )}
-
-            {p.tipo === "evidencias" && (
-              <>
-                <p className="kicker mb-5">Evidências</p>
-                <div className="grid gap-6">
-                  {caso.evidencias?.map((ev, idx) => (
-                    <figure key={idx}>
-                      <img
-                        src={ev.src}
-                        alt={ev.alt ?? ev.caption}
-                        loading="lazy"
-                        className="w-full rounded-md border border-border"
-                      />
-                      <figcaption className="mt-2 text-xs text-muted-foreground">
-                        {ev.caption}
-                      </figcaption>
-                    </figure>
                   ))}
                 </div>
               </>
