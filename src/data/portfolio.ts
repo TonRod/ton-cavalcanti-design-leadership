@@ -20,6 +20,12 @@ export type CaseChapter =
 
 // `apos` ancora cada evidência no capítulo que ela comprova — obrigatório
 // para que nenhuma imagem fique órfã e invisível no leitor.
+//
+// `src` aceita as duas origens que o projeto usa. As primeiras evidências vieram
+// de `.asset.json`, com os bytes na infra do Lovable e só o ponteiro no repo;
+// as novas moram em `public/cases/` e são referenciadas por caminho, como já
+// acontece com o retrato do hero. A segunda via versiona a imagem junto do
+// código e não consome crédito do Lovable para subir arquivo.
 export type CaseEvidence = {
   src: string;
   caption: string;
@@ -137,6 +143,15 @@ export const cases: CaseStudy[] = [
       "Aplicativo para tablet consumindo dados diretamente da base, com painéis priorizados e personalizáveis por perfil de gerente.",
     resultados:
       "Tempo de entrega de resposta caiu de 24h para 15min; aprovação de contrato caiu de 48h para 4h.",
+    evidencias: [
+      {
+        src: "/cases/bradesco-evid-01-mapa-oportunidades.jpg",
+        caption:
+          "O mapa de oportunidades sobre a jornada do gerente de relacionamento, da pré-visita à formalização. Cada “Como poderíamos” é uma dor levantada nas entrevistas, e os pontos de votação decidiram o que o painel resolveria primeiro — “controlar o tempo de resposta por departamento” entre os mais votados.",
+        alt: "Painel comprido dividido em faixas — Gestão do RM de Relacionamento, Pré-visita, Visita, Pós-visita, Negociação e Formalização — coberto de post-its amarelos, azuis e rosa escritos à mão, muitos com adesivos redondos de votação. Na base, uma faixa impressa com requisitos.",
+        apos: "estrategia",
+      },
+    ],
     metricas: [
       { label: "Entrega de resposta", value: "24h → 15min" },
       { label: "Aprovação de contrato", value: "48h → 4h" },
@@ -169,6 +184,36 @@ export const cases: CaseStudy[] = [
       "NPS de atendimento de +3,3 para +6,7, com redução do tempo médio de atendimento e maior agilidade na priorização de chamados. A experiência ficou mais consistente entre canais e os atendentes passaram a contar com ferramentas mais rápidas e materiais de suporte atualizados.",
     aprendizado:
       "A análise mostrou que o tempo de solução é mais relevante que o tempo de atendimento em si — pequenas falhas no roteiro do chatbot e na priorização de chamados tinham impacto desproporcional na experiência do cliente.",
+    evidencias: [
+      {
+        src: "/cases/livelo-evid-01-fluxo-atual.jpg",
+        caption:
+          "O fluxo como estava: o cliente informa o CPF e descreve o problema duas vezes, em pontos diferentes do atendimento, e a linha de emoção não sai do negativo em nenhum passo. É essa repetição que a jornada omnichannel foi desenhada para eliminar.",
+        alt: "Diagrama do fluxo de atendimento então vigente, numa linha do tempo horizontal com etapas como URA, informa CPF, descrição do problema, confirmação de dados, atendimento backoffice e pesquisa de satisfação. “Informa CPF” e “descrição do problema” aparecem duas vezes. Abaixo de cada etapa, ícones de rosto com expressão negativa.",
+        apos: "contexto",
+      },
+      {
+        src: "/cases/livelo-evid-02-tres-frentes.png",
+        caption:
+          "A imersão foi dividida em três frentes — processos, pessoas e sistemas. Em trinta dias, cerca de cem profissionais e clientes foram ouvidos e representados em journey maps, que alimentaram o blueprint.",
+        alt: "Três ícones lado a lado, rotulados Processos, Pessoas e Sistemas.",
+        apos: "estrategia",
+      },
+      {
+        src: "/cases/livelo-evid-04-apresentacao.jpg",
+        caption:
+          "Apresentação da solução ao time da Livelo, com a jornada mapeada em post-its na parede e sobre a mesa. Interface, chatbot e treinamento foram apresentados como um conjunto — que é como o serviço chega ao cliente.",
+        alt: "Sala de reunião corporativa com cerca de oito pessoas ao redor de uma mesa comprida; três delas de pé junto a uma televisão que exibe um diagrama. Nas paredes e sobre a mesa, fileiras de post-its coloridos.",
+        apos: "solucao",
+      },
+      {
+        src: "/cases/livelo-evid-03-blueprint.jpg",
+        caption:
+          "O Service Blueprint do atendimento, das quatro fases à linha de emoção na base. É a fileira de sistemas — P3000, Neoassist, CLM, Resolve Fácil, Token, CSC/OCC — que tornou as restrições técnicas discutíveis com design e operação na mesma mesa.",
+        alt: "Service blueprint do atendimento em quatro colunas — Identificação, Registro, Atendimento e Backoffice — com faixas de sistemas, KPIs, a jornada do cliente e uma linha de ícones de emoção na base.",
+        apos: "alinhamento",
+      },
+    ],
     metricas: [
       { label: "NPS de atendimento", value: "+3,3 → +6,7" },
       { label: "Time de design", value: "4 designers" },
@@ -221,6 +266,27 @@ export const cases: CaseStudy[] = [
           "A jornada abria perguntando onde o candidato queria chegar, não que curso queria fazer. Em seis passos a I.A. traduzia a ambição em trilhas — e passou a resolver 70% do que antes ia para o chat.",
         alt: 'Primeira tela da jornada de matrícula: a pergunta "Onde você quer chegar?" com quatro opções de ambição profissional e indicador de passo 1 de 6.',
         apos: "solucao",
+      },
+      {
+        src: "/cases/stpaul-evid-05-workshop-escopo.jpg",
+        caption:
+          "Workshop de definição de escopo no innovation hive. Os rascunhos de fluxo sobre a mesa são o primeiro traço do que viraria a jornada — antes de qualquer wireframe no Axure.",
+        alt: "Sala do laboratório de inovação com oito participantes sentados em poltronas coloridas diante de uma televisão que exibe um site. Ao fundo, quadros brancos com anotações; em primeiro plano, uma mesa com rascunhos de telas desenhados a caneta verde.",
+        apos: "escopo",
+      },
+      {
+        src: "/cases/stpaul-evid-06-priorizacao.jpg",
+        caption:
+          "A convergência do workshop: as mais de cem ideias viraram quase trinta oportunidades numeradas no quadro, e a votação por pontos decidiu quais entravam no escopo.",
+        alt: "Três pessoas de pé diante de um quadro branco comprido, coberto por uma lista numerada de oportunidades escritas à mão, com adesivos redondos de votação ao lado de vários itens. Na parede abaixo, o letreiro do innovation hive.",
+        apos: "estrategia",
+      },
+      {
+        src: "/cases/stpaul-evid-04-laboratorio.jpg",
+        caption:
+          "O innovation hive, laboratório que a St. Paul mantinha com a IBM e onde conduzi as cocriações. A parceria que está na parede é a mesma que entrou na jornada: a I.A. que montava as trilhas era da IBM.",
+        alt: "Parede branca com um logotipo de favos de mel e os dizeres “innovation hive — welcome to the collaborative era — IBM and Saint Paul”. Abaixo à direita, uma abertura mostra uma sala com mesas e cadeiras amarelas.",
+        apos: "alinhamento",
       },
     ],
     metricas: [
