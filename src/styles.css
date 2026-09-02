@@ -56,9 +56,17 @@
   --dur-micro: 180ms;
   --dur-state: 380ms;
   --dur-large: 520ms;
-  /* Exceção ao --ease-soft: a revelação varre a tela inteira e roda em `linear`,
-     porque uma varredura desse tamanho não deve ter aceleração perceptível. */
-  --dur-reveal: 900ms;
+  /* Exceção ao --ease-soft: a revelação varre a tela inteira e roda em `linear`.
+     Medido: com o círculo nascendo perto de uma quina, a área revelada já cresce
+     quase em linha reta (desvio RMS de 7% no desktop, 3% no celular, contra
+     21–40% de qualquer ease-out), então acelerar aqui inventaria um solavanco
+     que a geometria não tem.
+     A duração, sim, estava fora da escala: 900ms era 1,7× o maior valor do
+     sistema. Enquanto a varredura roda, o resto da tela é um bitmap congelado —
+     nada rola, nada responde ao mouse —, então cada 100ms a mais é tela parada.
+     Em --dur-large o pior caso (a quina oposta) espera 520ms e o pixel médio,
+     260ms. */
+  --dur-reveal: var(--dur-large);
 
   --background: oklch(0.972 0.008 85);
   --foreground: oklch(0.21 0.01 60);
@@ -179,6 +187,37 @@
 ::view-transition-new(root) {
   z-index: 1;
   animation: revelar-tema var(--dur-reveal) linear both;
+}
+
+/* Um relógio só.
+
+   O `::view-transition-new(root)` é a página nova de verdade, viva, e não uma
+   foto: quando a classe `.dark` entra, tudo que tem `transition` de cor começa
+   a animar por baixo do círculo. Rodavam quatro tempos ao mesmo tempo numa
+   troca de tema — a varredura, os 150ms do `transition-colors` do Tailwind, os
+   380ms de `--dur-state` e as bordas, que trocam secas. Era essa mistura que se
+   sentia como falta de fluidez.
+
+   E era trabalho jogado fora: com a varredura em 520ms, um fade de 150ms
+   termina antes de o círculo chegar nele. Ninguém via aquela animação; só se
+   pagava o repinte dela, justo nos quadros em que o compositor está mais
+   ocupado. Desligar deixa a varredura sozinha — e é ela que conta a história.
+
+   O céu do hero pausa junto: são seis camadas desfocadas (blur de 26 a 32px),
+   três delas em `mix-blend-mode: screen`, recompostas a cada quadro por baixo
+   de um clip-path que se move. É a camada mais cara da página, e some
+   exatamente na janela em que a GPU precisa de folga. Como os laços duram de 34
+   a 96 segundos, meio segundo pausado não se vê — `paused` congela no lugar e
+   volta de onde parou, sem salto. */
+html[data-trocando-tema] *,
+html[data-trocando-tema] *::before,
+html[data-trocando-tema] *::after {
+  transition: none !important;
+}
+
+html[data-trocando-tema] .nuvem,
+html[data-trocando-tema] .cortina {
+  animation-play-state: paused;
 }
 
 /* Entrada em cascata do hero — CSS puro, dispara na primeira pintura */

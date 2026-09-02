@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, type MouseEvent } from "react";
+import { useCallback, useEffect, useRef, useState, type MouseEvent } from "react";
 import { flushSync } from "react-dom";
 import { Monitor, Moon, Sun } from "lucide-react";
 
@@ -38,6 +38,11 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
     return () => mq.removeEventListener("change", onChange);
   }, [theme, mounted]);
 
+  // Conta as trocas para que uma varredura antiga não limpe a bandeira de uma
+  // nova: em dois cliques seguidos o navegador descarta a primeira transição, e
+  // a promessa dela resolve no meio da segunda.
+  const trocaRef = useRef(0);
+
   // Revela o tema novo em círculo, crescendo do centro do botão clicado.
   // A animação é declarada em CSS (::view-transition-new(root)); aqui só passamos
   // centro e raio por variáveis, porque nem todo navegador aceita `pseudoElement`
@@ -48,7 +53,10 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const startViewTransition = (
       document as Document & {
-        startViewTransition?: (cb: () => void) => { ready: Promise<void> };
+        startViewTransition?: (cb: () => void) => {
+          ready: Promise<void>;
+          finished: Promise<void>;
+        };
       }
     ).startViewTransition?.bind(document);
 
@@ -71,10 +79,29 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
     raiz.style.setProperty("--vt-y", `${y}px`);
     raiz.style.setProperty("--vt-r", `${raio}px`);
 
-    startViewTransition(() => {
+    // Antes de abrir a transição, e não depois: o navegador tira a foto da tela
+    // no próximo quadro, então o céu já precisa estar pausado e as transições de
+    // cor já desligadas quando ele for capturar e montar as camadas.
+    const troca = ++trocaRef.current;
+    raiz.dataset.trocandoTema = "";
+
+    const limpar = () => {
+      if (trocaRef.current !== troca) return;
+      delete raiz.dataset.trocandoTema;
+      raiz.style.removeProperty("--vt-x");
+      raiz.style.removeProperty("--vt-y");
+      raiz.style.removeProperty("--vt-r");
+    };
+
+    const vt = startViewTransition(() => {
       flushSync(() => setTheme(value));
       applyTheme(value);
     });
+
+    // `finished`, e não `ready`: `ready` rejeita quando a transição é descartada
+    // (outra troca por cima, aba escondida) e a bandeira ficaria presa, travando
+    // as transições do site inteiro.
+    vt.finished.then(limpar, limpar);
   }, []);
 
   return (
