@@ -82,6 +82,36 @@ export const cases: CaseStudy[] = [
       "CSAT de 40% para 80%, −25% no tempo de processamento de pedidos, −13% nos chamados ao suporte, 97% de aprovação entre gerentes de loja.",
     aprendizado:
       "A integração de tecnologia em processos físicos exige mais do que ferramentas digitais: depende de um profundo entendimento das jornadas dos usuários.",
+    evidencias: [
+      {
+        src: "/cases/natura-evid-01-loja-operacao.jpg",
+        caption:
+          "O ponto onde o digital encontra a operação: o time de loja consulta o pedido no sistema enquanto separa a sacola. Era aqui que a falta de visibilidade em tempo real virava retrabalho e chamado ao suporte.",
+        alt: "Duas pessoas do time de loja atrás do balcão de uma loja Natura; uma delas opera um monitor com o sistema de pedidos enquanto segura uma sacola de papel com o comprovante. Ao fundo, prateleiras com produtos.",
+        apos: "contexto",
+      },
+      {
+        src: "/cases/natura-evid-02-sala-omnicanalidade.jpg",
+        caption:
+          "A sala da frente de Omnicanalidade, que liderei. Na parede, cada tela do fluxo em coluna própria — home, busca, página de produto, categorias, sacola —, com post-its de feedback e a contagem de dias para o go-live.",
+        alt: "Placa suspensa escrita “Omnicanalidade” sobre uma área de trabalho. Na parede de vidro abaixo, colunas de telas impressas anotadas com post-its amarelos, rotuladas Sacola, Busca, Página de Produto, Categorias e Home, ao lado de rascunhos de wireframe.",
+        apos: "escopo",
+      },
+      {
+        src: "/cases/natura-evid-03-parede-wireframes.jpg",
+        caption:
+          "A mesma parede em outro ângulo. As telas do protótipo iam impressas para o vidro e o feedback vinha colado em cima delas — validar era um ato físico, no meio da sala, e não um link enviado por e-mail.",
+        alt: "Parede de vidro comprida com a inscrição “Nova XP Natura” em letra manual, um quadro de wireframes desenhado à mão e colunas de telas impressas com post-its amarelos.",
+        apos: "estrategia",
+      },
+      {
+        src: "/cases/natura-evid-04-csat-loja.jpg",
+        caption:
+          "A solução em operação: o cartão convida o cliente a escanear o QR Code e avaliar o atendimento, e o tablet no balcão coleta a nota de 0 a 10. É por esse instrumento que o CSAT foi de 40% para 80%.",
+        alt: "Balcão de loja Natura com uma atendente entregando sacolas de papel. Sobre o balcão, um cartão com os dizeres “Queremos ouvir você! Escaneie o QR Code abaixo e avalie o nosso atendimento” e um tablet exibindo uma pesquisa de satisfação com escala de 0 a 10.",
+        apos: "solucao",
+      },
+    ],
     metricas: [
       { label: "CSAT de atendimento", value: "40% → 80%" },
       { label: "Processamento de pedidos", value: "−25%" },
