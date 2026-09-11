@@ -35,34 +35,36 @@ function CartaCeleste({ semente }: { semente: number }) {
 
   return (
     <svg viewBox="0 0 200 140" aria-hidden="true">
-      {ligacoes.map(([a, b], i) => {
-        const ea = estrelas[a];
-        const eb = estrelas[b];
-        if (!ea || !eb) return null;
-        const comp = Math.hypot(eb.x - ea.x, eb.y - ea.y);
-        return (
-          <line
-            key={`${a}-${b}`}
-            x1={ea.x}
-            y1={ea.y}
-            x2={eb.x}
-            y2={eb.y}
-            className="recurso-traco recurso-desenha"
-            strokeWidth={1}
-            style={{ "--comp": comp, "--atraso": `${i * 110}ms` } as CSSProperties}
+      <g className="recurso-grupo">
+        {ligacoes.map(([a, b], i) => {
+          const ea = estrelas[a];
+          const eb = estrelas[b];
+          if (!ea || !eb) return null;
+          const comp = Math.hypot(eb.x - ea.x, eb.y - ea.y);
+          return (
+            <line
+              key={`${a}-${b}`}
+              x1={ea.x}
+              y1={ea.y}
+              x2={eb.x}
+              y2={eb.y}
+              className="recurso-traco recurso-desenha"
+              strokeWidth={1}
+              style={{ "--comp": comp, "--atraso": `${i * 110}ms` } as CSSProperties}
+            />
+          );
+        })}
+        {estrelas.map((e, i) => (
+          <circle
+            key={i}
+            cx={e.x}
+            cy={e.y}
+            r={e.r}
+            className="recurso-astro recurso-acende recurso-estrela"
+            style={{ "--atraso": `${180 + i * 90}ms`, "--i": i } as CSSProperties}
           />
-        );
-      })}
-      {estrelas.map((e, i) => (
-        <circle
-          key={i}
-          cx={e.x}
-          cy={e.y}
-          r={e.r}
-          className="recurso-astro recurso-acende"
-          style={{ "--atraso": `${180 + i * 90}ms` } as CSSProperties}
-        />
-      ))}
+        ))}
+      </g>
     </svg>
   );
 }
@@ -89,21 +91,24 @@ function CurvaDeNivel({ semente }: { semente: number }) {
 
   return (
     <svg viewBox="0 0 200 140" aria-hidden="true">
-      {aneis.map((d, i) => (
-        <path
-          key={i}
-          d={d}
-          className="recurso-traco recurso-desenha"
-          strokeWidth={i === 0 ? 1.3 : 1}
-          style={
-            {
-              "--comp": 620,
-              "--atraso": `${i * 90}ms`,
-              opacity: 1 - i * 0.11,
-            } as CSSProperties
-          }
-        />
-      ))}
+      <g className="recurso-grupo">
+        {aneis.map((d, i) => (
+          <path
+            key={i}
+            d={d}
+            className="recurso-traco recurso-desenha recurso-anel"
+            strokeWidth={i === 0 ? 1.3 : 1}
+            style={
+              {
+                "--comp": 620,
+                "--atraso": `${i * 90}ms`,
+                "--i": i,
+                opacity: 1 - i * 0.11,
+              } as CSSProperties
+            }
+          />
+        ))}
+      </g>
     </svg>
   );
 }

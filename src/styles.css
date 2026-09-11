@@ -747,9 +747,86 @@ html[data-trocando-tema] .cortina {
   opacity: 0.22;
 }
 
-/* O card inteiro é um link: ao passar o mouse, o desenho ganha presença. */
-.recurso-card:hover .recurso-arte {
-  opacity: 0.3;
+/* O card inteiro é um link: ao passar o mouse, ao focar pelo teclado ou
+   ao tocar, o desenho ganha presença e começa a se mover. */
+.recurso-card:hover .recurso-arte,
+.recurso-card:focus-visible .recurso-arte,
+.recurso-card:active .recurso-arte {
+  opacity: 0.32;
+}
+
+/* Movimento no hover.
+
+   As animações ficam declaradas o tempo todo, pausadas, e só rodam
+   enquanto o card está ativo. Assim, ao tirar o mouse, o desenho para
+   onde está em vez de saltar de volta ao começo — e retoma dali no
+   próximo hover.
+
+   Nada aqui mexe em opacidade: a entrada das estrelas já usa opacity, e
+   uma animação sobre a mesma propriedade as mostraria antes da hora.
+   O cintilar usa fill-opacity, que é outra propriedade. */
+.recurso-grupo,
+.recurso-anel,
+.recurso-estrela {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* O conjunto deriva de leve, com transição — volta suave ao sair. */
+.recurso-grupo {
+  transition: transform 900ms var(--ease-soft);
+}
+
+.recurso-card:hover .recurso-grupo,
+.recurso-card:focus-visible .recurso-grupo,
+.recurso-card:active .recurso-grupo {
+  transform: translate(-3%, 4%) rotate(-3deg);
+}
+
+/* Curva de nível: os anéis respiram em sequência, de dentro para fora,
+   como uma onda subindo o relevo. */
+.recurso-anel {
+  animation: recurso-onda 2.8s ease-in-out infinite;
+  animation-delay: calc(var(--i, 0) * 140ms);
+  animation-play-state: paused;
+}
+
+@keyframes recurso-onda {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+/* Carta celeste: cada estrela cintila no seu próprio tempo. */
+.recurso-estrela {
+  animation: recurso-cintila 1.9s ease-in-out infinite;
+  animation-delay: calc(var(--i, 0) * 230ms);
+  animation-play-state: paused;
+}
+
+@keyframes recurso-cintila {
+  0%,
+  100% {
+    transform: scale(1);
+    fill-opacity: 1;
+  }
+  50% {
+    transform: scale(1.9);
+    fill-opacity: 0.4;
+  }
+}
+
+.recurso-card:hover .recurso-anel,
+.recurso-card:focus-visible .recurso-anel,
+.recurso-card:active .recurso-anel,
+.recurso-card:hover .recurso-estrela,
+.recurso-card:focus-visible .recurso-estrela,
+.recurso-card:active .recurso-estrela {
+  animation-play-state: running;
 }
 
 .recurso-arte svg {
@@ -799,6 +876,15 @@ html[data-trocando-tema] .cortina {
   [data-revelar].revelada .recurso-acende {
     opacity: 1;
     transition: none;
+  }
+  .recurso-anel,
+  .recurso-estrela {
+    animation: none;
+  }
+  .recurso-card:hover .recurso-grupo,
+  .recurso-card:focus-visible .recurso-grupo,
+  .recurso-card:active .recurso-grupo {
+    transform: none;
   }
 }
 
