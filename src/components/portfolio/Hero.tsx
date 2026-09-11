@@ -70,15 +70,37 @@ export function Hero() {
         ))}
       </div>
 
-      <div className="mt-2 flex flex-wrap items-center gap-x-7 gap-y-2 border-t border-border pt-5">
+      <div className="mt-2 flex flex-wrap items-center gap-x-8 gap-y-4 border-t border-border pt-5">
         <span className="text-[0.7rem] uppercase tracking-[0.15em] text-muted-foreground">
           Passagens
         </span>
-        {hero.companies.map((c) => (
-          <span key={c} className="display text-base text-muted-foreground">
-            {c}
-          </span>
-        ))}
+        {hero.companies.map((c) => {
+          if (!c.logo) {
+            return (
+              <span key={c.nome} className="display text-base text-muted-foreground">
+                {c.nome}
+              </span>
+            );
+          }
+          // O logo é máscara, não imagem: pinta com a cor do texto e acompanha o tema.
+          const altura = c.altura ?? 24;
+          const mascara = `url(${c.logo}) center / contain no-repeat`;
+          return (
+            <span
+              key={c.nome}
+              role="img"
+              aria-label={c.nome}
+              title={c.nome}
+              className="block shrink-0 bg-muted-foreground transition-colors hover:bg-foreground"
+              style={{
+                width: `${Math.round(altura * (c.proporcao ?? 1))}px`,
+                height: `${altura}px`,
+                mask: mascara,
+                WebkitMask: mascara,
+              }}
+            />
+          );
+        })}
       </div>
     </section>
   );

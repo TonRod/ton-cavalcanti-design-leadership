@@ -410,7 +410,23 @@ export const hero = {
     { label: "Resposta · Bradesco", value: "24h → 15min" },
     { label: "Lançamento · Motrix", value: "−30%" },
   ],
-  companies: ["Try", "Bradesco", "Globo", "Motrix", "Natura", "Porto Seguro"],
+  /**
+   * Marcas na tira do hero, em ordem cronológica. Cada logo é um PNG
+   * monocromático usado como máscara: ele assume a cor do texto, então
+   * funciona nos dois temas sem uma versão para cada.
+   *
+   * `proporcao` é largura ÷ altura da marca recortada. `altura`
+   * compensa o peso visual: marcas cheias parecem maiores que as vazadas.
+   * Sem `logo`, o nome aparece em texto até o arquivo chegar.
+   */
+  companies: [
+    { nome: "Livelo", logo: "/hero/logos/livelo.png", proporcao: 1 },
+    { nome: "Saint Paul", logo: "/hero/logos/stpaul.png", proporcao: 1 },
+    { nome: "Bradesco", logo: "/hero/logos/bradesco.png", proporcao: 1.05 },
+    { nome: "Globo", logo: "/hero/logos/globo.png", proporcao: 1 },
+    { nome: "Natura", logo: "/hero/logos/natura.png", proporcao: 1.32, altura: 30 },
+    { nome: "PortoBank", logo: "/hero/logos/porto.png", proporcao: 5, altura: 20 },
+  ] as { nome: string; logo?: string; proporcao?: number; altura?: number }[],
   portrait: {
     /* WebP, e não AVIF: o AVIF gerado pelo sips decodifica com o canal alfa
        todo transparente — a foto simplesmente não aparece. Verificado
