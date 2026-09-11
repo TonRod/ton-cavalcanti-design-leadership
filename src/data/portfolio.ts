@@ -422,8 +422,10 @@ export const hero = {
   companies: [
     { nome: "Livelo", logo: "/hero/logos/livelo.png", proporcao: 1 },
     { nome: "Saint Paul", logo: "/hero/logos/stpaul.png", proporcao: 1 },
-    { nome: "Bradesco", logo: "/hero/logos/bradesco.png", proporcao: 1.05 },
+    { nome: "Bradesco BBI", logo: "/hero/logos/bbi.png", proporcao: 5.6, altura: 18 },
     { nome: "Globo", logo: "/hero/logos/globo.png", proporcao: 1 },
+    { nome: "Cielo", logo: "/hero/logos/cielo.png", proporcao: 2.87, altura: 22 },
+    { nome: "Credsystem", logo: "/hero/logos/credsystem.png", proporcao: 3.73, altura: 20 },
     { nome: "Natura", logo: "/hero/logos/natura.png", proporcao: 1.32, altura: 30 },
     { nome: "PortoBank", logo: "/hero/logos/porto.png", proporcao: 5, altura: 20 },
   ] as { nome: string; logo?: string; proporcao?: number; altura?: number }[],
