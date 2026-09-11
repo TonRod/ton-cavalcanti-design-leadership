@@ -35,6 +35,7 @@ export const mentoriaLinks = {
   instagram: "https://www.instagram.com/pinguinsquevoam/",
   instagramLabel: "@pinguinsquevoam",
   linkedin: "https://www.linkedin.com/in/toncavalcanti/",
+  medium: "https://medium.com/@elitonrodrigo",
   linkedinLabel: "LinkedIn",
 };
 
@@ -158,7 +159,11 @@ export interface MentoriaRecurso {
   tipo: MentoriaRecursoTipo;
   title: string;
   description: string;
-  /** Esforço ou duração — ajuda a pessoa a decidir se começa agora. */
+  /**
+   * Esforço ou duração — ajuda a pessoa a decidir se começa agora. Nos artigos,
+   * o tempo vem da contagem de palavras do texto a 265 por minuto, o mesmo
+   * critério do Medium, seguido do ano de publicação.
+   */
   meta: string;
   url: string;
   cta: string;
@@ -176,10 +181,28 @@ export const mentoriaRecursos: MentoriaRecurso[] = [
   },
   {
     tipo: "Artigo",
+    title: "Jornadas de Cliente Cíclicas e Multicamadas",
+    description:
+      "O que um mapa de jornada cíclico e em camadas mostra que o Service Blueprint tradicional deixa de fora.",
+    meta: "4 min · 2025",
+    url: "https://medium.com/@elitonrodrigo/jornadas-de-cliente-c%C3%ADclicas-e-multicamadas-f9392575c75b",
+    cta: "Ler no Medium",
+  },
+  {
+    tipo: "Artigo",
+    title: "A jornada do cliente pelo nível de dopamina",
+    description:
+      "Como os níveis de dopamina influenciam emoções e decisões ao longo da jornada do cliente.",
+    meta: "5 min · 2024",
+    url: "https://medium.com/@elitonrodrigo/a-jornada-do-cliente-representado-pelo-seu-n%C3%ADvel-de-dopamina-a6a4bc5232b4",
+    cta: "Ler no Medium",
+  },
+  {
+    tipo: "Artigo",
     title: "Designers não sabem dizer não",
     description:
-      "Sobre o custo de aceitar tudo, e como recusar escopo sem queimar a relação com quem pediu.",
-    meta: "Leitura de 6 min",
+      "Pressão por entrega, sobrecarga de demandas e medo de desagradar: por que o não custa tanto para designers.",
+    meta: "1 min · 2024",
     url: "https://medium.com/@elitonrodrigo/designers-n%C3%A3o-sabem-dizer-n%C3%A3o-91d27c40ca57",
     cta: "Ler no Medium",
   },
@@ -187,9 +210,36 @@ export const mentoriaRecursos: MentoriaRecurso[] = [
     tipo: "Artigo",
     title: "Uma I.A. para cada etapa do seu Design Thinking",
     description:
-      "Onde a inteligência artificial ajuda de verdade em cada fase do processo, e onde ela atrapalha mais do que acelera.",
-    meta: "Leitura de 8 min",
+      "Um mapa de ferramentas de IA para cada fase do Design Thinking, sem a pretensão de ser completo — surge uma nova por semana.",
+    meta: "5 min · 2024",
     url: "https://medium.com/@elitonrodrigo/uma-i-a-para-cada-etapa-do-seu-design-thinking-19ccde7fb320",
+    cta: "Ler no Medium",
+  },
+  {
+    tipo: "Artigo",
+    title: "Psicologia + UX/UI Design",
+    description:
+      "Como princípios da psicologia tornam cada clique, rolagem e gesto mais natural e intuitivo.",
+    meta: "2 min · 2024",
+    url: "https://medium.com/@elitonrodrigo/psicologia-ux-ui-design-a-revolu%C3%A7%C3%A3o-silenciosa-que-transforma-o-mundo-digital-85fdc4ee950c",
+    cta: "Ler no Medium",
+  },
+  {
+    tipo: "Artigo",
+    title: "Seu design enxerga bem?",
+    description:
+      "Um resultado fora da curva num teste de usabilidade, e o que ele revelou sobre quem a interface estava deixando de fora.",
+    meta: "3 min · 2018",
+    url: "https://medium.com/@elitonrodrigo/seu-design-enxerga-bem-292a5d8afcae",
+    cta: "Ler no Medium",
+  },
+  {
+    tipo: "Artigo",
+    title: "Como meu TDAH me ajuda em UX",
+    description:
+      "Como o TDAH moldou minha relação com interfaces, e por que valorizo tanto a interação que se explica sozinha.",
+    meta: "2 min · 2017",
+    url: "https://medium.com/@elitonrodrigo/como-meu-tdah-me-ajuda-em-ux-2c0bd47599b2",
     cta: "Ler no Medium",
   },
 ];
