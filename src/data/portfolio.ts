@@ -420,10 +420,12 @@ export const hero = {
    * Sem `logo`, o nome aparece em texto até o arquivo chegar.
    */
   companies: [
+    { nome: "Try", logo: "/hero/logos/try.png", proporcao: 1.41 },
     { nome: "Livelo", logo: "/hero/logos/livelo.png", proporcao: 1 },
     { nome: "Saint Paul", logo: "/hero/logos/stpaul.png", proporcao: 1 },
     { nome: "Bradesco BBI", logo: "/hero/logos/bbi.png", proporcao: 5.6, altura: 18 },
     { nome: "Globo", logo: "/hero/logos/globo.png", proporcao: 1 },
+    { nome: "Motrix", logo: "/hero/logos/motrix.png", proporcao: 1.4 },
     { nome: "Cielo", logo: "/hero/logos/cielo.png", proporcao: 2.87, altura: 22 },
     { nome: "Credsystem", logo: "/hero/logos/credsystem.png", proporcao: 3.73, altura: 20 },
     { nome: "Natura", logo: "/hero/logos/natura.png", proporcao: 1.32, altura: 30 },
