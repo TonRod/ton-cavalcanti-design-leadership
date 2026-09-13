@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { siteUrl } from "@/data/portfolio";
 import { SiteHeader } from "@/components/portfolio/SiteHeader";
 import { Hero } from "@/components/portfolio/Hero";
 import { LeadershipSection } from "@/components/portfolio/LeadershipSection";
@@ -7,8 +8,25 @@ import { TimelineSection } from "@/components/portfolio/TimelineSection";
 import { ResumeSection } from "@/components/portfolio/ResumeSection";
 import { ContactSection } from "@/components/portfolio/ContactSection";
 
+const pageTitle = "Ton Cavalcanti · Liderança de Design e Estratégia de Produto";
+const pageDescription =
+  "16 anos em produto, mais de 6 liderando times de design em Try, Bradesco, Globo, Motrix, Natura e Porto Seguro. Cases com resultado medido em CSAT, NPS, tempo de resposta e abandono de jornada.";
+const pageUrl = `${siteUrl}/`;
+
 export const Route = createFileRoute("/")({
   component: Index,
+  head: () => ({
+    meta: [
+      { title: pageTitle },
+      { name: "description", content: pageDescription },
+      { property: "og:title", content: pageTitle },
+      { property: "og:description", content: pageDescription },
+      { property: "og:url", content: pageUrl },
+      { name: "twitter:title", content: pageTitle },
+      { name: "twitter:description", content: pageDescription },
+    ],
+    links: [{ rel: "canonical", href: pageUrl }],
+  }),
 });
 
 function Index() {

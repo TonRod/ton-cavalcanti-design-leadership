@@ -118,38 +118,28 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "google-site-verification", content: "dlvXDkWxxs0bpieFPKxB9jNQ0LBGUiLvMvvuYVueoK8" },
-      { title: "Ton Cavalcanti" },
-      {
-        name: "description",
-        content:
-          "Personal design leadership portfolio showcasing experience in product strategy and team management.",
-      },
+      // Valores de reserva. Cada página define os seus e sobrescreve estes:
+      // o roteador mantém a primeira ocorrência partindo da rota mais funda.
+      // og:url e canonical ficam só nas páginas — links não são deduplicados.
+      { title: siteTitle },
+      { name: "description", content: siteDescription },
       { name: "author", content: "Éliton R. Cavalcanti" },
-      { property: "og:title", content: "Ton Cavalcanti" },
-      {
-        property: "og:description",
-        content:
-          "Personal design leadership portfolio showcasing experience in product strategy and team management.",
-      },
+      { property: "og:title", content: siteTitle },
+      { property: "og:description", content: siteDescription },
       { property: "og:type", content: "profile" },
-      { property: "og:url", content: siteUrl },
       { property: "og:site_name", content: "Ton Cavalcanti" },
       { property: "og:locale", content: "pt_BR" },
-      { property: "og:image", content: portraitUrl },
-      { property: "og:image:width", content: "768" },
-      { property: "og:image:height", content: "1365" },
+      { property: "og:image", content: `${siteUrl}/og/home.jpg` },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
       {
         property: "og:image:alt",
-        content: "Retrato profissional de Éliton (Ton) Cavalcanti",
+        content: "Ton Cavalcanti — liderança de design e estratégia de produto",
       },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Ton Cavalcanti" },
-      {
-        name: "twitter:description",
-        content:
-          "Personal design leadership portfolio showcasing experience in product strategy and team management.",
-      },
-      { name: "twitter:image", content: portraitUrl },
+      { name: "twitter:title", content: siteTitle },
+      { name: "twitter:description", content: siteDescription },
+      { name: "twitter:image", content: `${siteUrl}/og/home.jpg` },
     ],
     scripts: [
       {

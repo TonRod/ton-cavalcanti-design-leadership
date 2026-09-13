@@ -40,7 +40,13 @@ export const Route = createFileRoute("/mentoria")({
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: pageTitle },
       { name: "twitter:description", content: pageDescription },
+      { property: "og:image", content: `${siteUrl}/og/mentoria.jpg` },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "Mentoria em Product Design com Ton Cavalcanti" },
+      { name: "twitter:image", content: `${siteUrl}/og/mentoria.jpg` },
     ],
+    links: [{ rel: "canonical", href: `${siteUrl}/mentoria` }],
   }),
 });
 
