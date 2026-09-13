@@ -1,10 +1,83 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { flushSync } from "react-dom";
 import { Maximize2, ArrowLeft, ArrowRight } from "lucide-react";
 import { CaseReader } from "@/components/portfolio/CaseReader";
 import { cases, type CaseStudy } from "@/data/portfolio";
 
+/** Nome compartilhado pelo card clicado e pelo leitor durante a transição. */
+const MOLDURA = "case-moldura";
+
+type Transicao = { finished: Promise<void> };
+
+/**
+ * Roda `atualizar` dentro de uma View Transition, marcando no <html> se é
+ * abertura ou fechamento (o CSS usa isso para durações diferentes).
+ * Devolve null quando não há suporte ou o usuário pede menos movimento.
+ */
+function comTransicao(atualizar: () => void, modo: "abrir" | "fechar"): Transicao | null {
+  const iniciar = (
+    document as Document & { startViewTransition?: (cb: () => void) => Transicao }
+  ).startViewTransition?.bind(document);
+  if (!iniciar || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return null;
+  const raiz = document.documentElement;
+  raiz.dataset["vtCase"] = modo;
+  const t = iniciar(atualizar);
+  t.finished.finally(() => delete raiz.dataset["vtCase"]);
+  return t;
+}
+
+function naTela(el: HTMLElement) {
+  const r = el.getBoundingClientRect();
+  return r.bottom > 0 && r.top < window.innerHeight && r.right > 0 && r.left < window.innerWidth;
+}
+
 export function CasesSection() {
   const [active, setActive] = useState<CaseStudy | null>(null);
+  const [entradaSimples, setEntradaSimples] = useState(false);
+  const cardButtonRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+
+  // Abrir: o card recebe o nome antes da captura do estado antigo; dentro da
+  // transição o nome passa para o leitor. A troca precisa ser síncrona
+  // (flushSync), senão o navegador captura o mesmo estado duas vezes.
+  const abrir = (c: CaseStudy) => {
+    const card = cardButtonRefs.current[c.id];
+    if (card) card.style.setProperty("view-transition-name", MOLDURA);
+    const t = card
+      ? comTransicao(() => {
+          card.style.removeProperty("view-transition-name");
+          flushSync(() => {
+            setEntradaSimples(false);
+            setActive(c);
+          });
+        }, "abrir")
+      : null;
+    if (!t) {
+      card?.style.removeProperty("view-transition-name");
+      setEntradaSimples(true);
+      setActive(c);
+    }
+  };
+
+  // Fechar: a moldura encolhe de volta ao card do case aberto. Se o card não
+  // está na tela (ex.: navegou para outro case no carrossel), só dissolve.
+  const fechar = () => {
+    if (!active) return;
+    const card = cardButtonRefs.current[active.id] ?? null;
+    const alvo = card && naTela(card) ? card : null;
+    const t = comTransicao(() => {
+      alvo?.style.setProperty("view-transition-name", MOLDURA);
+      flushSync(() => setActive(null));
+    }, "fechar");
+    const devolverFoco = () => {
+      alvo?.style.removeProperty("view-transition-name");
+      card?.focus({ preventScroll: true });
+    };
+    if (t) t.finished.finally(devolverFoco);
+    else {
+      setActive(null);
+      devolverFoco();
+    }
+  };
   const trackRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [focused, setFocused] = useState<boolean[]>(() => cases.map(() => true));
@@ -129,7 +202,10 @@ export function CasesSection() {
               }}
             >
               <button
-                onClick={() => setActive(c)}
+                ref={(el) => {
+                  cardButtonRefs.current[c.id] = el;
+                }}
+                onClick={() => abrir(c)}
                 aria-label={`Ver case ${c.title}`}
                 className="group relative flex w-full flex-col overflow-hidden rounded-lg border border-border bg-surface text-left transition-transform duration-300 hover:-translate-y-1"
               >
@@ -206,7 +282,8 @@ export function CasesSection() {
         <CaseReader
           caso={active}
           proximo={next}
-          onFechar={() => setActive(null)}
+          entradaSimples={entradaSimples}
+          onFechar={fechar}
           onIrPara={setActive}
           onContato={goToContact}
         />

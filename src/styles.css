@@ -897,3 +897,84 @@ html[data-trocando-tema] .cortina {
   position: relative;
   height: 100%;
 }
+
+/* Abertura do case: o card clicado vira o leitor.
+
+   O card e o leitor dividem o nome `case-moldura`; o navegador interpola a
+   caixa de um até a do outro. Três cuidados:
+
+   1. Cresce a moldura, não a imagem. As fotos do card e do leitor ficam em
+      `object-fit: cover` dentro de uma caixa que recorta — sem isso a capa
+      4:3 esticaria até a proporção da janela no meio do caminho.
+   2. O conteúdo chega depois. A foto do card some cedo; a do leitor só
+      aparece, subindo 12px, na reta final do crescimento.
+   3. Fechar é mais curto que abrir: quem fecha já decidiu sair.
+
+   Curva ease-out padrão, escolhida por medição: desacelera ao chegar (a
+   caixa não pode bater na borda da tela) sem arranque — o maior avanço é
+   16% do percurso a cada 10% do tempo. A curva anterior percorria 68% do
+   caminho no primeiro quarto e se arrastava no resto. O conteúdo entra
+   quando a moldura está em ~80%. */
+html[data-vt-case]::view-transition-group(case-moldura) {
+  animation-duration: 460ms;
+  animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
+  overflow: clip;
+  background: var(--background);
+}
+
+html[data-vt-case]::view-transition-old(case-moldura),
+html[data-vt-case]::view-transition-new(case-moldura) {
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+html[data-vt-case="abrir"]::view-transition-old(case-moldura) {
+  animation: vt-case-sai 200ms ease-out both;
+}
+html[data-vt-case="abrir"]::view-transition-new(case-moldura) {
+  animation: vt-case-chega 190ms ease-out 270ms both;
+}
+
+html[data-vt-case="fechar"]::view-transition-group(case-moldura) {
+  animation-duration: 300ms;
+}
+html[data-vt-case="fechar"]::view-transition-old(case-moldura) {
+  animation: vt-case-sai 120ms ease-out both;
+}
+html[data-vt-case="fechar"]::view-transition-new(case-moldura) {
+  animation: vt-case-surge 160ms ease-out 140ms both;
+}
+
+/* A varredura circular do tema está declarada sem escopo em
+   `::view-transition-new(root)`; aqui a página de fundo não pode varrer. */
+html[data-vt-case]::view-transition-new(root) {
+  animation: none;
+}
+
+@keyframes vt-case-sai {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes vt-case-chega {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+@keyframes vt-case-surge {
+  from {
+    opacity: 0;
+  }
+}
+
+/* Sem View Transition: o leitor entra só com um fade curto. */
+@keyframes leitor-fade {
+  from {
+    opacity: 0;
+  }
+}
+.leitor-fade {
+  animation: leitor-fade 150ms ease-out both;
+}

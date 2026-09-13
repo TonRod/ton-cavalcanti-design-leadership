@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { ArrowLeft, ArrowRight, X } from "lucide-react";
 import type { CaseEvidence, CaseStudy } from "@/data/portfolio";
 
@@ -56,12 +56,15 @@ function montarPaineis(c: CaseStudy): Painel[] {
 export function CaseReader({
   caso,
   proximo,
+  entradaSimples = false,
   onFechar,
   onIrPara,
   onContato,
 }: {
   caso: CaseStudy;
   proximo: CaseStudy | null;
+  /** Sem View Transition disponível: entra só com um fade curto. */
+  entradaSimples?: boolean;
   onFechar: () => void;
   onIrPara: (c: CaseStudy) => void;
   onContato: () => void;
@@ -200,7 +203,9 @@ export function CaseReader({
       role="dialog"
       aria-modal="true"
       aria-label={`Case ${caso.index}: ${caso.title}`}
-      className="fixed inset-0 z-50 flex flex-col bg-background"
+      className={`fixed inset-0 z-50 flex flex-col bg-background ${entradaSimples ? "leitor-fade" : ""}`}
+      // Mesmo nome do card clicado: o navegador anima um virando o outro.
+      style={{ viewTransitionName: "case-moldura" } as CSSProperties}
     >
       {/* Moldura fixa: some do caminho da leitura, nunca da tela. */}
       <div className="shrink-0 border-b border-border px-6 pt-4">
