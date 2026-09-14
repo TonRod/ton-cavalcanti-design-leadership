@@ -85,8 +85,11 @@ export function CasesSection() {
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
   const activeIndex = active ? cases.findIndex((c) => c.id === active.id) : -1;
+  // No último case o "próximo" volta ao primeiro: o fim da leitura vira atalho
+  // para recomeçar, em vez de um beco sem saída.
+  const ultimo = activeIndex === cases.length - 1;
   const next =
-    activeIndex >= 0 && activeIndex < cases.length - 1 ? (cases[activeIndex + 1] ?? null) : null;
+    activeIndex < 0 || cases.length < 2 ? null : (cases[ultimo ? 0 : activeIndex + 1] ?? null);
 
   const updateScrollState = useCallback(() => {
     const el = trackRef.current;
@@ -282,6 +285,7 @@ export function CasesSection() {
         <CaseReader
           caso={active}
           proximo={next}
+          recomeca={ultimo && cases.length > 1}
           entradaSimples={entradaSimples}
           onFechar={fechar}
           onIrPara={setActive}

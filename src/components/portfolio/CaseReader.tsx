@@ -32,9 +32,10 @@ import type { CaseEvidence, CaseStudy } from "@/data/portfolio";
  * fica na medida de sempre e as imagens ganham uma coluna com o resto,
  * deixando 200px da etapa seguinte à vista — o bastante para ler o nome dela.
  * Medido nas 14 etapas com evidência a 1440px: evidência visível sem rolar
- * de 92% para 100%, e diagramas de uma imagem de ~400px para 716px (o
- * blueprint da Livelo sai de 0,30 para 0,53 de escala). Abaixo de 1280px a
- * coluna ficaria menor que o painel de hoje, então nada muda.
+ * de 92% para 100%. As imagens aparecem a 50% do tamanho que caberia na
+ * coluna, por decisão de desenho — cheias, um diagrama ia a 716px e disputava
+ * com o texto. Abaixo de 1280px a coluna ficaria menor que o painel de hoje,
+ * então nada muda.
  */
 
 // Mesmo corte do `xl:` do Tailwind, usado nas classes da etapa larga.
@@ -86,11 +87,12 @@ function montarPaineis(c: CaseStudy): Painel[] {
   return lista;
 }
 
-function nomeDoPainel(p: Painel, temProximo: boolean): string {
+function nomeDoPainel(p: Painel, temProximo: boolean, recomeca: boolean): string {
   if (p.tipo === "abertura") return "Abertura";
   if (p.tipo === "texto") return p.rotulo;
   if (p.tipo === "metricas") return "Em números";
-  return temProximo ? "Próximo case" : "Fim dos cases";
+  if (!temProximo) return "Fim dos cases";
+  return recomeca ? "Primeiro case" : "Próximo case";
 }
 
 function temEvidencia(p: Painel | undefined): boolean {
@@ -121,7 +123,7 @@ function medidasDaFigura(ev: CaseEvidence): { estilo?: CSSProperties; colunasDoP
   };
 }
 const FIGURA_LARGA =
-  "xl:w-[min(100%,calc((100cqh_-_12vh_-_4.5rem)*var(--ar)_+_var(--vao)),calc(var(--nat)_+_var(--vao)))]";
+  "xl:w-[calc(var(--escala,1)*min(100%,calc((100cqh_-_12vh_-_4.5rem)*var(--ar)_+_var(--vao)),calc(var(--nat)_+_var(--vao))))]";
 
 function maisProximoDaEsquerda(pista: HTMLElement): number {
   let melhor = 0;
@@ -139,6 +141,7 @@ function maisProximoDaEsquerda(pista: HTMLElement): number {
 export function CaseReader({
   caso,
   proximo,
+  recomeca = false,
   entradaSimples = false,
   onFechar,
   onIrPara,
@@ -146,6 +149,8 @@ export function CaseReader({
 }: {
   caso: CaseStudy;
   proximo: CaseStudy | null;
+  /** No último case, `proximo` é o primeiro: o fim vira atalho para recomeçar. */
+  recomeca?: boolean;
   /** Sem View Transition disponível: entra só com um fade curto. */
   entradaSimples?: boolean;
   onFechar: () => void;
@@ -161,6 +166,10 @@ export function CaseReader({
   const [semTransicao, setSemTransicao] = useState(-1);
   const largoRef = useRef(-1);
   const navegando = useRef(false);
+  // Temporizador de "a rolagem parou". Fica num ref para a navegação poder
+  // cancelá-lo: se ele disparasse entre a seta e o primeiro evento da nova
+  // rolagem, acharia que parou na etapa antiga e o ponto voltaria um passo.
+  const espera = useRef(0);
   const ancora = useRef<{ i: number; x: number } | null>(null);
   const paineis = useMemo(() => montarPaineis(caso), [caso]);
   const total = paineis.length;
@@ -209,6 +218,7 @@ export function CaseReader({
       const alvo = pista.children[k] as HTMLElement | undefined;
       if (!alvo) return;
       setAtual(k);
+      window.clearTimeout(espera.current);
       if (Math.abs(alvo.offsetLeft - pista.scrollLeft) < 1) return assentar();
       navegando.current = true;
       pista.scrollTo({ left: alvo.offsetLeft, behavior: semMovimento() ? "auto" : "smooth" });
@@ -228,6 +238,18 @@ export function CaseReader({
     fecharRef.current?.focus();
   }, [caso.id]);
 
+  // As imagens do case carregam e decodificam assim que o leitor abre. Antes
+  // eram lazy numa coluna de altura zero: só começavam a baixar quando a etapa
+  // abria, e apareciam depois do movimento. Agora já estão prontas quando a
+  // etapa é selecionada, e entram junto com a abertura.
+  useEffect(() => {
+    const pista = pistaRef.current;
+    if (!pista) return;
+    pista.querySelectorAll<HTMLImageElement>("figure img").forEach((im) => {
+      im.decode?.().catch(() => {});
+    });
+  }, [caso.id]);
+
   // Trava a rolagem da página atrás do leitor.
   useEffect(() => {
     const anterior = document.body.style.overflow;
@@ -242,17 +264,16 @@ export function CaseReader({
   useEffect(() => {
     const pista = pistaRef.current;
     if (!pista) return;
-    let espera = 0;
     const aoRolar = () => {
       if (!navegando.current) {
         const n = maisProximoDaEsquerda(pista);
         setAtual((a) => (a === n ? a : n));
       }
-      window.clearTimeout(espera);
-      espera = window.setTimeout(assentar, 140);
+      window.clearTimeout(espera.current);
+      espera.current = window.setTimeout(assentar, 140);
     };
     const aoParar = () => {
-      window.clearTimeout(espera);
+      window.clearTimeout(espera.current);
       assentar();
     };
     pista.addEventListener("scroll", aoRolar, { passive: true });
@@ -260,7 +281,7 @@ export function CaseReader({
     return () => {
       pista.removeEventListener("scroll", aoRolar);
       pista.removeEventListener("scrollend", aoParar);
-      window.clearTimeout(espera);
+      window.clearTimeout(espera.current);
     };
   }, [caso.id, assentar]);
 
@@ -371,7 +392,7 @@ export function CaseReader({
         */}
         <div role="group" aria-label="Partes do case" className="-ml-[8.5px] flex items-center py-1">
           {paineis.map((p, i) => {
-            const nome = nomeDoPainel(p, Boolean(proximo));
+            const nome = nomeDoPainel(p, Boolean(proximo), recomeca);
             const ativo = i === atual;
             return (
               <button
@@ -472,9 +493,12 @@ export function CaseReader({
                     </p>
                   </div>
                   {p.imagens.length > 0 && (
+                    // `--escala`: as imagens ocupam metade do tamanho que caberia
+                    // na coluna. O fade usa o mesmo tempo da abertura da etapa e
+                    // começa com ela, para as imagens entrarem junto do movimento.
                     <div
-                      className={`mt-7 grid gap-6 ${ofuscar} [transition:opacity_var(--dur-state)_var(--ease-soft),filter_var(--dur-state)_var(--ease-soft)] xl:mt-0 xl:grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] xl:items-start xl:gap-x-6 ${
-                        aberto ? "xl:opacity-100 xl:delay-150" : "xl:max-h-0 xl:overflow-hidden xl:opacity-0"
+                      className={`mt-7 grid gap-6 [--escala:0.5] ${ofuscar} [transition:opacity_var(--dur-large)_var(--ease-soft),filter_var(--dur-large)_var(--ease-soft)] xl:mt-0 xl:grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] xl:items-start xl:gap-x-6 ${
+                        aberto ? "xl:opacity-100" : "xl:max-h-0 xl:overflow-hidden xl:opacity-0"
                       }`}
                     >
                       {p.imagens.map((ev, idx) => {
@@ -490,7 +514,8 @@ export function CaseReader({
                                 alt={ev.alt ?? ev.caption}
                                 width={ev.largura}
                                 height={ev.altura}
-                                loading="lazy"
+                                loading="eager"
+                                decoding="async"
                                 className="h-auto w-full rounded-md border border-border"
                               />
                               {ev.par && (
@@ -499,7 +524,8 @@ export function CaseReader({
                                   alt={ev.par.alt}
                                   width={ev.par.largura}
                                   height={ev.par.altura}
-                                  loading="lazy"
+                                  loading="eager"
+                                  decoding="async"
                                   className="h-auto w-full rounded-md border border-border"
                                 />
                               )}
@@ -535,7 +561,7 @@ export function CaseReader({
                 <div className="flex max-w-[calc(min(48ch,90vw)_-_4rem)] flex-col sm:max-w-[calc(min(48ch,90vw)_-_5rem)]">
                   {proximo ? (
                     <>
-                      <p className="kicker mb-5">Próximo case</p>
+                      <p className="kicker mb-5">{recomeca ? "Primeiro case" : "Próximo case"}</p>
                       <div className={`flex flex-col ${ofuscar} ${TRANSICAO_FILTRO}`}>
                         <h3 className="display text-2xl">{proximo.title}</h3>
                         <p className="mt-2 text-sm text-muted-foreground">
