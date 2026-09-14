@@ -12,6 +12,12 @@ import type { CaseEvidence, CaseStudy } from "@/data/portfolio";
  * Cada capítulo ocupa um painel de 46ch, a mesma medida curta usada na
  * página de mentoria: o respiro faz a pausa que a régua de um bloco único
  * não fazia.
+ *
+ * O painel atual é o que está encostado na borda esquerda. Antes era o do
+ * centro da tela, mas no desktop cabem 3 a 5 painéis lado a lado e o olho lê
+ * a partir da esquerda: a barra acendia o 2º enquanto se lia o 1º, e como a
+ * rolagem não passa das bordas, o primeiro e os últimos nunca chegavam ao
+ * centro (medido no ar: a 2560px a barra parava em "Em números").
  */
 
 type Painel =
@@ -53,6 +59,13 @@ function montarPaineis(c: CaseStudy): Painel[] {
   return lista;
 }
 
+function nomeDoPainel(p: Painel, temProximo: boolean): string {
+  if (p.tipo === "abertura") return "Abertura";
+  if (p.tipo === "texto") return p.rotulo;
+  if (p.tipo === "metricas") return "Em números";
+  return temProximo ? "Próximo case" : "Fim dos cases";
+}
+
 export function CaseReader({
   caso,
   proximo,
@@ -85,7 +98,7 @@ export function CaseReader({
       const alvo = pista.children[Math.max(0, Math.min(total - 1, i))] as HTMLElement | undefined;
       if (!alvo) return;
       pista.scrollTo({
-        left: alvo.offsetLeft - (pista.clientWidth - alvo.clientWidth) / 2,
+        left: alvo.offsetLeft,
         behavior: semMovimento() ? "auto" : "smooth",
       });
     },
@@ -108,21 +121,19 @@ export function CaseReader({
     };
   }, []);
 
-  // O painel mais próximo do centro é o painel atual.
+  // O painel encostado na borda esquerda é o painel atual.
   useEffect(() => {
     const pista = pistaRef.current;
     if (!pista) return;
     let quadro = 0;
     const medir = () => {
       quadro = 0;
-      const centro = pista.scrollLeft + pista.clientWidth / 2;
       let melhor = 0;
       let dist = Infinity;
       Array.from(pista.children).forEach((filho, i) => {
-        const el = filho as HTMLElement;
-        const c = el.offsetLeft + el.clientWidth / 2;
-        if (Math.abs(c - centro) < dist) {
-          dist = Math.abs(c - centro);
+        const d = Math.abs((filho as HTMLElement).offsetLeft - pista.scrollLeft);
+        if (d < dist) {
+          dist = d;
           melhor = i;
         }
       });
@@ -227,32 +238,60 @@ export function CaseReader({
           </button>
         </div>
 
-        <div className="flex gap-1 py-3">
-          {paineis.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              onClick={() => irPara(i)}
-              aria-label={`Ir ao capítulo ${i + 1} de ${total}`}
-              aria-current={i === atual}
-              className={`h-[3px] flex-1 rounded-full transition-colors ${
-                i === atual ? "bg-foreground" : "bg-border"
-              }`}
-            />
-          ))}
+        {/*
+          Pontos, e não segmentos: a barra acesa ficava logo acima do traço do
+          painel atual, e as duas linhas de 3px pareciam dizer coisas
+          diferentes. Inativo é anel na cor de apoio (6,3:1 no claro, 6,7:1 no
+          escuro) — na cor da borda seria 1,3:1 e sumiria. O atual preenche: a
+          diferença é de forma, não só de tom. Ponto de 7px, alvo de 24px.
+          Ficam no topo e não no rodapé porque lá, com contador e setas, pedem
+          414px numa linha — não cabe em celular.
+        */}
+        <div role="group" aria-label="Partes do case" className="-ml-[8.5px] flex items-center py-1">
+          {paineis.map((p, i) => {
+            const nome = nomeDoPainel(p, Boolean(proximo));
+            const ativo = i === atual;
+            return (
+              <button
+                key={i}
+                type="button"
+                onClick={() => irPara(i)}
+                aria-label={`${nome}, parte ${i + 1} de ${total}`}
+                aria-current={ativo ? "step" : undefined}
+                title={nome}
+                className="group grid size-6 place-items-center rounded-full focus-visible:outline-2 focus-visible:outline-ring"
+              >
+                <span
+                  aria-hidden="true"
+                  className={`size-[7px] rounded-full transition-[background-color,box-shadow] duration-[var(--dur-state)] ease-[var(--ease-soft)] ${
+                    ativo
+                      ? "bg-foreground shadow-[inset_0_0_0_1.5px_var(--foreground)]"
+                      : "shadow-[inset_0_0_0_1.5px_var(--muted-foreground)] group-hover:shadow-[inset_0_0_0_1.5px_var(--foreground)]"
+                  }`}
+                />
+              </button>
+            );
+          })}
         </div>
       </div>
 
       <div
         ref={pistaRef}
-        className="no-scrollbar flex flex-1 snap-x snap-mandatory overflow-x-auto overflow-y-hidden"
+        className="no-scrollbar relative flex flex-1 snap-x snap-mandatory overflow-x-auto overflow-y-hidden"
       >
         {paineis.map((p, i) => (
           <section
             key={i}
             data-painel
-            className={`flex w-[min(48ch,90vw)] shrink-0 snap-center flex-col justify-start overflow-y-auto px-8 py-[6vh] sm:px-10 ${
-              i > 0 ? "border-l border-border" : ""
+            // Foco: o atual ganha o traço de 3px no alto; os outros apagam.
+            // A opacidade é diferente por tema porque o claro perde contraste
+            // mais rápido — .60 e .50 deixam o texto seguinte em ~4,5:1 nos dois.
+            // O painel final ocupa a tela toda: sem isso, os últimos capítulos
+            // nunca chegariam à borda esquerda.
+            className={`flex shrink-0 snap-start flex-col justify-start overflow-y-auto px-8 py-[6vh] transition-[opacity,box-shadow] duration-[var(--dur-state)] ease-[var(--ease-soft)] sm:px-10 ${
+              p.tipo === "fim" ? "w-[max(min(48ch,90vw),100%)]" : "w-[min(48ch,90vw)]"
+            } ${i > 0 ? "border-l border-border" : ""} ${
+              i === atual ? "shadow-[inset_0_3px_0_var(--foreground)]" : "opacity-60 dark:opacity-50"
             }`}
           >
             {p.tipo === "abertura" && (
@@ -325,7 +364,7 @@ export function CaseReader({
             )}
 
             {p.tipo === "fim" && (
-              <>
+              <div className="flex max-w-[calc(min(48ch,90vw)_-_4rem)] flex-col sm:max-w-[calc(min(48ch,90vw)_-_5rem)]">
                 {proximo ? (
                   <>
                     <p className="kicker mb-5">Próximo case</p>
@@ -357,7 +396,7 @@ export function CaseReader({
                     Vamos conversar
                   </button>
                 </div>
-              </>
+              </div>
             )}
           </section>
         ))}
