@@ -1,4 +1,13 @@
-import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+  type CSSProperties,
+  type FocusEvent,
+} from "react";
 import { ArrowLeft, ArrowRight, X } from "lucide-react";
 import type { CaseEvidence, CaseStudy } from "@/data/portfolio";
 
@@ -18,7 +27,25 @@ import type { CaseEvidence, CaseStudy } from "@/data/portfolio";
  * a partir da esquerda: a barra acendia o 2º enquanto se lia o 1º, e como a
  * rolagem não passa das bordas, o primeiro e os últimos nunca chegavam ao
  * centro (medido no ar: a 2560px a barra parava em "Em números").
+ *
+ * A partir de 1280px, a etapa atual que tem evidência ocupa a tela: o texto
+ * fica na medida de sempre e as imagens ganham uma coluna com o resto,
+ * deixando 200px da etapa seguinte à vista — o bastante para ler o nome dela.
+ * Medido nas 14 etapas com evidência a 1440px: evidência visível sem rolar
+ * de 92% para 100%, e diagramas de uma imagem de ~400px para 716px (o
+ * blueprint da Livelo sai de 0,30 para 0,53 de escala). Abaixo de 1280px a
+ * coluna ficaria menor que o painel de hoje, então nada muda.
  */
+
+// Mesmo corte do `xl:` do Tailwind, usado nas classes da etapa larga.
+const TELA_LARGA = "(min-width: 1280px)";
+
+// Fora de foco o conteúdo fica ilegível, com cara de conteúdo: somado ao
+// apagado do painel, 3px ainda se lia pelo contorno das palavras e 4px deixava
+// adivinhar a primeira; 5px vira textura (contraste de pico 1,5:1 nos dois
+// temas). O nome da etapa não desfoca, para a seguinte se anunciar.
+const OFUSCADO = "blur-[5px]";
+const TRANSICAO_FILTRO = "transition-[filter] duration-[var(--dur-state)] ease-[var(--ease-soft)]";
 
 type Painel =
   | { tipo: "abertura" }
@@ -66,6 +93,31 @@ function nomeDoPainel(p: Painel, temProximo: boolean): string {
   return temProximo ? "Próximo case" : "Fim dos cases";
 }
 
+function temEvidencia(p: Painel | undefined): boolean {
+  return p?.tipo === "texto" && p.imagens.length > 0;
+}
+
+// Na etapa larga a imagem cresce até caber na altura do painel, sem passar do
+// tamanho natural. A proporção vem dos dados, então vale antes de carregar.
+function estiloDaImagem(largura?: number, altura?: number): CSSProperties | undefined {
+  if (!largura || !altura) return undefined;
+  return { "--ar": (largura / altura).toFixed(4), "--nat": `${largura}px` } as CSSProperties;
+}
+const IMAGEM_LARGA = "xl:w-[min(100%,calc((100cqh_-_12vh_-_4.5rem)*var(--ar)),var(--nat))]";
+
+function maisProximoDaEsquerda(pista: HTMLElement): number {
+  let melhor = 0;
+  let dist = Infinity;
+  Array.from(pista.children).forEach((filho, i) => {
+    const d = Math.abs((filho as HTMLElement).offsetLeft - pista.scrollLeft);
+    if (d < dist) {
+      dist = d;
+      melhor = i;
+    }
+  });
+  return melhor;
+}
+
 export function CaseReader({
   caso,
   proximo,
@@ -85,29 +137,75 @@ export function CaseReader({
   const pistaRef = useRef<HTMLDivElement>(null);
   const fecharRef = useRef<HTMLButtonElement>(null);
   const [atual, setAtual] = useState(0);
+  // Etapa que ocupa a tela (-1: nenhuma). Muda só quando a rolagem para.
+  const [largo, setLargo] = useState(-1);
+  // Painel que encolhe sem animar, no quadro em que a rolagem é compensada.
+  const [semTransicao, setSemTransicao] = useState(-1);
+  const largoRef = useRef(-1);
+  const navegando = useRef(false);
+  const ancora = useRef<{ i: number; x: number } | null>(null);
   const paineis = useMemo(() => montarPaineis(caso), [caso]);
   const total = paineis.length;
 
   const semMovimento = () =>
     typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  // Mudar a largura enquanto o trilho rola faz a etapa seguinte pular embaixo
+  // do olho (medido: 484px, e a seta passa a mirar 485px além da borda). Por
+  // isso a largura só troca aqui, com a rolagem parada. Quando a etapa larga
+  // anterior está à esquerda — e portanto fora da tela —, ela encolhe seca e a
+  // rolagem recua o mesmo tanto antes da pintura: a etapa nova não se move.
+  // Quando está à direita, as duas animam juntas e somam a mesma largura.
+  const assentar = useCallback(() => {
+    navegando.current = false;
+    const pista = pistaRef.current;
+    if (!pista) return;
+    const n = maisProximoDaEsquerda(pista);
+    setAtual(n);
+    const alvo = window.matchMedia(TELA_LARGA).matches && temEvidencia(paineis[n]) ? n : -1;
+    const antes = largoRef.current;
+    if (alvo === antes) return;
+    if (antes >= 0 && antes < n) {
+      ancora.current = { i: n, x: (pista.children[n] as HTMLElement).getBoundingClientRect().left };
+      setSemTransicao(antes);
+    }
+    largoRef.current = alvo;
+    setLargo(alvo);
+  }, [paineis]);
+
+  useLayoutEffect(() => {
+    const a = ancora.current;
+    const pista = pistaRef.current;
+    if (!a || !pista) return;
+    ancora.current = null;
+    const el = pista.children[a.i] as HTMLElement | undefined;
+    if (el) pista.scrollLeft += el.getBoundingClientRect().left - a.x;
+    setSemTransicao(-1);
+  }, [largo]);
+
   const irPara = useCallback(
     (i: number) => {
       const pista = pistaRef.current;
       if (!pista) return;
-      const alvo = pista.children[Math.max(0, Math.min(total - 1, i))] as HTMLElement | undefined;
+      const k = Math.max(0, Math.min(total - 1, i));
+      const alvo = pista.children[k] as HTMLElement | undefined;
       if (!alvo) return;
-      pista.scrollTo({
-        left: alvo.offsetLeft,
-        behavior: semMovimento() ? "auto" : "smooth",
-      });
+      setAtual(k);
+      if (Math.abs(alvo.offsetLeft - pista.scrollLeft) < 1) return assentar();
+      navegando.current = true;
+      pista.scrollTo({ left: alvo.offsetLeft, behavior: semMovimento() ? "auto" : "smooth" });
     },
-    [total],
+    [total, assentar],
   );
 
   // Volta ao início ao trocar de case, sem animar o trajeto inteiro.
   useEffect(() => {
     setAtual(0);
+    setLargo(-1);
+    largoRef.current = -1;
+    setSemTransicao(-1);
+    ancora.current = null;
+    navegando.current = false;
     if (pistaRef.current) pistaRef.current.scrollLeft = 0;
     fecharRef.current?.focus();
   }, [caso.id]);
@@ -121,33 +219,39 @@ export function CaseReader({
     };
   }, []);
 
-  // O painel encostado na borda esquerda é o painel atual.
+  // Durante a rolagem só o destaque acompanha o painel da esquerda; a largura
+  // espera a rolagem parar (scrollend, ou 140ms sem evento onde não houver).
   useEffect(() => {
     const pista = pistaRef.current;
     if (!pista) return;
-    let quadro = 0;
-    const medir = () => {
-      quadro = 0;
-      let melhor = 0;
-      let dist = Infinity;
-      Array.from(pista.children).forEach((filho, i) => {
-        const d = Math.abs((filho as HTMLElement).offsetLeft - pista.scrollLeft);
-        if (d < dist) {
-          dist = d;
-          melhor = i;
-        }
-      });
-      setAtual((antes) => (antes === melhor ? antes : melhor));
-    };
+    let espera = 0;
     const aoRolar = () => {
-      if (!quadro) quadro = requestAnimationFrame(medir);
+      if (!navegando.current) {
+        const n = maisProximoDaEsquerda(pista);
+        setAtual((a) => (a === n ? a : n));
+      }
+      window.clearTimeout(espera);
+      espera = window.setTimeout(assentar, 140);
+    };
+    const aoParar = () => {
+      window.clearTimeout(espera);
+      assentar();
     };
     pista.addEventListener("scroll", aoRolar, { passive: true });
+    pista.addEventListener("scrollend", aoParar);
     return () => {
       pista.removeEventListener("scroll", aoRolar);
-      if (quadro) cancelAnimationFrame(quadro);
+      pista.removeEventListener("scrollend", aoParar);
+      window.clearTimeout(espera);
     };
-  }, [caso.id]);
+  }, [caso.id, assentar]);
+
+  // Cruzar os 1280px abre ou fecha a etapa larga sem esperar rolagem.
+  useEffect(() => {
+    const mq = window.matchMedia(TELA_LARGA);
+    mq.addEventListener("change", assentar);
+    return () => mq.removeEventListener("change", assentar);
+  }, [assentar]);
 
   // Roda vertical do mouse vira avanço horizontal — sem isso, quem não tem
   // giro lateral fica preso no primeiro painel. O painel que transborda rola
@@ -275,131 +379,176 @@ export function CaseReader({
         </div>
       </div>
 
+      {/* Contêiner de tamanho: a etapa larga e as imagens medem pela pista (cqw/cqh). */}
       <div
         ref={pistaRef}
-        className="no-scrollbar relative flex flex-1 snap-x snap-mandatory overflow-x-auto overflow-y-hidden"
+        className="no-scrollbar relative flex flex-1 snap-x snap-mandatory overflow-x-auto overflow-y-hidden [container-type:size] [overflow-anchor:none]"
       >
-        {paineis.map((p, i) => (
-          <section
-            key={i}
-            data-painel
-            // Foco: o atual ganha o traço de 3px no alto; os outros apagam.
-            // A opacidade é diferente por tema porque o claro perde contraste
-            // mais rápido — .60 e .50 deixam o texto seguinte em ~4,5:1 nos dois.
-            // O painel final ocupa a tela toda: sem isso, os últimos capítulos
-            // nunca chegariam à borda esquerda.
-            className={`flex shrink-0 snap-start flex-col justify-start overflow-y-auto px-8 py-[6vh] transition-[opacity,box-shadow] duration-[var(--dur-state)] ease-[var(--ease-soft)] sm:px-10 ${
-              p.tipo === "fim" ? "w-[max(min(48ch,90vw),100%)]" : "w-[min(48ch,90vw)]"
-            } ${i > 0 ? "border-l border-border" : ""} ${
-              i === atual ? "shadow-[inset_0_3px_0_var(--foreground)]" : "opacity-60 dark:opacity-50"
-            }`}
-          >
-            {p.tipo === "abertura" && (
-              <>
-                <p className="display text-5xl leading-none text-muted-foreground">{caso.index}</p>
-                <h3 className="display mt-5 text-3xl sm:text-4xl">{caso.title}</h3>
-                <p className="mt-3 text-sm text-muted-foreground">
-                  {caso.org} · {caso.year}
-                </p>
-                <p className="mt-7 font-serif text-sm leading-relaxed text-muted-foreground">
-                  {caso.role}
-                </p>
-                <div className="mt-8 border-t border-border pt-5">
-                  <p className="metric-num">{caso.highlight.value}</p>
-                  <p className="mt-2 text-[0.7rem] uppercase tracking-[0.15em] text-muted-foreground">
-                    {caso.highlight.label}
+        {paineis.map((p, i) => {
+          const emFoco = i === atual;
+          const ofuscar = emFoco ? "" : OFUSCADO;
+          const aberto = largo === i;
+          const largura =
+            p.tipo === "fim"
+              ? "w-[max(min(48ch,90vw),100%)]"
+              : aberto
+                ? "w-[min(48ch,90vw)] xl:w-[max(calc(2*min(48ch,90vw)),calc(100cqw_-_200px))]"
+                : "w-[min(48ch,90vw)]";
+          return (
+            <section
+              key={i}
+              data-painel
+              // Teclado entrando numa etapa ofuscada traz ela para o foco —
+              // senão se navegaria por um botão que não dá para ler.
+              onFocusCapture={(e: FocusEvent<HTMLElement>) => {
+                if (!emFoco && (e.target as HTMLElement).matches(":focus-visible")) irPara(i);
+              }}
+              // Foco: o atual ganha o traço de 3px no alto; os outros apagam.
+              // A opacidade é diferente por tema porque o claro perde contraste
+              // mais rápido — .60 e .50 deixam o texto seguinte em ~4,5:1 nos dois.
+              // O painel final ocupa a tela toda: sem isso, os últimos capítulos
+              // nunca chegariam à borda esquerda.
+              className={`flex shrink-0 snap-start flex-col justify-start overflow-x-hidden overflow-y-auto px-8 py-[6vh] sm:px-10 ${largura} ${
+                semTransicao === i
+                  ? "transition-none"
+                  : "[transition:width_var(--dur-large)_var(--ease-soft),opacity_var(--dur-state)_var(--ease-soft),box-shadow_var(--dur-state)_var(--ease-soft)]"
+              } ${i > 0 ? "border-l border-border" : ""} ${
+                emFoco ? "shadow-[inset_0_3px_0_var(--foreground)]" : "opacity-60 dark:opacity-50"
+              }`}
+            >
+              {p.tipo === "abertura" && (
+                <div className={`${ofuscar} ${TRANSICAO_FILTRO}`}>
+                  <p className="display text-5xl leading-none text-muted-foreground">{caso.index}</p>
+                  <h3 className="display mt-5 text-3xl sm:text-4xl">{caso.title}</h3>
+                  <p className="mt-3 text-sm text-muted-foreground">
+                    {caso.org} · {caso.year}
                   </p>
+                  <p className="mt-7 font-serif text-sm leading-relaxed text-muted-foreground">
+                    {caso.role}
+                  </p>
+                  <div className="mt-8 border-t border-border pt-5">
+                    <p className="metric-num">{caso.highlight.value}</p>
+                    <p className="mt-2 text-[0.7rem] uppercase tracking-[0.15em] text-muted-foreground">
+                      {caso.highlight.label}
+                    </p>
+                  </div>
                 </div>
-              </>
-            )}
+              )}
 
-            {p.tipo === "texto" && (
-              <>
-                <p className="kicker mb-5">{p.rotulo}</p>
-                <p className="font-serif text-base leading-relaxed sm:text-lg">{p.texto}</p>
-                {p.imagens.length > 0 && (
-                  <div className="mt-7 grid gap-6">
-                    {p.imagens.map((ev, idx) => (
-                      <figure key={idx}>
-                        <div className={ev.par ? "grid grid-cols-2 items-start gap-3" : undefined}>
-                          <img
-                            src={ev.src}
-                            alt={ev.alt ?? ev.caption}
-                            loading="lazy"
-                            className="w-full rounded-md border border-border"
-                          />
-                          {ev.par && (
+              {p.tipo === "texto" && (
+                // Com evidência, no desktop largo: texto na medida de sempre à
+                // esquerda (fixo enquanto as imagens rolam) e evidências no resto.
+                // Na etapa estreita a coluna de evidências fica recortada pela
+                // borda do painel e se revela quando ele abre, sem mexer no texto.
+                <div
+                  className={
+                    p.imagens.length
+                      ? "xl:grid xl:grid-cols-[calc(min(48ch,90vw)_-_5rem)_max(calc(min(48ch,90vw)_-_2.5rem),calc(100cqw_-_200px_-_min(48ch,90vw)_-_2.5rem))] xl:items-start xl:gap-x-10"
+                      : undefined
+                  }
+                >
+                  <div className={p.imagens.length ? "xl:sticky xl:top-0" : undefined}>
+                    <p className="kicker mb-5">{p.rotulo}</p>
+                    <p className={`font-serif text-base leading-relaxed sm:text-lg ${ofuscar} ${TRANSICAO_FILTRO}`}>
+                      {p.texto}
+                    </p>
+                  </div>
+                  {p.imagens.length > 0 && (
+                    <div
+                      className={`mt-7 grid gap-6 ${ofuscar} [transition:opacity_var(--dur-state)_var(--ease-soft),filter_var(--dur-state)_var(--ease-soft)] xl:mt-0 xl:grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] xl:items-start xl:gap-x-6 ${
+                        aberto ? "xl:opacity-100 xl:delay-150" : "xl:max-h-0 xl:overflow-hidden xl:opacity-0"
+                      }`}
+                    >
+                      {p.imagens.map((ev, idx) => (
+                        <figure key={idx}>
+                          <div className={ev.par ? "grid grid-cols-2 items-start gap-3" : undefined}>
                             <img
-                              src={ev.par.src}
-                              alt={ev.par.alt}
+                              src={ev.src}
+                              alt={ev.alt ?? ev.caption}
+                              width={ev.largura}
+                              height={ev.altura}
+                              style={estiloDaImagem(ev.largura, ev.altura)}
                               loading="lazy"
-                              className="w-full rounded-md border border-border"
+                              className={`h-auto w-full rounded-md border border-border ${ev.largura ? IMAGEM_LARGA : ""}`}
                             />
-                          )}
-                        </div>
-                        <figcaption className="mt-2 text-xs text-muted-foreground">
-                          {ev.caption}
-                        </figcaption>
-                      </figure>
+                            {ev.par && (
+                              <img
+                                src={ev.par.src}
+                                alt={ev.par.alt}
+                                width={ev.par.largura}
+                                height={ev.par.altura}
+                                style={estiloDaImagem(ev.par.largura, ev.par.altura)}
+                                loading="lazy"
+                                className={`h-auto w-full rounded-md border border-border ${ev.par.largura ? IMAGEM_LARGA : ""}`}
+                              />
+                            )}
+                          </div>
+                          <figcaption className="mt-2 text-xs text-muted-foreground">
+                            {ev.caption}
+                          </figcaption>
+                        </figure>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {p.tipo === "metricas" && (
+                <>
+                  <p className="kicker mb-5">Em números</p>
+                  <div className={`grid gap-4 ${ofuscar} ${TRANSICAO_FILTRO}`}>
+                    {caso.metricas.map((m) => (
+                      <div key={m.label} className="border-t border-border pt-3">
+                        <p className="display text-2xl">{m.value}</p>
+                        <p className="mt-1.5 text-[0.7rem] uppercase tracking-[0.15em] text-muted-foreground">
+                          {m.label}
+                        </p>
+                      </div>
                     ))}
                   </div>
-                )}
-              </>
-            )}
+                </>
+              )}
 
-            {p.tipo === "metricas" && (
-              <>
-                <p className="kicker mb-5">Em números</p>
-                <div className="grid gap-4">
-                  {caso.metricas.map((m) => (
-                    <div key={m.label} className="border-t border-border pt-3">
-                      <p className="display text-2xl">{m.value}</p>
-                      <p className="mt-1.5 text-[0.7rem] uppercase tracking-[0.15em] text-muted-foreground">
-                        {m.label}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </>
-            )}
+              {p.tipo === "fim" && (
+                <div className="flex max-w-[calc(min(48ch,90vw)_-_4rem)] flex-col sm:max-w-[calc(min(48ch,90vw)_-_5rem)]">
+                  {proximo ? (
+                    <>
+                      <p className="kicker mb-5">Próximo case</p>
+                      <div className={`flex flex-col ${ofuscar} ${TRANSICAO_FILTRO}`}>
+                        <h3 className="display text-2xl">{proximo.title}</h3>
+                        <p className="mt-2 text-sm text-muted-foreground">
+                          {proximo.org} · {proximo.year}
+                        </p>
+                        <button
+                          type="button"
+                          onClick={() => onIrPara(proximo)}
+                          className="mt-6 inline-flex items-center gap-2 self-start rounded-full border border-border px-5 py-3 text-sm transition-colors hover:bg-secondary"
+                        >
+                          Abrir {proximo.index} <ArrowRight className="size-4" aria-hidden="true" />
+                        </button>
+                      </div>
+                    </>
+                  ) : (
+                    <p className="kicker mb-5">Fim dos cases</p>
+                  )}
 
-            {p.tipo === "fim" && (
-              <div className="flex max-w-[calc(min(48ch,90vw)_-_4rem)] flex-col sm:max-w-[calc(min(48ch,90vw)_-_5rem)]">
-                {proximo ? (
-                  <>
-                    <p className="kicker mb-5">Próximo case</p>
-                    <h3 className="display text-2xl">{proximo.title}</h3>
-                    <p className="mt-2 text-sm text-muted-foreground">
-                      {proximo.org} · {proximo.year}
+                  <div className={`mt-10 border-t border-border pt-6 ${ofuscar} ${TRANSICAO_FILTRO}`}>
+                    <p className="text-sm text-muted-foreground">
+                      Quer entender como aplico isso no seu contexto?
                     </p>
                     <button
                       type="button"
-                      onClick={() => onIrPara(proximo)}
-                      className="mt-6 inline-flex items-center gap-2 self-start rounded-full border border-border px-5 py-3 text-sm transition-colors hover:bg-secondary"
+                      onClick={onContato}
+                      className="mt-4 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
                     >
-                      Abrir {proximo.index} <ArrowRight className="size-4" aria-hidden="true" />
+                      Vamos conversar
                     </button>
-                  </>
-                ) : (
-                  <p className="kicker mb-5">Fim dos cases</p>
-                )}
-
-                <div className="mt-10 border-t border-border pt-6">
-                  <p className="text-sm text-muted-foreground">
-                    Quer entender como aplico isso no seu contexto?
-                  </p>
-                  <button
-                    type="button"
-                    onClick={onContato}
-                    className="mt-4 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
-                  >
-                    Vamos conversar
-                  </button>
+                  </div>
                 </div>
-              </div>
-            )}
-          </section>
-        ))}
+              )}
+            </section>
+          );
+        })}
       </div>
 
       <div className="flex shrink-0 items-center justify-between gap-4 border-t border-border px-6 py-3">

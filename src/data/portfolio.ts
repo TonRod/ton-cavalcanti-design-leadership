@@ -34,7 +34,12 @@ export type CaseEvidence = {
   src: string;
   caption: string;
   alt?: string;
-  par?: { src: string; alt: string };
+  // Tamanho natural, em px. Com ele a imagem reserva o espaço certo antes de
+  // carregar e, no leitor largo do desktop, a largura sai da proporção — sem
+  // isso uma imagem lazy ainda não carregada colapsa para zero.
+  largura?: number;
+  altura?: number;
+  par?: { src: string; alt: string; largura?: number; altura?: number };
   apos: CaseChapter;
 };
 
@@ -90,6 +95,8 @@ export const cases: CaseStudy[] = [
     evidencias: [
       {
         src: "/cases/natura-evid-01-loja-operacao.jpg",
+        largura: 1100,
+        altura: 1427,
         caption:
           "O ponto onde o digital encontra a operação: o time de loja consulta o pedido no sistema enquanto separa a sacola. Era aqui que a falta de visibilidade em tempo real virava retrabalho e chamado ao suporte.",
         alt: "Duas pessoas do time de loja atrás do balcão de uma loja Natura; uma delas opera um monitor com o sistema de pedidos enquanto segura uma sacola de papel com o comprovante. Ao fundo, prateleiras com produtos.",
@@ -97,6 +104,8 @@ export const cases: CaseStudy[] = [
       },
       {
         src: "/cases/natura-evid-02-sala-omnicanalidade.jpg",
+        largura: 1100,
+        altura: 1467,
         caption:
           "A sala da frente de Omnicanalidade, que liderei. Na parede, cada tela do fluxo em coluna própria — home, busca, página de produto, categorias, sacola —, com post-its de feedback e a contagem de dias para o go-live.",
         alt: "Placa suspensa escrita “Omnicanalidade” sobre uma área de trabalho. Na parede de vidro abaixo, colunas de telas impressas anotadas com post-its amarelos, rotuladas Sacola, Busca, Página de Produto, Categorias e Home, ao lado de rascunhos de wireframe.",
@@ -104,6 +113,8 @@ export const cases: CaseStudy[] = [
       },
       {
         src: "/cases/natura-evid-03-parede-wireframes.jpg",
+        largura: 1100,
+        altura: 1375,
         caption:
           "A mesma parede em outro ângulo. As telas do protótipo iam impressas para o vidro e o feedback vinha colado em cima delas — validar era um ato físico, no meio da sala, e não um link enviado por e-mail.",
         alt: "Parede de vidro comprida com a inscrição “Nova XP Natura” em letra manual, um quadro de wireframes desenhado à mão e colunas de telas impressas com post-its amarelos.",
@@ -111,6 +122,8 @@ export const cases: CaseStudy[] = [
       },
       {
         src: "/cases/natura-evid-04-csat-loja.jpg",
+        largura: 1100,
+        altura: 1330,
         caption:
           "A solução em operação: o cartão convida o cliente a escanear o QR Code e avaliar o atendimento, e o tablet no balcão coleta a nota de 0 a 10. É por esse instrumento que o CSAT foi de 40% para 80%.",
         alt: "Balcão de loja Natura com uma atendente entregando sacolas de papel. Sobre o balcão, um cartão com os dizeres “Queremos ouvir você! Escaneie o QR Code abaixo e avalie o nosso atendimento” e um tablet exibindo uma pesquisa de satisfação com escala de 0 a 10.",
@@ -181,6 +194,8 @@ export const cases: CaseStudy[] = [
     evidencias: [
       {
         src: "/cases/bradesco-evid-01-mapa-oportunidades.jpg",
+        largura: 1600,
+        altura: 1098,
         caption:
           "O mapa de oportunidades sobre a jornada do gerente de relacionamento, da pré-visita à formalização. Cada “Como poderíamos” é uma dor levantada nas entrevistas, e os pontos de votação decidiram o que o painel resolveria primeiro — “controlar o tempo de resposta por departamento” entre os mais votados.",
         alt: "Painel comprido dividido em faixas — Gestão do RM de Relacionamento, Pré-visita, Visita, Pós-visita, Negociação e Formalização — coberto de post-its amarelos, azuis e rosa escritos à mão, muitos com adesivos redondos de votação. Na base, uma faixa impressa com requisitos.",
@@ -188,6 +203,8 @@ export const cases: CaseStudy[] = [
       },
       {
         src: "/cases/bradesco-evid-02-motor-recomendacoes.webp",
+        largura: 620,
+        altura: 853,
         caption:
           "O motor de recomendações, painel de entrada do gerente de relacionamento. Leads que pedem ação, índice FAL, últimas ordens e a classificação das empresas da carteira dividem a mesma tela — o que antes saía de consultas manuais chega consolidado antes da conversa com o cliente.",
         alt: "Tablet na vertical com o painel Motor de recomendações do Bradesco BBI, perfil Gerente de relacionamento. À esquerda, cartões escuros com a lista Check Leads, o valor ALP de R$ 988.345,00 e a classificação mensal de empresas; à direita, gráfico de barras do Índice FAL de junho a setembro, a lista de últimas ordens e barras percentuais de classificação de empresas.",
@@ -195,11 +212,15 @@ export const cases: CaseStudy[] = [
       },
       {
         src: "/cases/bradesco-evid-03-regras-precificacao.webp",
+        largura: 343,
+        altura: 517,
         caption:
           "Dois dos outros painéis, trocados pelo menu no topo da tela. Regras de precificação põe em primeiro plano o prazo de verificação de crédito e os processos em andamento; indicadores de gestão resume contratos ativos, resultado e performance por serviço.",
         alt: "Tela Regras de Precificação: tarefa com prazo limite às 8h30 para verificação de crédito, lista de leads, avisos sobre limite de crédito e ativação de clientes, linha do tempo de processos em andamento e os valores ADP e ATT.",
         par: {
           src: "/cases/bradesco-evid-04-indicadores-gestao.webp",
+          largura: 343,
+          altura: 517,
           alt: "Tela Indicadores de Gestão: índices PPG +68 e ATP +14, 304 contratos ativos, resultado de 235 mil, gráfico de performance por serviço e os totais de leads, limite e carteira.",
         },
         apos: "solucao",
@@ -240,6 +261,8 @@ export const cases: CaseStudy[] = [
     evidencias: [
       {
         src: "/cases/livelo-evid-01-fluxo-atual.jpg",
+        largura: 960,
+        altura: 540,
         caption:
           "O fluxo como estava: o cliente informa o CPF e descreve o problema duas vezes, em pontos diferentes do atendimento, e a linha de emoção não sai do negativo em nenhum passo. É essa repetição que a jornada omnichannel foi desenhada para eliminar.",
         alt: "Diagrama do fluxo de atendimento então vigente, numa linha do tempo horizontal com etapas como URA, informa CPF, descrição do problema, confirmação de dados, atendimento backoffice e pesquisa de satisfação. “Informa CPF” e “descrição do problema” aparecem duas vezes. Abaixo de cada etapa, ícones de rosto com expressão negativa.",
@@ -247,6 +270,8 @@ export const cases: CaseStudy[] = [
       },
       {
         src: "/cases/livelo-evid-02-tres-frentes.png",
+        largura: 575,
+        altura: 155,
         caption:
           "A imersão foi dividida em três frentes — processos, pessoas e sistemas. Em trinta dias, cerca de cem profissionais e clientes foram ouvidos e representados em journey maps, que alimentaram o blueprint.",
         alt: "Três ícones lado a lado, rotulados Processos, Pessoas e Sistemas.",
@@ -254,6 +279,8 @@ export const cases: CaseStudy[] = [
       },
       {
         src: "/cases/livelo-evid-04-apresentacao.jpg",
+        largura: 1500,
+        altura: 1125,
         caption:
           "Apresentação da solução ao time da Livelo, com a jornada mapeada em post-its na parede e sobre a mesa. Interface, chatbot e treinamento foram apresentados como um conjunto — que é como o serviço chega ao cliente.",
         alt: "Sala de reunião corporativa com cerca de oito pessoas ao redor de uma mesa comprida; três delas de pé junto a uma televisão que exibe um diagrama. Nas paredes e sobre a mesa, fileiras de post-its coloridos.",
@@ -261,6 +288,8 @@ export const cases: CaseStudy[] = [
       },
       {
         src: "/cases/livelo-evid-03-blueprint.jpg",
+        largura: 1356,
+        altura: 737,
         caption:
           "O Service Blueprint do atendimento, das quatro fases à linha de emoção na base. É a fileira de sistemas — P3000, Neoassist, CLM, Resolve Fácil, Token, CSC/OCC — que tornou as restrições técnicas discutíveis com design e operação na mesma mesa.",
         alt: "Service blueprint do atendimento em quatro colunas — Identificação, Registro, Atendimento e Backoffice — com faixas de sistemas, KPIs, a jornada do cliente e uma linha de ícones de emoção na base.",
@@ -301,6 +330,8 @@ export const cases: CaseStudy[] = [
     evidencias: [
       {
         src: stpaulEvidWorkshop.url,
+        largura: 1365,
+        altura: 1125,
         caption:
           "Workshop de cocriação que conduzi com 13 participantes. Benchmark de oito escolas, Crazy 8s e mapa de empatia levaram o grupo a mais de 100 ideias.",
         alt: "Sala de workshop em preto e branco, com cerca de treze participantes sentados em círculo e um facilitador em pé junto ao quadro branco.",
@@ -308,6 +339,8 @@ export const cases: CaseStudy[] = [
       },
       {
         src: stpaulEvidPlanejamento.url,
+        largura: 1600,
+        altura: 947,
         caption:
           "Cinco fases em três meses, com alocação diária de quatro pessoas — do entendimento aos testes de guerrilha.",
         alt: "Planejamento do projeto: diagrama das cinco fases e cronograma diário de fevereiro a abril com as atividades de cada integrante do time.",
@@ -315,6 +348,8 @@ export const cases: CaseStudy[] = [
       },
       {
         src: stpaulEvidJornada.url,
+        largura: 1460,
+        altura: 744,
         caption:
           "A jornada abria perguntando onde o candidato queria chegar, não que curso queria fazer. Em seis passos a I.A. traduzia a ambição em trilhas — e passou a resolver 70% do que antes ia para o chat.",
         alt: 'Primeira tela da jornada de matrícula: a pergunta "Onde você quer chegar?" com quatro opções de ambição profissional e indicador de passo 1 de 6.',
@@ -322,6 +357,8 @@ export const cases: CaseStudy[] = [
       },
       {
         src: "/cases/stpaul-evid-05-workshop-escopo.jpg",
+        largura: 1280,
+        altura: 960,
         caption:
           "Workshop de definição de escopo no innovation hive. Os rascunhos de fluxo sobre a mesa são o primeiro traço do que viraria a jornada — antes de qualquer wireframe no Axure.",
         alt: "Sala do laboratório de inovação com oito participantes sentados em poltronas coloridas diante de uma televisão que exibe um site. Ao fundo, quadros brancos com anotações; em primeiro plano, uma mesa com rascunhos de telas desenhados a caneta verde.",
@@ -329,6 +366,8 @@ export const cases: CaseStudy[] = [
       },
       {
         src: "/cases/stpaul-evid-06-priorizacao.jpg",
+        largura: 1280,
+        altura: 960,
         caption:
           "A convergência do workshop: as mais de cem ideias viraram quase trinta oportunidades numeradas no quadro, e a votação por pontos decidiu quais entravam no escopo.",
         alt: "Três pessoas de pé diante de um quadro branco comprido, coberto por uma lista numerada de oportunidades escritas à mão, com adesivos redondos de votação ao lado de vários itens. Na parede abaixo, o letreiro do innovation hive.",
@@ -336,6 +375,8 @@ export const cases: CaseStudy[] = [
       },
       {
         src: "/cases/stpaul-evid-04-laboratorio.jpg",
+        largura: 1500,
+        altura: 1125,
         caption:
           "O innovation hive, laboratório que a St. Paul mantinha com a IBM e onde conduzi as cocriações. A parceria que está na parede é a mesma que entrou na jornada: a I.A. que montava as trilhas era da IBM.",
         alt: "Parede branca com um logotipo de favos de mel e os dizeres “innovation hive — welcome to the collaborative era — IBM and Saint Paul”. Abaixo à direita, uma abertura mostra uma sala com mesas e cadeiras amarelas.",
