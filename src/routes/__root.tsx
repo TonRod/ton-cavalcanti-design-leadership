@@ -129,7 +129,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "profile" },
       { property: "og:site_name", content: "Ton Cavalcanti" },
       { property: "og:locale", content: "pt_BR" },
-      { property: "og:image", content: `${siteUrl}/og/home.jpg` },
+      // A versão vai no nome do arquivo: LinkedIn e WhatsApp guardam a imagem
+      // pelo endereço, e com o mesmo nome seguiriam mostrando a antiga.
+      { property: "og:image", content: `${siteUrl}/og/home-v2.jpg` },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
       {
@@ -139,7 +141,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: siteTitle },
       { name: "twitter:description", content: siteDescription },
-      { name: "twitter:image", content: `${siteUrl}/og/home.jpg` },
+      { name: "twitter:image", content: `${siteUrl}/og/home-v2.jpg` },
     ],
     scripts: [
       {
