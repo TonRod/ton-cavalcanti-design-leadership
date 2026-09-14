@@ -499,9 +499,15 @@ export const hero = {
     /* WebP, e não AVIF: o AVIF gerado pelo sips decodifica com o canal alfa
        todo transparente — a foto simplesmente não aparece. Verificado
        desenhando num canvas e contando pixels opacos. */
-    webp: "/hero/ton-recorte.webp",
-    png: "/hero/ton-recorte.png",
-    alt: "Ton Cavalcanti, recortado sobre o fundo",
+    webp: "/hero/ton-bracos-cruzados.webp",
+    png: "/hero/ton-bracos-cruzados.png",
+    alt: "Ton Cavalcanti, de óculos e suéter preto, com os braços cruzados",
+    largura: 801,
+    altura: 1256,
+    /* Linha dos olhos, em fração da altura da imagem — medida com régua de
+       pixels sobre a foto. O hero usa esse número para pôr os olhos na altura
+       da primeira linha do título. Trocou a foto, mede de novo. */
+    olho: 0.2102,
   },
 };
 

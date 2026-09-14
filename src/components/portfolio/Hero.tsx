@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { hero } from "@/data/portfolio";
 
 export function Hero() {
@@ -5,7 +6,7 @@ export function Hero() {
     <section id="top" className="mx-auto w-full max-w-6xl px-6 pb-4 pt-16 sm:pt-24">
       {/* A banda dá o fundo do texto; a figura sai dela por cima e por baixo. */}
       <div className="relative">
-        <div className="relative rounded-lg bg-surface-2 px-7 pb-10 pt-12 sm:px-12 sm:pb-14 sm:pt-16 md:min-h-[24rem] md:pb-12 md:pr-[27rem] md:pt-9 lg:min-h-[32.5rem] lg:pb-14 lg:pr-[36rem] lg:pt-10">
+        <div className="relative rounded-lg bg-surface-2 px-7 pb-10 pt-12 sm:px-12 sm:pb-14 sm:pt-16 md:min-h-[24rem] md:pb-12 md:pr-[20rem] md:pt-9 lg:min-h-[32.5rem] lg:pb-14 lg:pr-[28rem] lg:pt-10">
           <p className="kicker relative z-10">{hero.kicker}</p>
 
           <h1 className="display relative z-10 mt-5 max-w-[15ch] text-4xl sm:text-5xl md:mt-4 md:text-3xl lg:text-[3.4rem]">
@@ -34,18 +35,37 @@ export function Hero() {
           {/* Sem foto no celular, por ora: nenhuma das saídas testadas ficou
               boa em 390px. A partir de md ela aparece na lateral, inteira,
               com a base rente à banda e a cabeça ultrapassando o topo — que é
-              o gesto que sustenta a composição. */}
+              o gesto que sustenta a composição.
+
+              A altura da foto não é fixa: sai da altura da banda. Com altura
+              fixa, bastou o título quebrar numa linha a mais para a banda
+              crescer, a cabeça voltar para dentro e os olhos caírem 48px
+              abaixo do título (medido no ar a 1440px).
+
+              Com a base em 0 e o topo em T, a foto mede H − T e os olhos ficam
+              em T + e·(H − T), sendo e a fração `olho`. Igualando à linha do
+              título L e isolando T: T = (L − e·H) / (1 − e) — e o H entra como
+              100%, que no `top` de um absoluto é a altura da banda. O min()
+              garante 1rem de cabeça para fora quando a banda é baixa demais
+              para os dois caberem; aí os olhos sobem um pouco. */}
           <div
             aria-hidden="true"
-            className="pointer-events-none hidden md:absolute md:bottom-0 md:right-6 md:block md:h-[28rem] md:w-auto lg:right-8 lg:h-[35rem]"
+            className="pointer-events-none hidden md:absolute md:bottom-0 md:right-6 md:top-[var(--topo)] md:block md:[--linha:5.5rem] lg:right-8 lg:[--linha:6.6875rem]"
+            style={
+              {
+                "--olho": hero.portrait.olho,
+                "--topo":
+                  "min(-1rem, calc((var(--linha) - var(--olho) * 100%) / (1 - var(--olho))))",
+              } as CSSProperties
+            }
           >
             <picture>
               <source srcSet={hero.portrait.webp} type="image/webp" />
               <img
                 src={hero.portrait.png}
                 alt={hero.portrait.alt}
-                width={1012}
-                height={1056}
+                width={hero.portrait.largura}
+                height={hero.portrait.altura}
                 className="h-full w-auto select-none object-contain grayscale"
               />
             </picture>
