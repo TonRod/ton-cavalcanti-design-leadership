@@ -26,10 +26,15 @@ export type CaseChapter =
 // as novas moram em `public/cases/` e são referenciadas por caminho, como já
 // acontece com o retrato do hero. A segunda via versiona a imagem junto do
 // código e não consome crédito do Lovable para subir arquivo.
+//
+// `par` põe uma segunda imagem ao lado da primeira, sob a mesma legenda. Serve
+// para telas de interface que se leem juntas: empilhadas, duas telas verticais
+// dobram a altura do painel; lado a lado, cabem na mesma dobra.
 export type CaseEvidence = {
   src: string;
   caption: string;
   alt?: string;
+  par?: { src: string; alt: string };
   apos: CaseChapter;
 };
 
@@ -180,6 +185,24 @@ export const cases: CaseStudy[] = [
           "O mapa de oportunidades sobre a jornada do gerente de relacionamento, da pré-visita à formalização. Cada “Como poderíamos” é uma dor levantada nas entrevistas, e os pontos de votação decidiram o que o painel resolveria primeiro — “controlar o tempo de resposta por departamento” entre os mais votados.",
         alt: "Painel comprido dividido em faixas — Gestão do RM de Relacionamento, Pré-visita, Visita, Pós-visita, Negociação e Formalização — coberto de post-its amarelos, azuis e rosa escritos à mão, muitos com adesivos redondos de votação. Na base, uma faixa impressa com requisitos.",
         apos: "estrategia",
+      },
+      {
+        src: "/cases/bradesco-evid-02-motor-recomendacoes.webp",
+        caption:
+          "O motor de recomendações, painel de entrada do gerente de relacionamento. Leads que pedem ação, índice FAL, últimas ordens e a classificação das empresas da carteira dividem a mesma tela — o que antes saía de consultas manuais chega consolidado antes da conversa com o cliente.",
+        alt: "Tablet na vertical com o painel Motor de recomendações do Bradesco BBI, perfil Gerente de relacionamento. À esquerda, cartões escuros com a lista Check Leads, o valor ALP de R$ 988.345,00 e a classificação mensal de empresas; à direita, gráfico de barras do Índice FAL de junho a setembro, a lista de últimas ordens e barras percentuais de classificação de empresas.",
+        apos: "solucao",
+      },
+      {
+        src: "/cases/bradesco-evid-03-regras-precificacao.webp",
+        caption:
+          "Dois dos outros painéis, trocados pelo menu no topo da tela. Regras de precificação põe em primeiro plano o prazo de verificação de crédito e os processos em andamento; indicadores de gestão resume contratos ativos, resultado e performance por serviço.",
+        alt: "Tela Regras de Precificação: tarefa com prazo limite às 8h30 para verificação de crédito, lista de leads, avisos sobre limite de crédito e ativação de clientes, linha do tempo de processos em andamento e os valores ADP e ATT.",
+        par: {
+          src: "/cases/bradesco-evid-04-indicadores-gestao.webp",
+          alt: "Tela Indicadores de Gestão: índices PPG +68 e ATP +14, 304 contratos ativos, resultado de 235 mil, gráfico de performance por serviço e os totais de leads, limite e carteira.",
+        },
+        apos: "solucao",
       },
     ],
     metricas: [

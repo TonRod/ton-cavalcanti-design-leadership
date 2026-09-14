@@ -282,12 +282,22 @@ export function CaseReader({
                   <div className="mt-7 grid gap-6">
                     {p.imagens.map((ev, idx) => (
                       <figure key={idx}>
-                        <img
-                          src={ev.src}
-                          alt={ev.alt ?? ev.caption}
-                          loading="lazy"
-                          className="w-full rounded-md border border-border"
-                        />
+                        <div className={ev.par ? "grid grid-cols-2 items-start gap-3" : undefined}>
+                          <img
+                            src={ev.src}
+                            alt={ev.alt ?? ev.caption}
+                            loading="lazy"
+                            className="w-full rounded-md border border-border"
+                          />
+                          {ev.par && (
+                            <img
+                              src={ev.par.src}
+                              alt={ev.par.alt}
+                              loading="lazy"
+                              className="w-full rounded-md border border-border"
+                            />
+                          )}
+                        </div>
                         <figcaption className="mt-2 text-xs text-muted-foreground">
                           {ev.caption}
                         </figcaption>
