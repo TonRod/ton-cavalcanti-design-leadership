@@ -97,13 +97,31 @@ function temEvidencia(p: Painel | undefined): boolean {
   return p?.tipo === "texto" && p.imagens.length > 0;
 }
 
-// Na etapa larga a imagem cresce até caber na altura do painel, sem passar do
-// tamanho natural. A proporção vem dos dados, então vale antes de carregar.
-function estiloDaImagem(largura?: number, altura?: number): CSSProperties | undefined {
-  if (!largura || !altura) return undefined;
-  return { "--ar": (largura / altura).toFixed(4), "--nat": `${largura}px` } as CSSProperties;
+// Na etapa larga a figura — imagem e legenda juntas — cresce até a imagem
+// caber na altura do painel, sem passar do tamanho natural. A largura vai na
+// figura e não na imagem: assim a legenda nunca passa da borda da imagem, que
+// preenche a figura. Num par, as proporções somam e as colunas seguem a
+// proporção de cada imagem, para as duas terem a mesma altura. A proporção vem
+// dos dados, então vale antes de a imagem carregar.
+function medidasDaFigura(ev: CaseEvidence): { estilo?: CSSProperties; colunasDoPar?: string } {
+  if (!ev.largura || !ev.altura) return {};
+  const ar = ev.largura / ev.altura;
+  if (!ev.par) {
+    return { estilo: { "--ar": ar.toFixed(4), "--nat": `${ev.largura}px`, "--vao": "0px" } as CSSProperties };
+  }
+  if (!ev.par.largura || !ev.par.altura) return {};
+  const arPar = ev.par.largura / ev.par.altura;
+  return {
+    estilo: {
+      "--ar": (ar + arPar).toFixed(4),
+      "--nat": `${ev.largura + ev.par.largura}px`,
+      "--vao": "0.75rem",
+    } as CSSProperties,
+    colunasDoPar: `${ar.toFixed(4)}fr ${arPar.toFixed(4)}fr`,
+  };
 }
-const IMAGEM_LARGA = "xl:w-[min(100%,calc((100cqh_-_12vh_-_4.5rem)*var(--ar)),var(--nat))]";
+const FIGURA_LARGA =
+  "xl:w-[min(100%,calc((100cqh_-_12vh_-_4.5rem)*var(--ar)_+_var(--vao)),calc(var(--nat)_+_var(--vao)))]";
 
 function maisProximoDaEsquerda(pista: HTMLElement): number {
   let melhor = 0;
@@ -459,35 +477,39 @@ export function CaseReader({
                         aberto ? "xl:opacity-100 xl:delay-150" : "xl:max-h-0 xl:overflow-hidden xl:opacity-0"
                       }`}
                     >
-                      {p.imagens.map((ev, idx) => (
-                        <figure key={idx}>
-                          <div className={ev.par ? "grid grid-cols-2 items-start gap-3" : undefined}>
-                            <img
-                              src={ev.src}
-                              alt={ev.alt ?? ev.caption}
-                              width={ev.largura}
-                              height={ev.altura}
-                              style={estiloDaImagem(ev.largura, ev.altura)}
-                              loading="lazy"
-                              className={`h-auto w-full rounded-md border border-border ${ev.largura ? IMAGEM_LARGA : ""}`}
-                            />
-                            {ev.par && (
+                      {p.imagens.map((ev, idx) => {
+                        const { estilo, colunasDoPar } = medidasDaFigura(ev);
+                        return (
+                          <figure key={idx} style={estilo} className={estilo ? FIGURA_LARGA : undefined}>
+                            <div
+                              className={ev.par ? "grid grid-cols-2 items-start gap-3" : undefined}
+                              style={colunasDoPar ? { gridTemplateColumns: colunasDoPar } : undefined}
+                            >
                               <img
-                                src={ev.par.src}
-                                alt={ev.par.alt}
-                                width={ev.par.largura}
-                                height={ev.par.altura}
-                                style={estiloDaImagem(ev.par.largura, ev.par.altura)}
+                                src={ev.src}
+                                alt={ev.alt ?? ev.caption}
+                                width={ev.largura}
+                                height={ev.altura}
                                 loading="lazy"
-                                className={`h-auto w-full rounded-md border border-border ${ev.par.largura ? IMAGEM_LARGA : ""}`}
+                                className="h-auto w-full rounded-md border border-border"
                               />
-                            )}
-                          </div>
-                          <figcaption className="mt-2 text-xs text-muted-foreground">
-                            {ev.caption}
-                          </figcaption>
-                        </figure>
-                      ))}
+                              {ev.par && (
+                                <img
+                                  src={ev.par.src}
+                                  alt={ev.par.alt}
+                                  width={ev.par.largura}
+                                  height={ev.par.altura}
+                                  loading="lazy"
+                                  className="h-auto w-full rounded-md border border-border"
+                                />
+                              )}
+                            </div>
+                            <figcaption className="mt-2 text-xs text-muted-foreground">
+                              {ev.caption}
+                            </figcaption>
+                          </figure>
+                        );
+                      })}
                     </div>
                   )}
                 </div>
