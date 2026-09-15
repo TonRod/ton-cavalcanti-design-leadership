@@ -466,8 +466,7 @@ export const timeline: TimelineItem[] = [
 export const hero = {
   kicker: "Design Leadership · São Paulo",
   title: "Lidero design para transformar estratégia em resultado.",
-  support:
-    "16 anos em produto, 6 liderando times. Estruturo design onde a função ainda não existe.",
+  support: "Estruturo design onde a função ainda não existe.",
   /** Rótulos curtos: o do meio tinha 38 caracteres e comia duas linhas. */
   metrics: [
     { label: "CSAT · Natura", value: "40% → 80%" },
