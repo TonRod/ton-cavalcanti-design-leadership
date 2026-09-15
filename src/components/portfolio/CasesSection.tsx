@@ -231,7 +231,9 @@ export function CasesSection() {
                     <p className="text-[0.7rem] uppercase tracking-widest text-muted-foreground">
                       {c.highlight.label}
                     </p>
-                    <p className="metric-num mt-1">{c.highlight.value}</p>
+                    {/* Menor que o título do case (text-2xl): o número confirma o
+                        card, não disputa com o nome dele. */}
+                    <p className="display mt-1.5 text-xl">{c.highlight.value}</p>
                     <p className="mt-4 inline-flex items-center gap-1.5 text-xs text-muted-foreground transition-colors group-hover:text-foreground">
                       <Maximize2 className="size-3.5" aria-hidden="true" />
                       Ver case
