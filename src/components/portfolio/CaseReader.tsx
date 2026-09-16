@@ -8,6 +8,7 @@ import {
   type CSSProperties,
   type FocusEvent,
 } from "react";
+import { flushSync } from "react-dom";
 import { ArrowLeft, ArrowRight, X } from "lucide-react";
 import type { CaseEvidence, CaseStudy } from "@/data/portfolio";
 
@@ -183,21 +184,28 @@ export function CaseReader({
   // anterior está à esquerda — e portanto fora da tela —, ela encolhe seca e a
   // rolagem recua o mesmo tanto antes da pintura: a etapa nova não se move.
   // Quando está à direita, as duas animam juntas e somam a mesma largura.
+  //
+  // Tudo isso é aplicado na hora (flushSync), compensação incluída. Se ficasse
+  // para a próxima renderização, uma seta que chegasse no intervalo mediria o
+  // trilho com a largura velha, e a compensação atrasada puxaria a tela de
+  // volta para esta etapa — a seta se perdia (medido no site: 4 em 4).
   const assentar = useCallback(() => {
     navegando.current = false;
     const pista = pistaRef.current;
     if (!pista) return;
     const n = maisProximoDaEsquerda(pista);
-    setAtual(n);
     const alvo = window.matchMedia(TELA_LARGA).matches && temEvidencia(paineis[n]) ? n : -1;
     const antes = largoRef.current;
-    if (alvo === antes) return;
-    if (antes >= 0 && antes < n) {
-      ancora.current = { i: n, x: (pista.children[n] as HTMLElement).getBoundingClientRect().left };
-      setSemTransicao(antes);
-    }
-    largoRef.current = alvo;
-    setLargo(alvo);
+    flushSync(() => {
+      setAtual(n);
+      if (alvo === antes) return;
+      if (antes >= 0 && antes < n) {
+        ancora.current = { i: n, x: (pista.children[n] as HTMLElement).getBoundingClientRect().left };
+        setSemTransicao(antes);
+      }
+      largoRef.current = alvo;
+      setLargo(alvo);
+    });
   }, [paineis]);
 
   useLayoutEffect(() => {
