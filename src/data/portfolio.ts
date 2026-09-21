@@ -73,7 +73,7 @@ export const cases: CaseStudy[] = [
     title: "Experiência Omnichannel",
     org: "Natura &Co",
     year: "2024",
-    role: "Líder de design da frente Omnichannel · 2 designers",
+    role: "Responsável pelo design · squad autogerida de 4: 2 designers, PO e dev",
     highlight: { label: "CSAT de atendimento", value: "40% → 80%" },
     duotone: "duotone-1",
     contexto:
@@ -107,7 +107,7 @@ export const cases: CaseStudy[] = [
         largura: 1100,
         altura: 1467,
         caption:
-          "A sala da frente de Omnicanalidade, que liderei. Na parede, cada tela do fluxo em coluna própria — home, busca, página de produto, categorias, sacola —, com post-its de feedback e a contagem de dias para o go-live.",
+          "A sala da frente de Omnicanalidade, onde conduzi o design. Na parede, cada tela do fluxo em coluna própria — home, busca, página de produto, categorias, sacola —, com post-its de feedback e a contagem de dias para o go-live.",
         alt: "Placa suspensa escrita “Omnicanalidade” sobre uma área de trabalho. Na parede de vidro abaixo, colunas de telas impressas anotadas com post-its amarelos, rotuladas Sacola, Busca, Página de Produto, Categorias e Home, ao lado de rascunhos de wireframe.",
         apos: "escopo",
       },
@@ -435,21 +435,21 @@ export const timeline: TimelineItem[] = [
     role: "Lead Product Designer",
     org: "Motrix Techknowledge",
     description:
-      "Estruturei práticas de Design usadas por múltiplas equipes, reduzindo o tempo de lançamento em 30%",
+      "Atuação autogerida: defini a estratégia de design e estruturei as práticas usadas por múltiplas equipes, reduzindo o tempo de lançamento em 30%",
   },
   {
     period: "2024 – 2025",
     role: "Senior Product Designer",
     org: "Natura &Co",
     description:
-      "Liderança de design para iniciativas Omnichannel multi-país. Escopo: time de 4 pessoas, 3 produtos (Omnicanal, Frente de Entrega e Dashboard de Resultados), alcance LATAM",
+      "Responsável pelo design das iniciativas Omnichannel multi-país. Escopo: squad autogerida de 4 pessoas (2 designers, PO e dev), 3 produtos (Omnicanal, Frente de Entrega e Dashboard de Resultados), alcance LATAM",
   },
   {
     period: "2025 – PRESENTE",
     role: "Senior Product Designer",
-    org: "Porto Seguro",
+    org: "PortoBank · Porto Seguro",
     description:
-      "Liderança de design para a jornada de investimentos. Escopo: time de 3 pessoas, produtos CRM Assessor de Investimentos, Dashboard de Resultados e Painel Online de Acompanhamento CSAT, alcance nacional",
+      "Responsável pelo design da jornada de investimentos no PortoBank, braço financeiro do grupo Porto Seguro. Escopo: squad de 3 pessoas, produtos CRM Assessor de Investimentos, Dashboard de Resultados e Painel Online de Acompanhamento CSAT, alcance nacional",
   },
 ];
 
@@ -524,25 +524,34 @@ export type LeadershipProof = {
   label: string;
   value: string;
   context: string;
+  /** Link opcional no rodapé do card. */
+  link?: { label: string; href: string };
 };
 
+/**
+ * A liderança aqui é de design, não de pessoas: eu respondo pela direção,
+ * coordeno quem trabalha comigo e puxo o direcionamento sem gestor acima.
+ * Nenhum card deve sugerir gestão de time nem contagem de liderados.
+ */
 export const leadershipProofs: LeadershipProof[] = [
   {
-    label: "Time",
-    value: "Até 25 designers",
+    label: "Coordenação",
+    value: "Até 25 pessoas",
     context:
-      "Times multidisciplinares com engenharia, pesquisa, design e negócios. Pico no Bradesco, entre 2019 e 2020.",
+      "Discovery do Bradesco, entre 2019 e 2020: designers internos, parceiros externos, engenharia, pesquisa e negócios. Eu conduzia a direção de design e o alinhamento entre as frentes.",
   },
   {
     label: "Processo",
     value: "−30% no tempo de entrega",
     context:
-      "Práticas de design estruturadas na Motrix: design reviews semanais, ritual de handoff com engenharia e operação de pesquisa. Hoje, uso de IA para acelerar pesquisa e prototipação.",
+      "Atuação autogerida na Motrix: estruturei as práticas de design usadas por múltiplas equipes — design reviews semanais, ritual de handoff com engenharia e operação de pesquisa. Hoje, uso de IA para acelerar pesquisa e prototipação.",
   },
   {
-    label: "Pessoas",
-    value: "100+ designers",
-    context: "Liderados e mentorados ao longo da carreira.",
+    label: "Mentoria",
+    value: "1:1 e grupos",
+    context:
+      "Mentoria individual e em grupo, de quem está começando a quem já conduz produto. É onde devolvo o que aprendi estruturando design.",
+    link: { label: "Conhecer a mentoria", href: "/mentoria" },
   },
 ];
 
