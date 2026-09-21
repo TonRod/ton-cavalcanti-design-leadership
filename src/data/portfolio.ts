@@ -240,10 +240,10 @@ export const cases: CaseStudy[] = [
     org: "Try/WPP · Livelo",
     year: "2018",
     role: "Designer Líder · 4 designers",
-    highlight: { label: "NPS de atendimento", value: "+3,3 → +6,7" },
+    highlight: { label: "NPS de atendimento", value: "33 → 67" },
     duotone: "duotone-graphite",
     contexto:
-      "O atendimento da Livelo apresentava baixo NPS (+3,3) e alto turnover de funcionários (60% ao ano). O sistema de suporte era lento, os fluxos de atendimento desorganizados e a experiência multicanal fragmentada.",
+      "O atendimento da Livelo apresentava baixo NPS (33) e alto turnover de funcionários (60% ao ano). O sistema de suporte era lento, os fluxos de atendimento desorganizados e a experiência multicanal fragmentada.",
     problema:
       "Melhorar a qualidade do atendimento, aumentando o NPS e reduzindo a fricção entre canais, ao mesmo tempo em que se criavam condições melhores de trabalho para os atendentes.",
     escopo:
@@ -255,7 +255,7 @@ export const cases: CaseStudy[] = [
     solucao:
       "Redesign da interface de atendimento, reduzindo informações em tela e simplificando tarefas; chatbot com storytelling e diálogos mais humanos; jornadas omnichannel integradas, evitando que clientes precisassem repetir problemas em diferentes canais; programa de treinamento e materiais de apoio para os atendentes.",
     resultados:
-      "NPS de atendimento de +3,3 para +6,7, com redução do tempo médio de atendimento e maior agilidade na priorização de chamados. A experiência ficou mais consistente entre canais e os atendentes passaram a contar com ferramentas mais rápidas e materiais de suporte atualizados.",
+      "NPS de atendimento de 33 para 67, com redução do tempo médio de atendimento e maior agilidade na priorização de chamados. A experiência ficou mais consistente entre canais e os atendentes passaram a contar com ferramentas mais rápidas e materiais de suporte atualizados.",
     aprendizado:
       "A análise mostrou que o tempo de solução é mais relevante que o tempo de atendimento em si — pequenas falhas no roteiro do chatbot e na priorização de chamados tinham impacto desproporcional na experiência do cliente.",
     evidencias: [
@@ -297,7 +297,7 @@ export const cases: CaseStudy[] = [
       },
     ],
     metricas: [
-      { label: "NPS de atendimento", value: "+3,3 → +6,7" },
+      { label: "NPS de atendimento", value: "33 → 67" },
       { label: "Time de design", value: "4 designers" },
     ],
   },
