@@ -6,7 +6,7 @@ import type { MentoriaRecursoTipo } from "@/data/mentoria";
  *
  * O tipo do recurso escolhe a família, então o desenho informa em vez de
  * decorar: carta celeste para o que mapeia onde você está (diagnóstico e
- * teste), curva de nível para o que faz subir um degrau (artigo).
+ * teste), curva de nível para o que faz subir um degrau (artigo e guia).
  *
  * A geometria vem de uma semente, e não de aleatoriedade real — cada card
  * fica diferente do vizinho, mas sempre igual a si mesmo entre recargas.
@@ -116,7 +116,11 @@ function CurvaDeNivel({ semente }: { semente: number }) {
 export function RecursoArte({ tipo, semente }: { tipo: MentoriaRecursoTipo; semente: number }) {
   return (
     <div className="recurso-arte" aria-hidden="true">
-      {tipo === "Artigo" ? <CurvaDeNivel semente={semente} /> : <CartaCeleste semente={semente} />}
+      {tipo === "Artigo" || tipo === "Guia" ? (
+        <CurvaDeNivel semente={semente} />
+      ) : (
+        <CartaCeleste semente={semente} />
+      )}
     </div>
   );
 }

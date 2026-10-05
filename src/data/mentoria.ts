@@ -147,13 +147,16 @@ export const mentoriaPlanos: MentoriaPlano[] = [
 ];
 
 /**
- * Recursos gratuitos — diagnósticos, testes e leituras.
+ * Recursos — diagnósticos, testes, leituras e o guia pago.
  *
  * Este é o espaço que cresce: para publicar um teste ou artigo novo,
  * basta acrescentar um item aqui. A seção se ajusta sozinha, e a ordem
  * do array é a ordem que aparece na página — o mais recente primeiro.
+ *
+ * O que é pago traz o preço no `meta`, no lugar do tempo de leitura, e diz
+ * no `cta` onde se compra: ninguém clica achando que é de graça.
  */
-export type MentoriaRecursoTipo = "Diagnóstico" | "Teste" | "Artigo";
+export type MentoriaRecursoTipo = "Diagnóstico" | "Teste" | "Artigo" | "Guia";
 
 export interface MentoriaRecurso {
   tipo: MentoriaRecursoTipo;
@@ -178,6 +181,15 @@ export const mentoriaRecursos: MentoriaRecurso[] = [
     meta: "5 a 10 minutos",
     url: "https://tally.so/r/EkgvBr",
     cta: "Fazer o diagnóstico",
+  },
+  {
+    tipo: "Guia",
+    title: "Primeiro case, em um dia",
+    description:
+      "O método para transformar um projeto acadêmico ou experimental no primeiro case do portfólio: o que contar, em que ordem e o que deixar de fora. Garantia de 7 dias.",
+    meta: "eBook · R$ 24,99",
+    url: "https://go.hotmart.com/C107901417L",
+    cta: "Comprar na Hotmart",
   },
   {
     tipo: "Artigo",

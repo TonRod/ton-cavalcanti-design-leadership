@@ -72,8 +72,8 @@ export function MentoriaRecursos() {
           className="entra medida-curta mt-8 font-serif text-base leading-relaxed text-muted-foreground"
           style={{ "--atraso": "120ms" } as CSSProperties}
         >
-          Um diagnóstico gratuito para você mapear onde está, e tudo o que já escrevi sobre produto,
-          carreira e processo de design.
+          Um diagnóstico gratuito para você mapear onde está, o guia para montar seu primeiro case e
+          tudo o que já escrevi sobre produto, carreira e processo de design.
         </p>
 
         <div
