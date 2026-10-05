@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as GuiaRouteImport } from './routes/guia'
 import { Route as MentoriaRouteImport } from './routes/mentoria'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuiaRoute = GuiaRouteImport.update({
+  id: '/guia',
+  path: '/guia',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MentoriaRoute = MentoriaRouteImport.update({
@@ -25,27 +31,31 @@ const MentoriaRoute = MentoriaRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/guia': typeof GuiaRoute
   '/mentoria': typeof MentoriaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/guia': typeof GuiaRoute
   '/mentoria': typeof MentoriaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/guia': typeof GuiaRoute
   '/mentoria': typeof MentoriaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/mentoria'
+  fullPaths: '/' | '/guia' | '/mentoria'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/mentoria'
-  id: '__root__' | '/' | '/mentoria'
+  to: '/' | '/guia' | '/mentoria'
+  id: '__root__' | '/' | '/guia' | '/mentoria'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  GuiaRoute: typeof GuiaRoute
   MentoriaRoute: typeof MentoriaRoute
 }
 
@@ -56,6 +66,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guia': {
+      id: '/guia'
+      path: '/guia'
+      fullPath: '/guia'
+      preLoaderRoute: typeof GuiaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/mentoria': {
@@ -70,6 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  GuiaRoute: GuiaRoute,
   MentoriaRoute: MentoriaRoute,
 }
 export const routeTree = rootRouteImport

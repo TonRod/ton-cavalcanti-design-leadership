@@ -30,6 +30,8 @@ export const mentoriaLinks = {
   /** Agendamento a partir da escolha de um plano. */
   agendarPlano: "https://calendar.app.google/kW726cWW8BEShUHh6",
   diagnostico: "https://tally.so/r/EkgvBr",
+  /** eBook "Primeiro case". O card aponta para /guia: ver src/routes/guia.tsx. */
+  guia: "https://go.hotmart.com/C107901417L",
   whatsapp: "https://wa.me/message/FXEZOVCU562EI1",
   email: "pinguinsquevoam@gmail.com",
   instagram: "https://www.instagram.com/pinguinsquevoam/",
@@ -182,7 +184,7 @@ export const mentoriaRecursos: MentoriaRecurso[] = [
     description:
       "O método para transformar um projeto acadêmico ou experimental no primeiro case do portfólio: o que contar, em que ordem e o que deixar de fora. Garantia de 7 dias.",
     meta: "eBook · R$ 24,99",
-    url: "https://go.hotmart.com/C107901417L",
+    url: "/guia",
     cta: "Comprar na Hotmart",
   },
   {
