@@ -644,6 +644,20 @@ html[data-trocando-tema] .cortina {
   overflow: hidden;
 }
 
+/* A máscara corta na altura da linha, e a linha (0.98) é mais curta que a
+   fonte: a descida do "g" de "Design." ficava decepada em 7,8px. O corte só
+   precisa existir enquanto o texto sobe, então ele é liberado depois da
+   última linha chegar — 220ms do atraso mais 620ms da transição. */
+@keyframes soltar-mascara {
+  to {
+    overflow: visible;
+  }
+}
+
+[data-revelar].revelada .linha-mascara {
+  animation: soltar-mascara 1ms linear 1100ms forwards;
+}
+
 .linha-mascara > span {
   display: block;
   transform: translateY(102%);
@@ -715,6 +729,12 @@ html[data-trocando-tema] .cortina {
     transform: none !important;
     opacity: 1 !important;
     transition: none !important;
+  }
+
+  /* Sem subida, não há o que mascarar — e o "g" precisa do espaço. */
+  .linha-mascara {
+    overflow: visible;
+    animation: none !important;
   }
 }
 
