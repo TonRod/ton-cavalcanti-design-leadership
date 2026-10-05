@@ -151,7 +151,10 @@ export const mentoriaPlanos: MentoriaPlano[] = [
  *
  * Este é o espaço que cresce: para publicar um teste ou artigo novo,
  * basta acrescentar um item aqui. A seção se ajusta sozinha, e a ordem
- * do array é a ordem que aparece na página — o mais recente primeiro.
+ * do array é a ordem que aparece na página.
+ *
+ * O guia pago abre a lista: no celular só o primeiro card aparece inteiro,
+ * e o que estiver em segundo lugar depende de alguém arrastar a pista.
  *
  * O que é pago traz o preço no `meta`, no lugar do tempo de leitura, e diz
  * no `cta` onde se compra: ninguém clica achando que é de graça.
@@ -174,15 +177,6 @@ export interface MentoriaRecurso {
 
 export const mentoriaRecursos: MentoriaRecurso[] = [
   {
-    tipo: "Diagnóstico",
-    title: "Onde você está em UX",
-    description:
-      "Um diagnóstico rápido das suas competências, com os gaps e os próximos passos organizados por prioridade. Sem custo e sem compromisso.",
-    meta: "5 a 10 minutos",
-    url: "https://tally.so/r/EkgvBr",
-    cta: "Fazer o diagnóstico",
-  },
-  {
     tipo: "Guia",
     title: "Primeiro case, em um dia",
     description:
@@ -190,6 +184,15 @@ export const mentoriaRecursos: MentoriaRecurso[] = [
     meta: "eBook · R$ 24,99",
     url: "https://go.hotmart.com/C107901417L",
     cta: "Comprar na Hotmart",
+  },
+  {
+    tipo: "Diagnóstico",
+    title: "Onde você está em UX",
+    description:
+      "Um diagnóstico rápido das suas competências, com os gaps e os próximos passos organizados por prioridade. Sem custo e sem compromisso.",
+    meta: "5 a 10 minutos",
+    url: "https://tally.so/r/EkgvBr",
+    cta: "Fazer o diagnóstico",
   },
   {
     tipo: "Artigo",

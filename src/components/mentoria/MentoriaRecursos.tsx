@@ -8,9 +8,12 @@ import { RecursoArte } from "@/components/mentoria/RecursoArte";
  * Recursos em carrossel horizontal.
  *
  * Com o diagnóstico mais todos os artigos do Medium, a grade de três colunas
- * virava uma parede de cards. Na pista horizontal o diagnóstico continua
- * primeiro, à vista, e os artigos se estendem para o lado — o card que fica
- * cortado na borda direita é o que avisa que há mais.
+ * virava uma parede de cards. Na pista horizontal o primeiro card fica à
+ * vista e o resto se estende para o lado — o card cortado na borda direita
+ * é o que avisa que há mais.
+ *
+ * A ordem vem de `mentoriaRecursos`, e a primeira posição é a única que o
+ * celular mostra inteira: por isso ela é do guia pago, não do diagnóstico.
  *
  * A roda do mouse não é remapeada aqui, ao contrário do leitor de cases:
  * esta pista vive no meio de uma página que rola na vertical, e sequestrar a
@@ -72,7 +75,7 @@ export function MentoriaRecursos() {
           className="entra medida-curta mt-8 font-serif text-base leading-relaxed text-muted-foreground"
           style={{ "--atraso": "120ms" } as CSSProperties}
         >
-          Um diagnóstico gratuito para você mapear onde está, o guia para montar seu primeiro case e
+          O guia para montar seu primeiro case, um diagnóstico gratuito para você mapear onde está e
           tudo o que já escrevi sobre produto, carreira e processo de design.
         </p>
 
