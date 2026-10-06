@@ -653,13 +653,13 @@ html[data-trocando-tema] .cortina {
   /* véu: opacidade do lado do texto, por seção (tema claro) */
   --vd: 0.93;
 }
-.fundo[data-ativo="trabalho"] { --vd: 0.94; --w: 58rem; }
+.fundo[data-ativo="trabalho"] { --vd: 0.94; --w: 58rem; --vrmin: 0.5; }
 .fundo[data-ativo="recursos"] { --vd: 0.94; --w: 200rem; }
 .fundo[data-ativo="planos"] { --vd: 0.94; --w: 50rem; }
 .fundo[data-ativo="depoimentos"] { --vd: 0.95; --w: 49rem; }
 .fundo[data-ativo="contato"] { --vd: 0.94; --w: 48rem; }
 .fundo[data-ativo="sobre"] { --vd: 0; }
-.dark .fundo[data-ativo="trabalho"] { --vd: 0.75; }
+.dark .fundo[data-ativo="trabalho"] { --vd: 0.75; --vrmin: 0.03; }
 .dark .fundo[data-ativo="recursos"] { --vd: 0.91; }
 .dark .fundo[data-ativo="planos"] { --vd: 0.91; }
 .dark .fundo[data-ativo="depoimentos"] { --vd: 0.9; }
@@ -694,16 +694,26 @@ html[data-trocando-tema] .cortina {
   position: absolute;
   inset: 0;
   --va: var(--vd);
-  --vr: max(0.03, calc(var(--vd) * 0.05));
+  --vr: max(var(--vrmin, 0.03), calc(var(--vd) * 0.05));
   /* margem esquerda do conteúdo (max-w-6xl centrado + px-6) mais a largura do texto */
   --vf: calc(max(0px, (100vw - 72rem) / 2) + 1.5rem + var(--w, 50rem));
   --c1: color-mix(in srgb, var(--background) calc(var(--va) * 100%), transparent);
   --c2: color-mix(in srgb, var(--background) calc(var(--vr) * 100%), transparent);
+  /* Desvanece em curva suave (smoothstep) e em 36vw, para não haver borda visível
+     onde o véu acaba, principalmente quando o vídeo é escuro sobre fundo claro. */
+  --e1: color-mix(in srgb, var(--background) calc((var(--vr) + (var(--va) - var(--vr)) * 0.896) * 100%), transparent);
+  --e2: color-mix(in srgb, var(--background) calc((var(--vr) + (var(--va) - var(--vr)) * 0.648) * 100%), transparent);
+  --e3: color-mix(in srgb, var(--background) calc((var(--vr) + (var(--va) - var(--vr)) * 0.352) * 100%), transparent);
+  --e4: color-mix(in srgb, var(--background) calc((var(--vr) + (var(--va) - var(--vr)) * 0.104) * 100%), transparent);
   background: linear-gradient(
     to right,
     var(--c1) 0,
     var(--c1) var(--vf),
-    var(--c2) calc(var(--vf) + 18vw),
+    var(--e1) calc(var(--vf) + 7.2vw),
+    var(--e2) calc(var(--vf) + 14.4vw),
+    var(--e3) calc(var(--vf) + 21.6vw),
+    var(--e4) calc(var(--vf) + 28.8vw),
+    var(--c2) calc(var(--vf) + 36vw),
     var(--c2) 100%
   );
   transition:
