@@ -6,7 +6,8 @@ import { useEffect, useRef, useState } from "react";
  * 45% da tela. O layout não muda; o texto fica sobre um véu da cor do
  * fundo, calculado para manter o texto cinza acima de 5,5:1 (ver styles.css).
  *
- * O hero tem o próprio céu e fica de fora; "sobre" mostra a foto do Ton.
+ * O hero tem o próprio céu e fica de fora; "sobre" fica sem vídeo, porque a
+ * foto do Ton faz parte do conteúdo da seção (MentoriaAbout).
  */
 const SECOES = ["trabalho", "recursos", "planos", "depoimentos", "sobre", "contato"] as const;
 type Secao = (typeof SECOES)[number];
@@ -106,17 +107,6 @@ export function MentoriaFundo() {
           )}
         </div>
       ))}
-
-      <div className="fundo-cam fundo-cam-retrato" data-on={ativo === "sobre" ? "" : undefined}>
-        <span className="fundo-brilho" />
-        <img
-          className="fundo-retrato"
-          src="/mentoria/ton-sobre.webp"
-          alt=""
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
 
       <div className="fundo-veu" />
     </div>
