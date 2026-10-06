@@ -11,23 +11,23 @@ export function MentoriaAbout() {
     >
       <div className="mx-auto w-full max-w-6xl px-6">
         {/* Título à esquerda, acima da foto; o texto fica na coluna da direita,
-            alinhado pela base: termina junto com a foto. No celular tudo
+            começando na mesma linha do título. A grade tem uma linha para o
+            rótulo, uma para título e texto e outra para a foto. No celular tudo
             empilha na ordem do código: título, foto, texto. */}
-        <div className="grid gap-12 md:grid-cols-[minmax(0,6fr)_minmax(0,6fr)] md:grid-rows-[auto_1fr] md:gap-x-10 md:gap-y-14 lg:gap-x-16">
-          <div className="md:col-start-1 md:row-start-1">
-            <p className="kicker entra">Sobre mim</p>
-            <h2
-              className="titulo-grande entra mt-6 max-w-[16ch]"
-              style={{ "--atraso": "60ms" } as CSSProperties}
-            >
-              {mentoriaSobre.title}
-            </h2>
-          </div>
+        <div className="grid md:grid-cols-[minmax(0,6fr)_minmax(0,6fr)] md:gap-x-10 lg:gap-x-16">
+          <p className="kicker entra md:col-start-1 md:row-start-1">Sobre mim</p>
+
+          <h2
+            className="titulo-grande entra mt-6 max-w-[16ch] md:col-start-1 md:row-start-2"
+            style={{ "--atraso": "60ms" } as CSSProperties}
+          >
+            {mentoriaSobre.title}
+          </h2>
 
           {/* O recorte tem margem transparente dos lados, então a caixa vaza um
               pouco para a esquerda (ver .sobre-foto) para o corpo ocupar a coluna. */}
           <figure
-            className="sobre-foto entra md:col-start-1 md:row-start-2"
+            className="sobre-foto entra mt-12 md:col-start-1 md:row-start-3 md:mt-14"
             style={{ "--atraso": "0ms" } as CSSProperties}
           >
             <img
@@ -44,7 +44,7 @@ export function MentoriaAbout() {
 
           {/* Medida curta: 42ch lê mais rápido que os ~65ch de antes, e o
               texto deixa de parecer coluna de jornal. */}
-          <div className="medida-curta space-y-7 md:col-start-2 md:row-span-2 md:row-start-1 md:self-end">
+          <div className="medida-curta mt-12 space-y-7 md:col-start-2 md:row-span-2 md:row-start-2 md:mt-6 md:self-start">
             {mentoriaSobre.paragraphs.map((p, i) => (
               <p
                 key={p.slice(0, 40)}
