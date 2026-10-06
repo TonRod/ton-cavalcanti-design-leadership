@@ -621,8 +621,11 @@ html[data-trocando-tema] .cortina {
    A força do véu não é estética: foi calculada por seção e por tema
    para que o texto cinza (muted-foreground) fique acima de 5,5:1 no
    pior de 8 quadros de cada loop, medindo os 2% de pixels mais
-   próximos da cor do texto. Seções com texto na largura toda
-   (trabalho, depoimentos) levam véu uniforme; no celular todas levam.
+   próximos da cor do texto, sobre TODA a zona onde a seção tem texto.
+   O véu é plano até onde o texto da seção termina (--w, em rem a partir
+   da margem esquerda do conteúdo, medido no DOM em 1024 a 1920px) e só
+   então desvanece; se o texto de uma seção crescer, aumentar --w. No
+   celular o véu é uniforme.
    Se trocar um vídeo, refazer a medição antes de ajustar --vd.
    ───────────────────────────────────────────────────────────── */
 @property --va {
@@ -635,6 +638,11 @@ html[data-trocando-tema] .cortina {
   inherits: true;
   initial-value: 0.05;
 }
+@property --vf {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 50rem;
+}
 
 .fundo {
   position: fixed;
@@ -645,13 +653,13 @@ html[data-trocando-tema] .cortina {
   /* véu: opacidade do lado do texto, por seção (tema claro) */
   --vd: 0.93;
 }
-.fundo[data-ativo="trabalho"] { --vd: 0.93; }
-.fundo[data-ativo="recursos"] { --vd: 0.94; }
-.fundo[data-ativo="planos"] { --vd: 0.94; }
-.fundo[data-ativo="depoimentos"] { --vd: 0.95; }
-.fundo[data-ativo="contato"] { --vd: 0.94; }
+.fundo[data-ativo="trabalho"] { --vd: 0.94; --w: 58rem; }
+.fundo[data-ativo="recursos"] { --vd: 0.94; --w: 200rem; }
+.fundo[data-ativo="planos"] { --vd: 0.94; --w: 50rem; }
+.fundo[data-ativo="depoimentos"] { --vd: 0.95; --w: 49rem; }
+.fundo[data-ativo="contato"] { --vd: 0.94; --w: 48rem; }
 .fundo[data-ativo="sobre"] { --vd: 0; }
-.dark .fundo[data-ativo="trabalho"] { --vd: 0.91; }
+.dark .fundo[data-ativo="trabalho"] { --vd: 0.75; }
 .dark .fundo[data-ativo="recursos"] { --vd: 0.91; }
 .dark .fundo[data-ativo="planos"] { --vd: 0.91; }
 .dark .fundo[data-ativo="depoimentos"] { --vd: 0.9; }
@@ -687,12 +695,21 @@ html[data-trocando-tema] .cortina {
   inset: 0;
   --va: var(--vd);
   --vr: max(0.03, calc(var(--vd) * 0.05));
+  /* margem esquerda do conteúdo (max-w-6xl centrado + px-6) mais a largura do texto */
+  --vf: calc(max(0px, (100vw - 72rem) / 2) + 1.5rem + var(--w, 50rem));
   --c1: color-mix(in srgb, var(--background) calc(var(--va) * 100%), transparent);
   --c2: color-mix(in srgb, var(--background) calc(var(--vr) * 100%), transparent);
-  background: linear-gradient(to right, var(--c1) 0, var(--c1) 56%, var(--c2) 86%, var(--c2) 100%);
+  background: linear-gradient(
+    to right,
+    var(--c1) 0,
+    var(--c1) var(--vf),
+    var(--c2) calc(var(--vf) + 18vw),
+    var(--c2) 100%
+  );
   transition:
     --va 1100ms ease,
-    --vr 1100ms ease;
+    --vr 1100ms ease,
+    --vf 1100ms ease;
 }
 
 /* Foto do Ton em "Sobre mim": faz parte do conteúdo, na coluna da esquerda.
