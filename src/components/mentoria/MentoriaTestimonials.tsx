@@ -7,7 +7,7 @@ export function MentoriaTestimonials() {
       id="depoimentos"
       tabIndex={-1}
       data-revelar
-      className="scroll-mt-20 bg-surface-2 py-28 outline-none sm:py-40"
+      className="scroll-mt-20 py-28 outline-none sm:py-40"
     >
       <div className="mx-auto w-full max-w-6xl px-6">
         <p className="kicker entra">Depoimentos</p>

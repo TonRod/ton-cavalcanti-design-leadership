@@ -15,7 +15,7 @@ export function MentoriaContact() {
       id="contato"
       tabIndex={-1}
       data-revelar
-      className="flex min-h-[calc(100svh-5rem)] scroll-mt-20 items-center bg-surface-2 py-20 outline-none sm:py-28"
+      className="flex min-h-[calc(100svh-5rem)] scroll-mt-20 items-center py-20 outline-none sm:py-28"
     >
       <div className="mx-auto w-full max-w-6xl px-6">
         <p className="kicker entra">Contato</p>

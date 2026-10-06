@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import { SiteHeader, type SiteHeaderLink } from "@/components/portfolio/SiteHeader";
+import { MentoriaFundo } from "@/components/mentoria/MentoriaFundo";
 import { MentoriaHero } from "@/components/mentoria/MentoriaHero";
 import { MentoriaWork } from "@/components/mentoria/MentoriaWork";
 import { MentoriaRecursos } from "@/components/mentoria/MentoriaRecursos";
@@ -54,7 +55,8 @@ function Mentoria() {
   useRevelar();
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="relative isolate min-h-screen bg-background">
+      <MentoriaFundo />
       <a
         href="#conteudo"
         className="sr-only rounded-md focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-background focus:px-4 focus:py-2 focus:text-sm focus:text-foreground focus:outline focus:outline-2 focus:outline-ring"
@@ -62,7 +64,7 @@ function Mentoria() {
         Pular para o conteúdo
       </a>
       <SiteHeader brand={mentoria.brand} links={links} imersivo />
-      <main id="conteudo">
+      <main id="conteudo" className="relative z-10">
         <MentoriaHero />
         <MentoriaWork />
         <MentoriaRecursos />
@@ -72,7 +74,7 @@ function Mentoria() {
         <MentoriaContact />
       </main>
 
-      <footer className="border-t border-border py-8">
+      <footer className="relative z-10 border-t border-border py-8">
         <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-2 px-6">
           <a
             href="/"
