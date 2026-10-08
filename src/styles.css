@@ -659,13 +659,13 @@ html[data-trocando-tema] .cortina {
   --vrmin: 0.12;
 }
 .dark .fundo { --vrmin: 0.03; }
-.fundo[data-ativo="trabalho"] { --vd: 0.94; --w: 58rem; }
+.fundo[data-ativo="trabalho"] { --vd: 0.93; --w: 58rem; }
 .fundo[data-ativo="recursos"] { --vd: 0.94; --w: 200rem; }
 .fundo[data-ativo="planos"] { --vd: 0.94; --w: 50rem; }
 .fundo[data-ativo="depoimentos"] { --vd: 0.95; --w: 49rem; }
 .fundo[data-ativo="contato"] { --vd: 0.94; --w: 48rem; }
 .fundo[data-ativo="sobre"] { --vd: 0; }
-.dark .fundo[data-ativo="trabalho"] { --vd: 0.75; }
+.dark .fundo[data-ativo="trabalho"] { --vd: 0.91; }
 .dark .fundo[data-ativo="recursos"] { --vd: 0.91; }
 .dark .fundo[data-ativo="planos"] { --vd: 0.91; }
 .dark .fundo[data-ativo="depoimentos"] { --vd: 0.9; }
