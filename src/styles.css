@@ -654,9 +654,9 @@ html[data-trocando-tema] .cortina {
   --vd: 0.93;
   /* piso do véu do lado do vídeo: igual em todas as seções para a transição ser a mesma.
      No claro, todo vídeo tem massas escuras à direita (cabelo, cadeira, madeira) e o piso de
-     30% limita o salto contra o creme (ponto mais escuro de cada clipe entre 0,32 e 0,47 de
-     luminosidade, contra 0,04 a 0,26 sem piso; com 50% era 0,50 a 0,61). */
-  --vrmin: 0.3;
+     12% limita o salto contra o creme (ponto mais escuro de cada clipe entre 0,16 e 0,34 de
+     luminosidade, contra 0,04 a 0,26 sem piso; com 30% era 0,32 a 0,47, com 50% 0,50 a 0,61). */
+  --vrmin: 0.12;
 }
 .dark .fundo { --vrmin: 0.03; }
 .fundo[data-ativo="trabalho"] { --vd: 0.94; --w: 58rem; }
