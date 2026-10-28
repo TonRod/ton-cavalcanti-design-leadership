@@ -149,6 +149,72 @@ export const mentoriaPlanos: MentoriaPlano[] = [
 ];
 
 /**
+ * Oferta para empresas — a mentoria contratada por quem lidera um time,
+ * não pelo designer. O comprador é outro (head de design, produto, RH),
+ * a dor é outra e a prova é outra: aqui vale a experiência de coordenar
+ * frentes e estruturar prática, não os depoimentos de mentorados.
+ *
+ * Sem preço de propósito: o valor depende do tamanho do time, da duração
+ * e do formato. O que a página mostra é o critério e o primeiro passo.
+ */
+export interface MentoriaFormatoEmpresa {
+  title: string;
+  /** Duração típica, no lugar de preço. */
+  duracao: string;
+  description: string;
+  /** O que a empresa recebe no fim — o que torna a compra concreta. */
+  entrega: string;
+}
+
+export const mentoriaEmpresas = {
+  kicker: "Para empresas",
+  title: "Mentoria contratada para o seu time de design.",
+  intro:
+    "Empresas me contratam para desenvolver designers de dentro: subir a senioridade do time sem abrir uma vaga sênior, combinar um critério de qualidade que todo mundo use e apoiar quem acabou de assumir a liderança.",
+  /** A prova que interessa a esse comprador mora no portfólio. */
+  prova:
+    "No Bradesco coordenei uma frente de discovery com até 25 pessoas, entre designers internos, parceiros externos, engenharia e negócios. Na Motrix estruturei as práticas de design usadas por múltiplas equipes, e o tempo de lançamento caiu 30%.",
+  provaLink: { label: "Ver os cases", href: "/" },
+  formatos: [
+    {
+      title: "Diagnóstico do time",
+      duracao: "2 semanas",
+      description:
+        "Entrevistas com designers e stakeholders, leitura dos artefatos e dos rituais que já existem. Onde o time está e o que trava a evolução dele.",
+      entrega:
+        "Relatório com os gaps de senioridade e um plano de desenvolvimento, apresentado à liderança.",
+    },
+    {
+      title: "Trilha de desenvolvimento",
+      duracao: "8 a 12 semanas",
+      description:
+        "Encontros 1:1 com cada designer e sessões em grupo, usando os projetos reais da empresa em vez de exercícios genéricos.",
+      entrega: "Critério de qualidade escrito junto com o time e em uso nas revisões.",
+    },
+    {
+      title: "Apoio a quem lidera",
+      duracao: "Contínuo",
+      description:
+        "Para quem acabou de assumir o time: rituais, feedback, priorização e as conversas difíceis com stakeholder.",
+      entrega: "Acompanhamento quinzenal, com pauta vinda dos problemas da semana.",
+    },
+  ] as MentoriaFormatoEmpresa[],
+  /** No lugar do preço: o que o faz variar. */
+  fatoresTitle: "O que define o investimento",
+  fatores: [
+    "Tamanho do time e quantas pessoas entram nos encontros individuais",
+    "Duração da trilha",
+    "Formato: remoto ou presencial em São Paulo",
+    "Profundidade: só os encontros, ou diagnóstico e plano de desenvolvimento junto",
+  ],
+  comoComeca:
+    "Começa por uma conversa de 30 minutos, sem custo, para entender o momento do time. Depois dela você recebe uma proposta com escopo, calendário e valor fechado.",
+  nota: "Emito nota fiscal como PJ. Contrato e NDA, sem problema.",
+  ctaPrimario: "Agendar a conversa",
+  ctaSecundario: "Escrever um e-mail",
+};
+
+/**
  * Recursos — diagnósticos, testes, leituras e o guia pago.
  *
  * Este é o espaço que cresce: para publicar um teste ou artigo novo,

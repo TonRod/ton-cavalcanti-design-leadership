@@ -54,9 +54,42 @@ export function ContactSection() {
             <MapPin className="size-4" /> São Paulo, Brasil
           </span>
           <span className="flex items-center gap-2">
-            <Briefcase className="size-4" /> CLT ou PJ · Remoto, híbrido ou presencial
+            <Briefcase className="size-4" /> Remoto, híbrido ou presencial
           </span>
         </div>
+
+        {/* Três formas de contratação, e não só o vínculo: quem procura
+            mentoria para um time não se reconhece em "CLT ou PJ". */}
+        <dl className="mt-8 grid max-w-3xl gap-x-8 gap-y-4 sm:grid-cols-3">
+          <div>
+            <dt className="text-[0.7rem] uppercase tracking-widest text-muted-foreground">
+              Efetivo
+            </dt>
+            <dd className="mt-1.5 text-sm leading-relaxed">CLT ou PJ, em posição de liderança</dd>
+          </div>
+          <div>
+            <dt className="text-[0.7rem] uppercase tracking-widest text-muted-foreground">
+              Consultoria
+            </dt>
+            <dd className="mt-1.5 text-sm leading-relaxed">
+              Por projeto, com escopo e prazo definidos
+            </dd>
+          </div>
+          <div>
+            <dt className="text-[0.7rem] uppercase tracking-widest text-muted-foreground">
+              Mentoria para times
+            </dt>
+            <dd className="mt-1.5 text-sm leading-relaxed">
+              Desenvolvimento de designers dentro da empresa.{" "}
+              <a
+                href="/mentoria#empresas"
+                className="underline underline-offset-4 transition-colors hover:text-muted-foreground"
+              >
+                Ver formatos
+              </a>
+            </dd>
+          </div>
+        </dl>
 
         <div className="mt-8 flex flex-wrap gap-3">
           <a

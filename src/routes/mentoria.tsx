@@ -6,6 +6,7 @@ import { MentoriaHero } from "@/components/mentoria/MentoriaHero";
 import { MentoriaWork } from "@/components/mentoria/MentoriaWork";
 import { MentoriaRecursos } from "@/components/mentoria/MentoriaRecursos";
 import { MentoriaPlans } from "@/components/mentoria/MentoriaPlans";
+import { MentoriaEmpresas } from "@/components/mentoria/MentoriaEmpresas";
 import { MentoriaTestimonials } from "@/components/mentoria/MentoriaTestimonials";
 import { MentoriaAbout } from "@/components/mentoria/MentoriaAbout";
 import { MentoriaContact } from "@/components/mentoria/MentoriaContact";
@@ -18,14 +19,15 @@ const links: SiteHeaderLink[] = [
   { href: "#trabalho", label: "A mentoria" },
   { href: "#recursos", label: "Recursos" },
   { href: "#planos", label: "Planos" },
+  { href: "#empresas", label: "Para empresas" },
   { href: "#depoimentos", label: "Depoimentos" },
   { href: "#sobre", label: "Sobre" },
   { href: "#contato", label: "Contato" },
 ];
 
-const pageTitle = "Mentoria em Product Design · Pinguins que voam — Ton Cavalcanti";
+const pageTitle = "Mentoria em Product Design para designers e times · Ton Cavalcanti";
 const pageDescription =
-  "Mentoria para estudantes e designers em início de carreira: portfólio que demonstra raciocínio, confiança para defender decisões e visão estratégica. Com Ton Cavalcanti, 16 anos em produto.";
+  "Mentoria para designers em início de carreira e para times de design contratada por empresas: portfólio que demonstra raciocínio, confiança para defender decisões e critério de qualidade combinado. Com Ton Cavalcanti, 16 anos em produto.";
 
 export const Route = createFileRoute("/mentoria")({
   component: Mentoria,
@@ -69,6 +71,7 @@ function Mentoria() {
         <MentoriaWork />
         <MentoriaRecursos />
         <MentoriaPlans />
+        <MentoriaEmpresas />
         <MentoriaTestimonials />
         <MentoriaAbout />
         <MentoriaContact />
