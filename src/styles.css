@@ -364,6 +364,35 @@ html[data-trocando-tema] .cortina {
 }
 
 /* ─────────────────────────────────────────────────────────────
+   Fundo de estúdio do hero.
+
+   A foto de referência tem luz lateral e um fundo que cai em diagonal, com
+   um halo mais claro atrás da cabeça. O retrato já vem reiluminado (razão de
+   luz entre os lados do rosto: 2,9:1, contra 1,5:1 antes); aqui o fundo
+   completa o efeito.
+
+   O lado do texto (esquerda) fica na cor da banda de antes, --surface-2, então
+   o contraste do texto não muda. A queda de luz e o halo só acontecem do lado
+   da foto. O halo fica em 80% × 24% da banda, onde a foto põe a cabeça (cabeça
+   a ~230px da borda direita, olhos na altura do título).
+   ───────────────────────────────────────────────────────────── */
+.hero-estudio {
+  --estudio-a: oklch(0.945 0.009 85);
+  --estudio-b: oklch(0.88 0.01 85);
+  --estudio-c: oklch(0.7 0.01 85);
+  --estudio-halo: oklch(0.978 0.006 85);
+  background:
+    radial-gradient(ellipse 30% 72% at 80% 24%, var(--estudio-halo), transparent 72%),
+    linear-gradient(112deg, var(--estudio-a) 0%, var(--estudio-a) 42%, var(--estudio-b) 70%, var(--estudio-c) 100%);
+}
+.dark .hero-estudio {
+  --estudio-a: oklch(0.24 0.008 60);
+  --estudio-b: oklch(0.285 0.008 60);
+  --estudio-c: oklch(0.25 0.007 60);
+  --estudio-halo: oklch(0.43 0.007 60);
+}
+
+/* ─────────────────────────────────────────────────────────────
    O céu — fundo do hero da mentoria.
 
    O hero é um céu que muda com o tema: de dia, azul com nuvens

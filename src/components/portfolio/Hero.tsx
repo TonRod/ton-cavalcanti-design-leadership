@@ -6,7 +6,7 @@ export function Hero() {
     <section id="top" className="mx-auto w-full max-w-6xl px-6 pb-4 pt-16 sm:pt-24">
       {/* A banda dá o fundo do texto; a figura sai dela por cima e por baixo. */}
       <div className="relative">
-        <div className="relative rounded-lg bg-surface-2 px-7 pb-10 pt-12 sm:px-12 sm:pb-14 sm:pt-16 md:min-h-[24rem] md:pb-12 md:pr-[20rem] md:pt-9 lg:min-h-[32.5rem] lg:pb-14 lg:pr-[28rem] lg:pt-10">
+        <div className="hero-estudio relative rounded-lg px-7 pb-10 pt-12 sm:px-12 sm:pb-14 sm:pt-16 md:min-h-[24rem] md:pb-12 md:pr-[20rem] md:pt-9 lg:min-h-[32.5rem] lg:pb-14 lg:pr-[28rem] lg:pt-10">
           <p className="kicker relative z-10">{hero.kicker}</p>
 
           <h1 className="display relative z-10 mt-5 max-w-[15ch] text-4xl sm:text-5xl md:mt-4 md:text-3xl lg:text-[3.4rem]">

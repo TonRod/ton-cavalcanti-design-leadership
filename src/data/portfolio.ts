@@ -498,11 +498,15 @@ export const hero = {
     /* WebP, e não AVIF: o AVIF gerado pelo sips decodifica com o canal alfa
        todo transparente — a foto simplesmente não aparece. Verificado
        desenhando num canvas e contando pixels opacos. */
-    webp: "/hero/ton-bracos-cruzados.webp",
-    png: "/hero/ton-bracos-cruzados.png",
+    webp: "/hero/ton-bracos-cruzados-luz.webp",
+    png: "/hero/ton-bracos-cruzados-luz.png",
     alt: "Ton Cavalcanti, de óculos e suéter preto, com os braços cruzados",
     largura: 801,
     altura: 1256,
+    /* "-luz": a mesma foto reiluminada (luz lateral, razão de 2,9:1 entre os lados do
+       rosto, como na foto de referência), com o mesmo recorte e o mesmo alfa da
+       anterior, então `olho` não mudou. O nome novo evita servir a foto antiga do cache.
+       O fundo de estúdio que completa a luz está em .hero-estudio (styles.css). */
     /* Linha dos olhos, em fração da altura da imagem — medida com régua de
        pixels sobre a foto. O hero usa esse número para pôr os olhos na altura
        da primeira linha do título. Trocou a foto, mede de novo. */
