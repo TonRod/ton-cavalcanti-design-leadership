@@ -498,15 +498,19 @@ export const hero = {
     /* WebP, e não AVIF: o AVIF gerado pelo sips decodifica com o canal alfa
        todo transparente — a foto simplesmente não aparece. Verificado
        desenhando num canvas e contando pixels opacos. */
-    webp: "/hero/ton-bracos-cruzados-luz.webp",
-    png: "/hero/ton-bracos-cruzados-luz.png",
+    webp: "/hero/ton-bracos-cruzados-luz-suave.webp",
+    png: "/hero/ton-bracos-cruzados-luz-suave.png",
     alt: "Ton Cavalcanti, de óculos e suéter preto, com os braços cruzados",
     largura: 801,
     altura: 1256,
-    /* "-luz": a mesma foto reiluminada (luz lateral, razão de 2,9:1 entre os lados do
-       rosto, como na foto de referência), com o mesmo recorte e o mesmo alfa da
-       anterior, então `olho` não mudou. O nome novo evita servir a foto antiga do cache.
-       O fundo de estúdio que completa a luz está em .hero-estudio (styles.css). */
+    /* "-luz-suave": a mesma foto reiluminada (luz lateral, razão de 2,7:1 entre os lados
+       do rosto; a referência tem 3,0:1), com o mesmo recorte e o mesmo alfa, então `olho`
+       não mudou. O lado da sombra é o do relight anterior (bochecha em 0,22; referência
+       0,21). O lado da luz é a foto original com pretos levantados e brilhos contidos
+       (média 0,60, máximo 0,79 e nenhum pixel acima de 0,85; a referência dá 0,62, 0,79
+       e 0,1%), porque a primeira versão estourava: 17,6% dos pixels acima de 0,85 e pretos
+       em 0,00. O fundo de estúdio que completa a luz está em .hero-estudio (styles.css).
+       O sufixo novo evita servir a foto anterior do cache. */
     /* Linha dos olhos, em fração da altura da imagem — medida com régua de
        pixels sobre a foto. O hero usa esse número para pôr os olhos na altura
        da primeira linha do título. Trocou a foto, mede de novo. */
