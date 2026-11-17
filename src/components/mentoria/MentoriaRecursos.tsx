@@ -2,6 +2,7 @@ import type { CSSProperties } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { mentoriaLinks, mentoriaRecursos } from "@/data/mentoria";
+import { NovaAba } from "@/components/mentoria/NovaAba";
 import { RecursoArte } from "@/components/mentoria/RecursoArte";
 
 /**
@@ -115,6 +116,7 @@ export function MentoriaRecursos() {
                   aria-hidden="true"
                 />
               </span>
+              <NovaAba />
             </a>
           ))}
 
@@ -136,6 +138,7 @@ export function MentoriaRecursos() {
                 aria-hidden="true"
               />
             </span>
+            <NovaAba />
           </a>
         </div>
 

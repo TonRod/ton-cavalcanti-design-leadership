@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import { CalendarCheck, ClipboardCheck } from "lucide-react";
+import { NovaAba } from "@/components/mentoria/NovaAba";
 import { mentoria, mentoriaLinks } from "@/data/mentoria";
 
 export function MentoriaHero() {
@@ -54,6 +55,7 @@ export function MentoriaHero() {
             className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
           >
             <CalendarCheck className="size-4" aria-hidden="true" /> Agendar conversa inicial
+            <NovaAba />
           </a>
           <a
             href={mentoriaLinks.diagnostico}
@@ -62,6 +64,7 @@ export function MentoriaHero() {
             className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-medium transition-colors hover:bg-secondary"
           >
             <ClipboardCheck className="size-4" aria-hidden="true" /> Fazer diagnóstico gratuito
+            <NovaAba />
           </a>
         </div>
 

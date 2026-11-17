@@ -7,6 +7,7 @@ import {
   Mail,
   MessageCircle,
 } from "lucide-react";
+import { NovaAba } from "@/components/mentoria/NovaAba";
 import { mentoriaLinks } from "@/data/mentoria";
 
 export function MentoriaContact() {
@@ -44,6 +45,7 @@ export function MentoriaContact() {
             className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
           >
             <CalendarCheck className="size-4" aria-hidden="true" /> Agendar conversa
+            <NovaAba />
           </a>
           <a
             href={mentoriaLinks.whatsapp}
@@ -52,6 +54,7 @@ export function MentoriaContact() {
             className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-medium transition-colors hover:bg-secondary"
           >
             <MessageCircle className="size-4" aria-hidden="true" /> WhatsApp
+            <NovaAba />
           </a>
         </div>
 
@@ -72,6 +75,7 @@ export function MentoriaContact() {
             className="alvo-toque-v flex items-center gap-2 hover:text-foreground"
           >
             <Instagram className="size-4" aria-hidden="true" /> {mentoriaLinks.instagramLabel}
+            <NovaAba />
           </a>
           <a
             href={mentoriaLinks.linkedin}
@@ -80,6 +84,7 @@ export function MentoriaContact() {
             className="alvo-toque-v flex items-center gap-2 hover:text-foreground"
           >
             <Linkedin className="size-4" aria-hidden="true" /> {mentoriaLinks.linkedinLabel}
+            <NovaAba />
           </a>
           <a
             href={mentoriaLinks.diagnostico}
@@ -88,6 +93,7 @@ export function MentoriaContact() {
             className="alvo-toque-v flex items-center gap-2 hover:text-foreground"
           >
             <ClipboardCheck className="size-4" aria-hidden="true" /> Diagnóstico de competências
+            <NovaAba />
           </a>
         </div>
       </div>
