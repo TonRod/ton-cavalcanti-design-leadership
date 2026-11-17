@@ -19,7 +19,7 @@ export function MovimentoToggle({ className = "" }: { className?: string }) {
       aria-label="Pausar movimento"
       title="Pausar movimento"
       onClick={alternar}
-      className={`inline-flex size-8 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:text-foreground ${className}`}
+      className={`alvo-toque-v inline-flex size-8 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:text-foreground ${className}`}
     >
       <Icone className="size-3.5" aria-hidden="true" />
     </button>

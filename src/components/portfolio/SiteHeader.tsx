@@ -153,7 +153,7 @@ export function SiteHeader({
           />
         )}
         <div className="relative mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
-          <a href={homeHref} className="display text-lg tracking-tight">
+          <a href={homeHref} className="alvo-toque-v display text-lg tracking-tight">
             {brand}
           </a>
 
@@ -174,7 +174,7 @@ export function SiteHeader({
                   }}
                   aria-current={isActive ? "true" : undefined}
                   className={cn(
-                    "text-sm transition-colors hover:text-foreground",
+                    "alvo-toque-v text-sm transition-colors hover:text-foreground",
                     isActive ? "text-foreground" : "text-muted-foreground",
                   )}
                 >
@@ -202,7 +202,7 @@ export function SiteHeader({
             {controleMovimento && <MovimentoToggle />}
             <ThemeToggle />
             <button
-              className="relative size-8 p-1.5"
+              className="alvo-toque relative size-8 p-1.5"
               aria-label={open ? "Fechar menu" : "Abrir menu"}
               aria-expanded={open}
               aria-controls="menu-mobile"
@@ -264,7 +264,7 @@ export function SiteHeader({
                   onClick={() => setOpen(false)}
                   aria-current={isActive ? "true" : undefined}
                   className={cn(
-                    "py-2 text-sm",
+                    "py-3 text-sm",
                     isActive ? "text-foreground" : "text-muted-foreground",
                   )}
                 >

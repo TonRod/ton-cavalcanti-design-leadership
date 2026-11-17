@@ -81,7 +81,7 @@ function Mentoria() {
         <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-2 px-6">
           <a
             href="/"
-            className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+            className="alvo-toque-v text-xs text-muted-foreground transition-colors hover:text-foreground"
           >
             Ver o portfólio de liderança de design de Ton Cavalcanti
           </a>

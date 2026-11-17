@@ -122,7 +122,7 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
             title={label}
             onClick={(e) => select(value, e)}
 
-            className={`rounded-full p-1.5 transition-colors ${
+            className={`alvo-toque-v rounded-full p-1.5 transition-colors ${
               active
                 ? "bg-secondary text-foreground"
                 : "text-muted-foreground hover:text-foreground"

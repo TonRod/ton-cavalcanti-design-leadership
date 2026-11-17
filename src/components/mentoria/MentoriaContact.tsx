@@ -61,7 +61,7 @@ export function MentoriaContact() {
         >
           <a
             href={`mailto:${mentoriaLinks.email}`}
-            className="flex items-center gap-2 hover:text-foreground"
+            className="alvo-toque-v flex items-center gap-2 hover:text-foreground"
           >
             <Mail className="size-4" aria-hidden="true" /> {mentoriaLinks.email}
           </a>
@@ -69,7 +69,7 @@ export function MentoriaContact() {
             href={mentoriaLinks.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 hover:text-foreground"
+            className="alvo-toque-v flex items-center gap-2 hover:text-foreground"
           >
             <Instagram className="size-4" aria-hidden="true" /> {mentoriaLinks.instagramLabel}
           </a>
@@ -77,7 +77,7 @@ export function MentoriaContact() {
             href={mentoriaLinks.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 hover:text-foreground"
+            className="alvo-toque-v flex items-center gap-2 hover:text-foreground"
           >
             <Linkedin className="size-4" aria-hidden="true" /> {mentoriaLinks.linkedinLabel}
           </a>
@@ -85,7 +85,7 @@ export function MentoriaContact() {
             href={mentoriaLinks.diagnostico}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 hover:text-foreground"
+            className="alvo-toque-v flex items-center gap-2 hover:text-foreground"
           >
             <ClipboardCheck className="size-4" aria-hidden="true" /> Diagnóstico de competências
           </a>

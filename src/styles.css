@@ -131,6 +131,14 @@
     border-color: var(--color-border);
   }
 
+  /* Foco de teclado visível em tudo que se pode focar: 2px, afastado 3px.
+     Só :focus-visible, então o clique de mouse não desenha anel. Classes de
+     utilitário (outline-none, focus-visible:ring-*) continuam vencendo. */
+  :where(a, button, summary, [role="button"], [role="radio"], [tabindex]):focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+  }
+
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 5rem;
@@ -291,6 +299,36 @@ html[data-trocando-tema] .cortina {
     animation: none !important;
     transform: none;
     opacity: 1;
+  }
+}
+
+/* Área de toque de 44px sem mudar o desenho: o ::after invisível estende o
+   alvo a partir do centro. `alvo-toque` cresce nos dois eixos (controles
+   isolados); `alvo-toque-v`, só na altura (controles lado a lado ou texto,
+   que já passam de 44px de largura ou ficam colados nos vizinhos). */
+@utility alvo-toque {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: max(100%, 44px);
+    height: max(100%, 44px);
+    transform: translate(-50%, -50%);
+  }
+}
+
+@utility alvo-toque-v {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: max(100%, 44px);
+    transform: translateY(-50%);
   }
 }
 

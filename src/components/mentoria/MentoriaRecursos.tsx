@@ -149,13 +149,13 @@ export function MentoriaRecursos() {
               }}
             />
           </div>
-          <div className="hidden gap-2 sm:flex">
+          <div className="hidden gap-3 sm:flex">
             <button
               type="button"
               onClick={() => deslizar(-1)}
               disabled={noInicio}
               aria-label="Ver recursos anteriores"
-              className="rounded-full border border-border p-2 transition-colors hover:bg-secondary disabled:opacity-40"
+              className="alvo-toque rounded-full border border-border p-2 transition-colors hover:bg-secondary disabled:opacity-40"
             >
               <ArrowLeft className="size-4" />
             </button>
@@ -164,7 +164,7 @@ export function MentoriaRecursos() {
               onClick={() => deslizar(1)}
               disabled={noFim}
               aria-label="Ver próximos recursos"
-              className="rounded-full border border-border p-2 transition-colors hover:bg-secondary disabled:opacity-40"
+              className="alvo-toque rounded-full border border-border p-2 transition-colors hover:bg-secondary disabled:opacity-40"
             >
               <ArrowRight className="size-4" />
             </button>
