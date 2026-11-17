@@ -65,7 +65,7 @@ function Mentoria() {
       >
         Pular para o conteúdo
       </a>
-      <SiteHeader brand={mentoria.brand} links={links} imersivo />
+      <SiteHeader brand={mentoria.brand} links={links} imersivo controleMovimento />
       <main id="conteudo" className="relative z-10">
         <MentoriaHero />
         <MentoriaWork />

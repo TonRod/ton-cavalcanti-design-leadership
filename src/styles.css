@@ -638,6 +638,15 @@ html[data-trocando-tema] .cortina {
   }
 }
 
+/* Botão "Pausar movimento" (WCAG 2.2.2): congela no lugar as animações que não
+   terminam sozinhas. `!important` para vencer o :hover dos cards de recurso. */
+html[data-movimento="parado"] .cortina,
+html[data-movimento="parado"] .nuvem,
+html[data-movimento="parado"] .recurso-anel,
+html[data-movimento="parado"] .recurso-estrela {
+  animation-play-state: paused !important;
+}
+
 /* ─────────────────────────────────────────────────────────────
    Fundo contínuo da mentoria.
 

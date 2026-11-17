@@ -23,7 +23,7 @@ export function MentoriaTestimonials() {
               className="entra flex flex-col rounded-lg border border-border bg-surface p-6"
             >
               <blockquote className="font-serif text-base leading-relaxed">“{d.quote}”</blockquote>
-              <figcaption className="mt-auto pt-6 text-[0.7rem] uppercase tracking-[0.15em] text-muted-foreground">
+              <figcaption className="mt-auto pt-6 text-xs uppercase tracking-[0.15em] text-muted-foreground">
                 {d.author}
               </figcaption>
             </figure>

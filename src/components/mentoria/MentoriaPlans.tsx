@@ -33,7 +33,7 @@ export function MentoriaPlans() {
               <h3 className="display text-2xl">{plano.name}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{plano.summary}</p>
 
-              <p className="mt-4 text-[0.7rem] uppercase tracking-[0.15em] text-muted-foreground">
+              <p className="mt-4 text-xs uppercase tracking-[0.15em] text-muted-foreground">
                 {plano.format}
               </p>
 

@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
+import { useMovimento } from "@/hooks/use-movimento";
+
 /**
  * Fundo contínuo da página de mentoria: uma camada fixa, atrás de tudo,
  * que troca de vídeo (em preto e branco) conforme a seção sob a linha dos
@@ -27,14 +29,17 @@ const BASE = "/mentoria/fundo";
 export function MentoriaFundo() {
   const [ativo, setAtivo] = useState<Secao | null>(null);
   const [carregados, setCarregados] = useState<ReadonlySet<Secao>>(() => new Set());
-  const [parado, setParado] = useState(false);
+  const [semMovimento, setSemMovimento] = useState(false);
+  const { pausado } = useMovimento();
+  // Parado por escolha da pessoa (botão no cabeçalho), pelo sistema ou por economia de dados.
+  const parado = semMovimento || pausado;
   const videos = useRef<Partial<Record<Clipe, HTMLVideoElement | null>>>({});
 
   // Sem movimento quando a pessoa pede menos animação ou está em economia de dados.
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     const conexao = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
-    const atualizar = () => setParado(mq.matches || Boolean(conexao?.saveData));
+    const atualizar = () => setSemMovimento(mq.matches || Boolean(conexao?.saveData));
     atualizar();
     mq.addEventListener("change", atualizar);
     return () => mq.removeEventListener("change", atualizar);

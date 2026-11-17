@@ -1,6 +1,7 @@
 import { Menu, X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
+import { MovimentoToggle } from "@/components/portfolio/MovimentoToggle";
 import { ThemeToggle } from "@/components/portfolio/ThemeToggle";
 import { cn } from "@/lib/utils";
 
@@ -32,6 +33,8 @@ export interface SiteHeaderProps {
    * a página não parece começar depois da barra, parece continuar sob ela.
    */
   imersivo?: boolean;
+  /** Mostra o botão "Pausar movimento" (para páginas com vídeo ou animação contínua). */
+  controleMovimento?: boolean;
 }
 
 export function SiteHeader({
@@ -39,6 +42,7 @@ export function SiteHeader({
   homeHref = "#top",
   links = defaultLinks,
   imersivo = false,
+  controleMovimento = false,
 }: SiteHeaderProps = {}) {
   const [open, setOpen] = useState(false);
   const [activeId, setActiveId] = useState<string | null>(null);
@@ -153,7 +157,11 @@ export function SiteHeader({
             {brand}
           </a>
 
-          <nav ref={navRef} className="relative hidden items-center gap-6 xl:gap-8 lg:flex">
+          <nav
+            ref={navRef}
+            aria-label="Principal"
+            className="relative hidden items-center gap-6 xl:gap-8 lg:flex"
+          >
             {links.map((l) => {
               const id = l.href.slice(1);
               const isActive = activeId === id;
@@ -184,10 +192,14 @@ export function SiteHeader({
                   "transform var(--dur-state) var(--ease-soft), opacity var(--dur-state) var(--ease-soft)",
               }}
             />
-            <ThemeToggle />
+            <div className="flex items-center gap-2">
+              {controleMovimento && <MovimentoToggle />}
+              <ThemeToggle />
+            </div>
           </nav>
 
           <div className="flex items-center gap-2 lg:hidden">
+            {controleMovimento && <MovimentoToggle />}
             <ThemeToggle />
             <button
               className="relative size-8 p-1.5"
@@ -235,6 +247,7 @@ export function SiteHeader({
       >
         <nav
           id="menu-mobile"
+          aria-label="Principal"
           inert={!open}
           className={cn(
             "min-h-0 overflow-hidden px-6",

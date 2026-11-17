@@ -35,7 +35,7 @@ export function MentoriaEmpresas() {
               className="entra flex flex-col rounded-lg border border-border bg-surface p-6"
             >
               <h3 className="display text-2xl">{formato.title}</h3>
-              <p className="mt-4 text-[0.7rem] uppercase tracking-[0.15em] text-muted-foreground">
+              <p className="mt-4 text-xs uppercase tracking-[0.15em] text-muted-foreground">
                 {formato.duracao}
               </p>
               <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
